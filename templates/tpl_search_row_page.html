@@ -1,0 +1,127 @@
+<DIV class=container data-page=tpl_search_row_page>
+
+	<ul class="list list_2">
+		{{section name=data loop=$data.entity}}
+		<li class="item">
+			<DIV class="pack pack_video_brief" style="width:600px ">
+				<DIV class="pic">
+
+					{{if $data.entity[data].movie_name}}
+						<A class=inner title="{{$data.entity[data].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$data.entity[data].movie_id}}" target="vodplay"><IMG class=pack_clipImg height=90 alt="{{$data.entity[data].movie_name}}" src="admin/upload/{{$data.entity[data].image}}" width=120></A>
+					{{else}}
+						<A class=inner title="{{$data.entity[data].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$data.entity[data].media_id}}" target="vodplay"><IMG class=pack_clipImg height=90 alt="{{$data.entity[data].name}}" src="admin/upload/{{$data.entity[data].imagepos}}" width=120></A>
+					{{/if}}
+				</DIV>
+				<DIV class="txt">
+				{{if $data.entity[data].movie_name}}
+					<H1 class="caption"><A title="{{$data.entity[data].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$data.entity[data].movie_id}}" target="vodplay"><SPAN class=highlight>{{$data.entity[data].movie_name|truncate:15:'...':true}}</a></SPAN></H1>
+				{{else}}
+					<H1 class="caption"><A title="{{$data.entity[data].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$data.entity[data].media_id}}" target="vodplay"><SPAN class=highlight>{{$data.entity[data].name|truncate:15:'...':true}}</a></SPAN></H1>
+				{{/if}}
+					{{if $data.tagtype.daoyin}}
+						<p class="summary" title="{{$data.entity[data].tag_directors}}">{{$data.tagtype.directors}}: {{$data.entity[data].tag_directors|truncate:4:'':true}}</p>
+					{{/if}}
+					{{if $data.tagtype.yanyuan}}
+						<p class="summary" title="{{$data.entity[data].tag_stars}}">{{$data.tagtype.stars}}: {{$data.entity[data].tag_stars|truncate:4:'':true}}</p>
+					{{/if}}
+
+					<!--<p class="summary">创建: {{$data.entity[data].updated|date_format:"%Y-%m-%d"}}</p>-->
+					{{if $tagtype.bofang}}
+					<p class="summary">播放:{{$data.entity[data].click_num}}</p>
+					{{/if}}
+					{{if $data.tagtype.pingjia}}
+				      <p class="summary"><div style="float:left; margin-top:8px ">评价: </div><div class="fRed" style="float:left "><strong>{{$data.entity[data].codenumsp[0]}}</strong>{{$data.entity[data].codenumsp[1]}}</div> </p>
+				    {{/if}}
+
+				</DIV>
+			</DIV>
+		</li>
+		{{/section}}
+	</ul>
+
+
+
+	<DIV class=page_nav  id=pagingBars>
+		{{if $data.page <= 1}}
+			<SPAN class=page_nav_prev><SPAN>上一页</SPAN></SPAN>
+		{{else}}
+			<SPAN class=page_nav_prev><a onClick="doSearch('Search','{{$data.type}}',{{$data.page-1}})" href = "javascript:">上一页</a></SPAN>
+		{{/if}}
+
+
+
+
+		<UL>
+		  {{if $data.page < 10}}
+
+			  {{section name=loop loop=$data.count start=0 max=10 }}
+				{{if $smarty.section.loop.index+1 == $data.page }}
+					<LI class=page_nav_current>{{$smarty.section.loop.index+1}} </LI>
+				{{else}}
+					<LI><a onClick="doSearch('Search','{{$data.type}}',{{$smarty.section.loop.index+1}})" href = "javascript:">{{$smarty.section.loop.index+1}}</A> </LI>
+				{{/if}}
+			  {{/section}}
+			  {{if $data.count >10}}
+			  		{{if $data.count-1 >11}}
+						<LI class=pagebarDot>... </LI>
+					{{/if}}
+					{{if $data.count-1 > 10}}
+						<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.count-1}})" href = "javascript:">{{$data.count-1}}</A> </LI>
+					{{/if}}
+					<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.count}})" href = "javascript:">{{$data.count}}</A> </LI>
+			  {{/if}}
+		  {{else}}
+
+				<LI><a onClick="doSearch('Search','{{$data.type}}',1)" href = "javascript:">1</A> </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',2)" href = "javascript:">2</A> </LI>
+				{{ if $data.count > 10}}
+				<LI class=pagebarDot>... </LI>
+				{{/if}}
+				{{if $data.count-$data.page >= 7}}
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.page-3}})" href = "javascript:">{{$data.page-3}}</A> </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.page-2}})" href = "javascript:">{{$data.page-2}}</A> </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.page-1}})" href = "javascript:">{{$data.page-1}}</A> </LI>
+				<LI class=page_nav_current>{{$data.page}} </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.page+1}})" href = "javascript:">{{$data.page+1}}</A> </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.page+2}})" href = "javascript:">{{$data.page+2}}</A> </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.page+3}})" href = "javascript:">{{$data.page+3}}</A> </LI>
+				<LI class=pagebarDot>... </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.count-1}})" href = "javascript:">{{$data.count-1}}</A> </LI>
+				<LI><a onClick="doSearch('Search','{{$data.type}}',{{$data.count}})" href = "javascript:">{{$data.count}}</A> </LI>
+				{{else}}
+				{{section name=page loop=$data.count start=-8}}
+					{{if $data.page== $smarty.section.page.index+1}}
+					<LI class=page_nav_current>{{$data.page}} </LI>
+					{{else}}
+					<LI><a onClick="doSearch('Search','{{$data.type}}',{{$smarty.section.page.index+1}})" href = "javascript:">{{$smarty.section.page.index+1}}</A> </LI>
+					{{/if}}
+				{{/section}}
+				{{/if}}
+		  {{/if}}
+
+		  <input name="maxpage" type="hidden" id="maxpage" value="{{$data.count}}">
+		  <input name="way" type="hidden" id="way" value="{{$way}}">
+		  <input name="sCt" type="hidden" id="sCt" value="{{$data.sContent}}">
+		  <input name="sType" type="hidden" id="sType" value="{{$data.sType}}">
+		</UL>
+
+
+
+
+
+
+
+		{{if $data.page >= $data.count}}
+			<SPAN class=page_nav_next><SPAN>下一页</SPAN></SPAN>
+		{{else}}
+			<SPAN class=page_nav_next><a onClick="doSearch('Search','{{$data.type}}',{{$data.page+1}})" href = "javascript:">下一页</A></SPAN>
+		{{/if}}
+
+		<div class=page_nav_jump id=pageForm style="margin-right:20px "  >第 <INPUT class=text id=inputPage size=3 name=page onkeydown="if(event.keyCode==13) {return  onClicks('Search','{{$data.type}}','tz')};"> 页 <INPUT class=submit type=button onclick="return onClicks('Search','{{$data.type}}','tz')" value=跳转> </div>
+	</DIV>
+
+
+</DIV>
+<script>
+getcunurls()
+</script>

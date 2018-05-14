@@ -1,0 +1,18 @@
+<div class="listleft">
+
+{{foreach item = item name = track from = $track.entity}}
+
+
+	<div data-page=tpl_track_list class="waterfall_column" style="display:inline-block; *display:inline;zoom:1; margin-left:5px;margin-right:5px; vertical-align:top; overflow:hidden; text-align:center">
+		<div class="cell" style="color:#fff "><a href="http://{{$aServer.addr}}:89/live{{$item.live_id}}/live{{$item.live_id}}.m3u8" title="{{$item.name}}"><img class='imgcss'{{if $item.image}} src="admin/upload/{{$item.image}}?rd={{$rands}}" {{else}} src="http://{{$aServer.addr}}:89/live{{$item.live_id}}/image/1.jpg?rd={{$rands}}"{{/if}}/></a><p style="color:#000">{{$item.name|truncate:20:'':true}}</p></div>
+	</div>
+
+
+
+
+
+{{/foreach}}
+</div>
+<script>
+	getimgwh()
+</script>

@@ -1,0 +1,429 @@
+
+
+
+
+
+<DIV id=playerBox data-page=tpl_play_content>
+	<div class=player style="height:22px;color:#f17b19;"><div id="playtitle" style="margin-top:5px;font-size:14px ;margin-left:20px ">正在播放:&nbsp;{{if $sName}}{{$sName}}&nbsp;>&nbsp;{{$entity.movie.movie_name}}&nbsp;>&nbsp;{{$entity.SomeMovie.entity[0].name}}{{else}}直播录像&nbsp;>&nbsp;{{$entity.movie.name}}{{/if}}</div></div>
+	<H1>{{$entity.movie.movie_name}}</H1>
+	<DIV class=player>
+
+		 <!---播放器开始-->
+    <div style="margin-top:10px "  >
+	  <div style="width:200px; float:left; height:400px " ><div id='left' >{{if $mysetting.play_left}}<a href="{{$mysetting.playleft_url}}"><img src="admin/images/{{$mysetting.play_left}}" width="200" height="395"></a><a href="javascript://" onClick="closead('left')" style="margin-left:160px ">关闭</a>{{/if}}</div></div>
+      <div  id="playHtml" style="float:left;width:588px;height:400px; border:#565656 3px solid "  >
+	  	   {{if $entity.ipad || $isMobile}}
+		   		<video width="588" height="400" id="WMP" controls="controls" src="{{if $entity.server.addr}}http://{{$entity.server.addr}}:{{$entity.server.hls_port}}/{{$entity.movie.guid}}.mp4{{/if}}"></video>
+		   {{else}}
+			  {{if $mysetting.player_type==1}}
+				<OBJECT CLASSID="clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6" ID="WMP" height="400" width="588" name="MediaPlay" VIEWASTEXT>
+				  <param name="AllowChangeDisplaySize" value="-1">
+				  <param name="DisplayBackColor" value="0">
+				  <param NAME="AutoStart" VALUE="-1">
+				  <PARAM name="stretchToFit" value="-1">
+				  <PARAM NAME="URL" VALUE="{{if $entity.server.addr}}http://{{$entity.server.addr}}:{{$entity.server.port}}/{{$entity.movie.guid}}{{/if}}">
+				</OBJECT>
+				  <script type="text/javascript" for="WMP" event="error()">
+						//var thePlayer = $('WMP');
+						//var max = thePlayer.error.errorCount - 1;
+						//var errItem = thePlayer.error.item(max);
+						//var errDesc = errItem.errorDescription;
+						//var errNum = errItem.errorCode;
+						//$('playHtml').innerHTML =  '<div class="playText">错误提示： <a href="javascript:">'+ errDesc + '</a></div>';
+					</script>
+				{{elseif $mysetting.player_type==3}}
+						<input name="flash_port" id="flash_port" type="hidden" value="{{$entity.server.rtmpport}}">
+						<div id="showplayvod" width="588" height="400">
+								<embed type="application/x-shockwave-flash"
+											 src="root/images/flvplayer.swf"
+											 width="588" height="400" style="undefined"
+											 id="single" name="single" quality="high" allowfullscreen="true"
+											 {{if $vmovie==1}}
+											 	flashvars="flashvars=&src=http://{{$entity.server.addr}}:{{$entity.server.hls_port}}/{{$entity.movie.guid}}.mp4&autoHideControlBar=true&streamType=vod&autoPlay=true&verbose=true">
+											 {{else}}
+											 	flashvars="flashvars=&src=rtmp://{{$entity.server.addr}}:{{$entity.server.rtmpport}}/vod/{{$entity.movie.guid}}&autoHideControlBar=true&streamType=vod&autoPlay=true&verbose=true">
+											 {{/if}}
+							  </embed>
+						</div>
+				    <!--<div onload="falshplayvod('rtmp://192.168.1.63:1935','C7A38BB134B02C94873D2FF2B5FF3FA1','600','370')">-->
+				{{else}}
+						<OBJECT CLASSID="CLSID:5E52B19F-8B42-4330-AA35-E556D35B4D1C" ID="WMP" height="400" width="588" codeBase="./GMPlayerX.cab#version={{$mysetting.vodversion}}" VIEWASTEXT>
+						<param name="OpenURL" value="{{if $entity.server.addr}}http://{{$entity.server.addr}}:{{$entity.server.port}}/{{$entity.movie.guid}}{{/if}}">
+						<param name="Volume" value="100">
+						<param name="FullScreen" value="{{$mysetting.fullscreen}}">
+						<param name="ShowCtrlBar" value="{{$mysetting.showctrlbar}}">
+						<param name="ShowStatusBar" value="{{$mysetting.showstatusbar}}">
+						<PARAM NAME="RButtonEnable" VALUE="{{$mysetting.rkeystatus}}">
+						<PARAM NAME="ScalePlay" VALUE="{{$mysetting.scale}}">
+						<PARAM NAME="RecordEnable" VALUE="{{$mysetting.recordenable}}">
+						</OBJECT>
+				{{/if}}
+			{{/if}}
+	  	<input name="playtype" id="playtype" type="hidden" value="{{$mysetting.player_type}}">
+		<input name="ipad" id="ipad" type="hidden" value="{{$entity.ipad}}">
+		<input name="tseries" id="tseries" type="hidden" value="{{$entity.SomeMovie.series}}">
+		</div>
+
+		<div style="width:200px; float:left;height:400px " >
+			<div id="right">{{if $mysetting.play_right}}<a href="{{$mysetting.playright_url}}"><img src="admin/images/{{$mysetting.play_right}}" width="200" height="395"></a><a href="javascript://" onClick="closead('right')" style="margin-left:15px ">关闭</a>{{/if}}</div>
+			<script language="javascript" type="text/javascript">
+				var w3c = (document.getElementById) ? true : false;
+				var agt = navigator.userAgent.toLowerCase();
+				var ie = ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1) && (agt.indexOf("omniweb") == -1));
+				var mymovey = 0;
+				function IeTrueBody(){
+				return (document.compatMode && document.compatMode!="BackCompat") ? document.documentElement : document.body;
+				}
+				function GetScrollTop(){
+				return ie ? IeTrueBody().scrollTop : window.pageYOffset;
+				}
+			</script>
+
+
+				{{if $mysetting.erweima==0}}
+				<DIV id='MovedDiv' style='margin-left:58px;POSITION:absolute;TOP:180px; z-index:1000'><span id='erweiplayurl'><a href="http://{{$entity.server.addr}}:{{$entity.server.hls_port}}/{{$entity.movie.guid}}.mp4"><img src="admin/upload{{$entity.movie.qr_imagepos}}" width="86" height="86"></a></span><a href="javascript://" onClick="document.getElementById('MovedDiv').style.display='none'" style="margin-left:30px ">关闭</a></DIV>
+
+				 <script language="JavaScript1.1">
+					function heartBeat(){
+					 diffY=GetScrollTop();
+					 mymovey += Math.floor((diffY-document.getElementById('MovedDiv').style.top.replace("px","")+180)*0.1);
+					 document.getElementById('MovedDiv').style.top = mymovey+"px";
+					}
+					window.setInterval("heartBeat()",1);
+				</script>
+			{{/if}}
+
+
+
+		</div>
+    </div>
+
+
+
+
+	</DIV>
+</DIV>
+
+
+
+<input name="orderdesc" id="orderdesc" type="hidden" value="a">
+<DIV class=rl id=relV>
+
+	<DIV class=rh>
+		<H2>相关视频</H2>
+		<DIV class="rp">
+			<a   hidefocus="true" class="rp_i current">1</a>
+			<a   hidefocus="true" class="rp_i">2</a>
+
+			{{if $entity.SomeMovie.page <= 1}}
+				<a href="javascript://" title="上一页"  hidefocus="true" coords="KJu|1" class="rp_pr_off">上一页</a>
+			{{else}}
+				<a href="javascript://" title="上一页"  {{if $sName}}  onClick="movepage('MoviePage',{{$entity.SomeMovie.class}},{{$entity.SomeMovie.page-1}},{{$entity.movie.movie_id}})" {{else}} onClick="movepage('MoviePage',0,{{$entity.SomeMovie.page-1}},{{$entity.movie.track_id}})" {{/if}}>上一页</a>
+			{{/if}}
+			{{if $entity.SomeMovie.page >= $entity.SomeMovie.pageCount}}
+				<a href="javascript://" title="下一页" hidefocus="true" coorde="KJv|1" class="rp_nx_off">下一页</a>
+			{{else}}
+				<a href="javascript://" title="下一页" class="rp_nx" {{if $sName}}  onClick="movepage('MoviePage',{{$entity.SomeMovie.class}},{{$entity.SomeMovie.page+1}},{{$entity.movie.movie_id}})" {{else}} onClick="movepage('MoviePage',0,{{$entity.SomeMovie.page+1}},{{$entity.movie.track_id}})" {{/if}}>下一页</A>
+			{{/if}}
+
+		</DIV>
+		<div style="float:left;color:#FFFFFF ">
+			{{$entity.SomeMovie.page}}/{{$entity.SomeMovie.pageCount}}&nbsp;&nbsp;
+			<input name="jumpage" id="jumpage" style="width:30px;margin-top:2px"  value="" type="text">&nbsp;
+			<a href="javascript:void(0)" {{if $sName}}  onClick="movepage('MoviePage',{{$entity.SomeMovie.class}},'jmp',{{$entity.movie.movie_id}})" {{else}} onClick="movepage('MoviePage',0,'jmp',{{$entity.movie.track_id}})" {{/if}} style="color:#fff">跳转</a>
+		</div>
+		<div style="float:left;color:#FFFFFF;margin-top:3px;margin-left:5px ">
+			<a href="javascript:void(0)" {{if $sName}}  onClick="orderdesc('MoviePage',{{$entity.SomeMovie.class}},1,{{$entity.movie.movie_id}},'a')" {{else}} onClick="orderdesc('MoviePage',0,1,{{$entity.movie.track_id}},'a')" {{/if}} style="color:#fff">正序</a>
+			<a href="javascript:void(0)" {{if $sName}}  onClick="orderdesc('MoviePage',{{$entity.SomeMovie.class}},1,{{$entity.movie.movie_id}},'d')" {{else}} onClick="orderdesc('MoviePage',0,1,{{$entity.movie.track_id}},'d')" {{/if}} style="color:#fff">倒序</a>
+
+		</div>
+
+		<DIV class=mcr id=mcr style="DISPLAY:">
+			<DIV class=mcr-ct>
+
+				<div style="float:right;margin-top:0px;width:160px">
+					{{if $mysetting.player_type!=3}}
+						<div style="float:left;margin-top:0px ">
+							<input name="seriesplay" id="seriesplay" type="checkbox" {{if $mysetting.auto_play}} checked {{/if}} value="" >
+						</div>
+					{{/if}}
+					<div style="margin-top:2px ">
+						{{if $mysetting.player_type!=3}}
+							<span class="link_vod" >&nbsp;连续播放</span>&nbsp;&nbsp;
+						{{/if}}
+						<A class="daohang" href="javascript:" onclick="bgcolor(1)">开灯</A>&nbsp;&nbsp;
+						<A class="daohang" href="javascript:" onclick="bgcolor(2)">关灯</A>&nbsp;&nbsp;
+					</div>
+				</div>
+
+
+			</DIV>
+
+		</DIV>
+
+	</DIV>
+	<UL class=rc style="height: 130px; DISPLAY: block;" id="vodPlayList" >
+	{{section name=someMovie loop=$entity.SomeMovie.entity}}
+	  <LI>
+		  <DIV class=p>
+			 <DIV  class=pic style="cursor:pointer "  onclick="getUrl('GetUrl',{{$entity.SomeMovie.entity[someMovie].movie_id}},{{$entity.SomeMovie.entity[someMovie].media_id}},{{$mysetting.image_type}},{{$smarty.section.someMovie.rownum}})" >
+			 	<A  title="{{$entity.SomeMovie.entity[someMovie].movie_name}}"   ><IMG class=pack_clipImg    alt="{{$entity.SomeMovie.entity[someMovie].name}}"   src="admin/upload/{{$entity.SomeMovie.entity[someMovie].imagepos}}"    coords="KJCA"> </A>
+			 	<span class="vpbg"><span style=" float:right ">{{$entity.SomeMovie.entity[someMovie].duration}}</span></span>
+			 </DIV>
+
+			<H6 style="width: 120px;" id="{{$smarty.section.someMovie.rownum}}" {{if  $smarty.section.someMovie.rownum==1}}class='link_vod'{{/if}} ><A title="{{$entity.SomeMovie.entity[someMovie].name}}" href="javascript://"    onclick="getUrl('GetUrl',{{$entity.SomeMovie.entity[someMovie].movie_id}},{{$entity.SomeMovie.entity[someMovie].media_id}},{{$mysetting.image_type}},{{$smarty.section.someMovie.rownum}})"   coords=KJCB >{{$entity.SomeMovie.entity[someMovie].name}}</A></H6>
+
+		  </DIV>
+	  </LI>
+
+	  {{/section}}
+	</UL>
+	<DIV class=rf></DIV>
+</DIV>
+
+
+
+
+
+
+
+<DIV class=fr id="fr">
+	<DIV class=m id=mCnt>
+
+	{{if $sName}}
+		<DIV class="b ds ds_v">
+			<DIV class=h>
+				<H2>视频信息</H2>
+			</DIV>
+			<DIV class=c>
+				<DIV class=pic>
+					<DIV class=avatar><A title="{{$entity.movie.movie_name}}" href="index.php?controller=play&action=index&movie_id={{$entity.movie.movie_id}}" target="vodplay"><IMG alt="{{$entity.movie.movie_name}}" src="admin/upload/{{$entity.movie.image}}" coords="KBB"> </A></DIV>
+				</DIV>
+				<DIV class=txt>
+					<UL style="margin-top:13px " >
+					  <LI style="overflow:hidden; width:190px; height:20px;margin-right:10px">名称: <EM title="{{$entity.movie.movie_name}}">{{$entity.movie.movie_name}}</EM></LI>
+					 <!-- <LI style="width:200px;height:20px;">分类: <EM id=playNum>{{$sName}}</EM> </LI>-->
+					  <LI style="width:200px;height:20px;">{{$tagtype.type}}: <EM id=commentNum>{{section name=looptype loop=$entity.mType}} {{$entity.mType[looptype].name}}&nbsp;  {{/section}}</EM> </LI>
+					  <LI style="width:200px;height:20px;">{{$tagtype.years}}: <EM >{{if $entity.mYears}}{{$entity.mYears[0].name}}{{/if}}</EM> </LI>
+					  <LI style="width:200px;height:20px;">{{$tagtype.areas}}: <EM >{{section name=loopareas loop=$entity.mAreas}} {{$entity.mAreas[loopareas].name}}&nbsp;  {{/section}}</EM> </LI>
+					  <input name="assesspeople" id="assesspeople" type="hidden" value="{{$entity.movie.assess_people}}">
+					  <LI style="width:200px;height:20px;">
+						  <div style="float:left;margin-top:8px ">评价:</div>
+						  <EM >
+							  <div id='start1' style="float:left;margin-top:5px; cursor:pointer " onClick="assess(2,{{$entity.movie.movie_id}})" title="2分" >{{if $entity.mCode >=2}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'> {{/if}}</div>
+							  <div id='start2' style="float:left;margin-top:5px; cursor:pointer " onClick="assess(4,{{$entity.movie.movie_id}})" title="4分">{{if $entity.mCode >=4}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id='start3' style="float:left;margin-top:5px; cursor:pointer " onClick="assess(6,{{$entity.movie.movie_id}})" title="6分">{{if $entity.mCode >=6}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id='start4' style="float:left;margin-top:5px; cursor:pointer " onClick="assess(8,{{$entity.movie.movie_id}})" title="8分">{{if $entity.mCode >=8}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id='start5' style="float:left;margin-top:5px; cursor:pointer " onClick="assess(10,{{$entity.movie.movie_id}})" title="10分">{{if $entity.mCode >=10}}<img src='./root/images/starthuang.gif'>{{else}}<img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id="mycode">
+
+							 	 <div class="fRed" style="float:left; ">
+							  		<strong>{{$entity.movie.codenumsp[0]}}</strong>
+							  		{{$entity.movie.codenumsp[1]}}
+								 </div>
+							  	<div style=" float:left;margin-top:6px ">({{$entity.movie.assess_people}}评)</div>
+
+							  </div>
+						  </EM>
+					  </LI>
+					</UL>
+					<P class=ds_t>
+					<!--
+						<SPAN>标签:</SPAN>
+						{{section name=tag loop=$entity.tag}}
+						<A href="javascript://" onClick="return Search('tag','{{$entity.tag[tag].name}}')" >{{$entity.tag[tag].name}}</A>
+						 {{/section}}
+					-->
+					</P>
+
+				</DIV>
+
+				<DIV class=ds_d   style="word-wrap:break-word;clear:both " id=videoDes>影片简介:{{$entity.movie.describe|truncate:100:'':true}}</DIV>
+				<DIV class=ds_d   style="word-wrap:break-word;display:none;clear:both " id=videoDesOp>影片简介:{{$entity.movie.describe}}</DIV>
+				<DIV style='float:right;width:70px'><div style="float:left; cursor: pointer " onClick="opendiv()" id="openclose"><a href="javascript://"  >全部展开</a></div><div id="picopen"><img src="./root/images/open.gif"></div></DIV>
+
+
+
+			</DIV>
+			<DIV class=f></DIV>
+		</DIV>
+	{{/if}}
+
+
+
+		<DIV class="b cmt" id=comment>
+			<DIV class="h">
+				<h2>评论</h2>
+				<span class="ap"><a href="javascript://" class="cm_more" onClick="getfocus()">我要发表评论</a></span>
+				<input name="playtpye" id="playtpye" type="hidden" value="{{$entity.comment.playtpye}}">
+			</DIV>
+			<DIV class="c" id="movie_comment_list">
+				<DIV class="cm_pg">
+					<DIV class="cm_info"> 共{{$entity.comment.count}}条</DIV>
+					<DIV class="pg">
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">首页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},1)" href ="javascript:" class="pg_n">首页</a> {{/if}}
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">上一页&nbsp;&nbsp;&nbsp;</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page-1}})" href = "javascript:" class="pg_n">上一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">下一页  </span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page+1}})" href="javascript:" class="pg_n">下一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">末页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.pageCount}})" href ="javascript:" class="pg_n">末页</a> {{/if}}
+
+					</DIV>
+				</DIV>
+				<DIV class="cm_l" id="cmList">
+					{{section name=comment loop=$entity.comment.entity}}
+					<DIV class="cm_i" commentid="35438201" userid="123">
+						<DIV class="avatar_s">
+							<span><img src="root/images/p2.jpg"></span>
+						</DIV>
+						<DIV class="cm_t">
+							<DIV class="cm_u">{{$entity.comment.entity[comment].author}}<span class="cm_d">&nbsp;&nbsp;{{$entity.comment.entity[comment].created}}</span></DIV>
+							<DIV class="cm_b">{{$entity.comment.entity[comment].describe}}</DIV>
+							{{if $entity.comment.entity[comment].recom }}<blockquote>{{$entity.comment.entity[comment].recom.author}}&nbsp;&nbsp;的评论:<br>{{$entity.comment.entity[comment].recom.describe}}</blockquote>{{/if}}<!--引入评论-->
+							<DIV class="cm_a">
+								<!--<a href="#" commentid="3543021" userid="123" class="deleteMyBtn">删除</a>-->
+								<a href="javascript://" onclick="reComment({{$entity.comment.entity[comment].comment_id}},'open')" class="reBtn">回应这条评论</a>
+							</DIV>
+							<DIV id="reBox{{$entity.comment.entity[comment].comment_id}}" class="cm_re" style="display:none">
+								<p>
+									<textarea name="{{$entity.comment.entity[comment].comment_id}}" id="{{$entity.comment.entity[comment].comment_id}}" style="width:420px;" rows="5" cols="60"></textarea>
+									{{*<input type="hidden" value="{{$entity.comment.entity[comment].comment_id}}" id="comment_id">*}}
+								</p>
+								<p>
+									<input type="button" value="写上去" id="postRe" class="submit"  {{if $sName}} onclick="doAddComment('AddComment','recomment'{{if $entity.SomeMovie.entity[0].media_id}},{{$entity.SomeMovie.entity[0].media_id}}{{/if}},{{$entity.comment.entity[comment].comment_id}})" {{else}} onclick="doAddComment('AddComment','recomment'{{if $entity.movie.media_id}},{{$entity.movie.media_id}}{{/if}},{{$entity.comment.entity[comment].comment_id}})" {{/if}}>
+									<input type="button" value="不想说了" class="button" onclick="reComment({{$entity.comment.entity[comment].comment_id}},'close')">
+								</p>
+							</DIV>
+						</DIV>
+					</DIV>
+					{{/section}}
+				</DIV>
+				<DIV class="cm_pg">
+					<DIV class="pg">
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">首页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},1)" href ="javascript:" class="pg_n">首页</a> {{/if}}
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">上一页&nbsp;&nbsp;&nbsp;</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page-1}})" href = "javascript:" class="pg_n">上一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">下一页  </span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page+1}})" href="javascript:" class="pg_n">下一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">末页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.pageCount}})" href ="javascript:" class="pg_n">末页</a> {{/if}}
+					</DIV>
+				</DIV>
+				<DIV id="cmPost" class="cm_po">
+					<h3>发表评论</h3>
+
+					<p>
+						<textarea id="commentcom" name="commentcom" rows="5" cols="100" class="cm_ta"></textarea>
+					</p>
+					<p>
+						<input type="button" value="写上去" id="comment_post" class="cm_su" name="submit"  {{if $sName}}  onclick="doAddComment('AddComment','comment'{{if $entity.SomeMovie.entity[0].media_id}},{{$entity.SomeMovie.entity[0].media_id}}{{/if}})" {{else}} onclick="doAddComment('AddComment','comment'{{if $entity.movie.media_id}},{{$entity.movie.media_id}}{{/if}})" {{/if}}>
+					</p>
+				</DIV>
+			</DIV>
+			<DIV class="f">
+				<a href="#comment" class="cm_top">返回顶部</a>
+			</DIV>
+		</DIV>
+	</DIV><!-- main_col -->
+	<DIV class=s id=side>
+
+
+		<DIV class="b recv">
+			<DIV class=h>
+				<H2>相关推荐</H2>
+			</DIV>
+			<DIV class=c>
+				{{section name=comvod loop=$entity.commentvod.entity}}
+				{{if $smarty.section.comvod.rownum%2==1}}
+				<DIV class=r>
+				{{/if}}
+					<DIV class=p>
+						{{if $sName}}
+							<DIV class=pic><A title="{{$entity.commentvod.entity[comvod].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$entity.commentvod.entity[comvod].movie_id}}" target="vodplay"><IMG class="pack_clipImg lazyImg" alt="{{$entity.commentvod.entity[comvod].movie_name}}" src="admin/upload/{{$entity.commentvod.entity[comvod].image}}" coords="KFA"></A> </DIV>
+							<H6 class=caption><A class="link_xiang" title="{{$entity.commentvod.entity[comvod].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$entity.commentvod.entity[comvod].movie_id}}" coords=KFA target="vodplay">{{$entity.commentvod.entity[comvod].movie_name}}</A></H6>
+							<!--<P>&nbsp;&nbsp;评论:{{$entity.commentvod.entity[comvod].comment_num}}</P>-->
+							<UL></UL>
+						{{else}}
+							<DIV class=pic><A title="{{$entity.commentvod.entity[comvod].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$entity.commentvod.entity[comvod].media_id}}" target="vodplay"><IMG class="pack_clipImg lazyImg" alt="{{$entity.commentvod.entity[comvod].name}}" src="admin/upload/{{$entity.commentvod.entity[comvod].imagepos}}" coords="KFA"></A> </DIV>
+							<H6 class=caption><A class="link_xiang" title="{{$entity.commentvod.entity[comvod].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$entity.commentvod.entity[comvod].media_id}}" coords=KFA target="vodplay">{{$entity.commentvod.entity[comvod].name}}</A></H6>
+							<!--<P>&nbsp;&nbsp;评论:{{$entity.commentvod.entity[comvod].comment_num}}</P>-->
+							<UL></UL>
+						{{/if}}
+					</DIV>
+				{{if $smarty.section.comvod.rownum%2==0 || $smarty.section.comvod.last}}
+				</DIV>
+				{{/if}}
+				{{/section}}
+			</DIV>
+			<DIV class=f></DIV>
+		</DIV>
+
+		<DIV class="b bj" id=adExtension_buttons style="DISPLAY: none">
+			<DIV class=h></DIV>
+			<DIV class="c ad_banner" id=adExtension_right_minis></DIV>
+			<DIV class=f></DIV>
+		</DIV>
+		<DIV class=b id=adExtension_baidu style="PADDING-LEFT: 10px"></DIV>
+	</DIV><!-- side_col -->
+
+
+
+</DIV><!-- fr-->
+
+<script>
+		function $w(_id){
+			return document.getElementById?document.getElementById(_id):null;
+		}
+
+{{if $mysetting.player_type != 3}}
+
+	  function WMP::OnFireEvent(lIndex, wParam, lParam)
+		{
+			if( lIndex == 2 )  // 播放结束
+			{
+				if (document.getElementById('seriesplay').checked){
+					var aA = document.getElementById('vodPlayList').getElementsByTagName('H6');
+					var iALen = aA.length;
+					for(var i=0; i<iALen; i++){
+						if (aA[i].className == 'link_vod'){
+							var iNowId = aA[i].id;
+							var iNextId = parseFloat(iNowId) + 1;
+							var wNextId = document.getElementById(iNextId);
+							var type = wNextId ? true : false;
+							if(type){
+								//wNextId.className = 'link_vod';
+								//aA[i].className = '';
+								var getcond = wNextId.innerHTML;
+								var dtNum = getcond.split("(");
+								var last = dtNum[1].split(")");
+								var param = last[0].split(',');
+								getUrl('GetUrl',param[1],param[2],param[3],param[4])
+							}
+							break;
+						}
+					}
+					if (!iNowId){
+						var getcond = document.getElementById('1').innerHTML;
+						var dtNum = getcond.split("(");
+						var last = dtNum[1].split(")");
+						//document.getElementById('1').className='link_vod';
+						var param = last[0].split(',');
+						getUrl('GetUrl',param[1],param[2],param[3],param[4])
+					}
+				}
+			}
+		}
+{{/if}}
+
+	</script>

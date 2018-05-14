@@ -1,0 +1,95 @@
+<DIV class=page_content data-page=tpl_record_content>
+<DIV class=frame_2cols><!-- 主栏 -->
+	<DIV class=main_col>
+		<DIV class="tab tab_2">
+			<UL>
+			  <LI  class=tab_first><A {{if $type=='new'}} class=active  {{/if}} href="index.php?controller=record&action=index&type=new&track_id={{$track_id}}">最新发布的</A> </LI>
+			  <LI><A {{if $type=='name'}} class=active  {{/if}} href="index.php?controller=record&action=index&type=name&track_id={{$track_id}}">名称排序的</A>   </LI>
+			  <!--<LI><A {{if $type=='comment'}} class=active  {{/if}} href="index.php?controller=record&action=index&type=comment&track_id={{$track_id}}">评论最多的</A> </LI>-->
+			</UL>
+			<input name="condition" id="condition"  type="hidden" value="{{$ListMovie.condition}}">
+		</DIV>
+		<DIV class=box id="movie_info">
+			<DIV class=container>
+				<DIV class=showcase><!-- 一行 -->
+					{{section name=ListMovie loop=$ListMovie.entity }}
+					{{if $smarty.section.ListMovie.rownum%5==1 }}
+					<DIV class=row>
+					{{/if}}
+						<DIV class=item>
+							<DIV class="pack pack_video_card " style="width:130px ">
+								<DIV class=pic>
+									<A class=inner title="{{$ListMovie.entity[ListMovie].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$ListMovie.entity[ListMovie].media_id}}" target="vodplay"><IMG class=pack_clipImg height=90 alt="{{$ListMovie.entity[ListMovie].name}}" src="admin/upload/{{$ListMovie.entity[ListMovie].imagepos}}" width=120></A>
+								</DIV>
+								<DIV class=txt>
+									<H1 class=caption><A title="{{$ListMovie.entity[ListMovie].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$ListMovie.entity[ListMovie].media_id}}" target="vodplay">{{$ListMovie.entity[ListMovie].name|truncate:14:'':true}}</A></H1>
+									<UL class=info>
+									  	<LI>时长: {{$ListMovie.entity[ListMovie].duration}} </LI>
+									  <LI>时间: {{$ListMovie.entity[ListMovie].created|date_format:"%Y-%m-%d"}} </LI>
+									</UL>
+								</DIV>
+							</DIV>
+						</DIV><!-- 单元格 -->
+					{{if $smarty.section.ListMovie.rownum%5==0 ||$smarty.section.ListMovie.last }}
+					</DIV>
+					{{/if}}
+					{{/section}}
+				<!-- 一行 -->
+				</DIV>
+				{{if $ListMovie.pageCount > 1}}
+				<DIV class=page_nav style="width:730px " id=pagingBars >
+					{{if $ListMovie.page <= 1}}
+						<SPAN class=page_nav_prev><SPAN>上一页</SPAN></SPAN>
+					{{else}}
+						<SPAN class=page_nav_prev><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page-1}})" href = "javascript:">上一页</a></SPAN>
+					{{/if}}
+
+
+
+					<UL>
+
+					  <LI class=page_nav_current>1 </LI>
+					  {{section name=loop loop=$ListMovie.pageCount start=1 max=9}}
+					  	<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$smarty.section.loop.index+1}})" href = "javascript:">{{$smarty.section.loop.index+1}}</A> </LI>
+					  {{/section}}
+					  {{if $ListMovie.pageCount >10}}
+					  	{{if $ListMovie.pageCount -1 >11}}
+					  		<LI class=pagebarDot>... </LI>
+						{{/if}}
+						{{if $ListMovie.pageCount-1 > 10}}
+							<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.pageCount-1}})" href = "javascript:">{{$ListMovie.pageCount-1}}</A> </LI>
+					    {{/if}}
+						<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.pageCount}})" href = "javascript:">{{$ListMovie.pageCount}}</A> </LI>
+					  {{/if}}
+					  <input name="maxpage" type="hidden" id="maxpage" value="{{$ListMovie.pageCount}}">
+					</UL>
+
+
+
+					{{if $ListMovie.page >= $ListMovie.pageCount}}
+						<SPAN class=page_nav_next><SPAN>下一页</SPAN></SPAN>
+					{{else}}
+						<SPAN class=page_nav_next><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page+1}})" href = "javascript:">下一页</A></SPAN>
+					{{/if}}
+
+					<div class=page_nav_jump id=pageForm  >第 <INPUT class=text id=inputPage size=3 name=page onkeydown="if(event.keyCode==13) {return trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}','tz')};"> 页 <INPUT class=submit type=button onclick="return trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}','tz')" value=跳转> </div>
+				</DIV>
+				{{/if}}
+			</DIV>
+		</DIV>
+	</DIV><!-- 主栏 -->
+
+
+<!-- 侧栏 -->
+	<DIV class=side_col><!-- 左侧一级分类-->
+		<DIV class=nav_channel>
+			<UL>
+			  <LI {{if !$track_id}} class=current {{/if}}><A href="index.php?controller=record"   rel=-1>全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部</A> </LI>
+			  {{section name=oneClass loop=$trackList.entity }}
+			  <LI {{if $track_id == $trackList.entity[oneClass].track_id}}class="current"{{/if}}><A href="index.php?controller=record&action=index&track_id={{$trackList.entity[oneClass].track_id}}" title="{{$trackList.entity[oneClass].name}}" rel=22>{{$trackList.entity[oneClass].name|truncate:6:'':true}}</A> </LI>
+			  {{/section}}
+			</UL>
+		</DIV><!-- 左侧一级分类-->
+	</DIV><!--frame -->
+</DIV>
+</DIV>

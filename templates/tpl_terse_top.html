@@ -1,0 +1,86 @@
+<!---头部文件开始--><a name="linkTop"></a>
+
+<DIV id=gTop data-page=tpl_terse_top>
+	<DIV class=gh >
+		<!--<DIV class=logo><a href="{{$mysetting.logo_url}}"><img src="admin/images/{{$mysetting.logo_image}}" width="500" height="50"></a> </DIV>-->
+		<DIV class=logo><a href="{{$mysetting.logo_url}}"><img src="admin/images/{{$mysetting.logo_image}}" width="500" height="50"></a> </DIV>
+		<DIV class=gs>
+				<DIV class="gsf fix" style="float:left;width:330px;">
+				<FORM class=gs_form action="index.php?controller=search&action=index" method=get searchtype="">
+					<div class="diyselect">
+						<input id="sel_name" name="sel_name" type="button" value="名称" onclick=turnit(bb)>
+						<ul id="bb"  style="display:none">
+						  <li id=t1 class="diyselect_current" onclick=sele('名称') ><a href="javascript://" >名称</a> </li>
+						  <li id=t2 onclick=sele('简介')><a href="javascript://" >简介</a>  </li>
+						</ul>
+					</div>
+					<INPUT class="gs_text tui_searchint"  id="sKey"   name=kw  	 onkeydown="if(event.keyCode==13) {return SearchTop()};"><INPUT class=gs_submit type=button onClick="return SearchTop();" value="搜 索">
+					<INPUT 	 type=hidden value="movie_name" name=tnb id="tnb">
+					<div  class="heippos">&nbsp;<a href="index.php?controller=track" class="helpTop">移动版</a></br><a href="index.php?controller=help&action=index" class="helpTop">观看帮助</a></div>
+				</FORM>
+				</DIV>
+				<!--<div  class="heippos"><a href="index.php?controller=help&action=index" class="helpTop">观看帮助</a></div>-->
+				<DIV class=gsk id=redKey></DIV>
+		</DIV>
+		<DIV class=gl>
+			<DIV class=gu id="LogInfo">
+				{{if !$my_nav.isLogin}}
+					<DIV class=gui id=uInfo >
+						<STRONG class=first><!--<A 	href="#" onClick="htmlEditor()">登录</A>--><A 	href="index.php?controller=login&action=index" style="font-size:12px " >登录</A></STRONG>
+						{{if $mysetting.register_open==1}}
+							<STRONG><A title=注册 	href="index.php?controller=Register&action=index" style="font-size:12px ">注册</A></STRONG>
+						{{/if}}
+					</DIV>
+				{{else}}
+					{{*{{if $mysetting.web_type==1}}*}}
+						<DIV class=gui id=uLivInfo >
+							<STRONG class=first><A style="font-size:12px " 	href="#" >欢迎{{$my_nav.username}}登录</A></STRONG>
+							<STRONG><A title=退出 style="font-size:12px " 	href="#" onClick="unlogin({{$mysetting.web_type}})">退出</A></STRONG>
+						</DIV>
+					{{*{{/if}}*}}
+				{{/if}}
+			</DIV>
+		</DIV>
+	</DIV>
+
+	{{if $mysetting.logobanner }}<DIV class=gh style="height:104px " ><img src="admin/images/{{$mysetting.logobannername }}" width="980" height="100"></DIV>{{/if}}
+<input name="isLogin" type="hidden" value="{{$my_nav.isLogin}}">
+<input name="isregister" type="hidden" value="{{$mysetting.register_open}}">
+
+	<DIV class=gn>
+		<DIV class=gn_i>
+
+
+		<UL class=gn_pri >
+
+		  {{if $mysetting.web_type == 0 or $mysetting.web_type == 2}}
+		  		<LI {{if $currpostion}}class=current{{/if}}><A href="index.php?controller=terse">点播</A> </LI>
+		  {{/if}}
+		  {{if  $mysetting.web_type == 1 or $mysetting.web_type == 2}}
+		 	 <LI {{if $shotrack == 1}} class="current  "{{/if}}><A href="index.php?controller=LiveCast">直播</A> </LI>
+		  {{/if}}
+		  {{if $mysetting.web_type == 1 or $mysetting.web_type==2}}
+		  	<LI {{if $record == 1}} class="current  "{{/if}}><A href="index.php?controller=Record" >直播录像</A></LI>
+		  {{/if}}
+
+		 </UL>
+
+
+
+
+		<!--
+		  <UL class=gn_pri >
+		  <LI {{if $currpostion}}class=current{{/if}}><A href="index.php?controller=terse">点播</A> </LI>
+		  <LI {{if $shotrack == 1}} class="current  "{{/if}}><A href="index.php?controller=LiveCast">直播</A> </LI>
+		  <LI {{if $record == 1}} class="current  "{{/if}}><A href="index.php?controller=Record" >直播录像</A></LI>
+		  </UL>
+		 -->
+
+
+		 </DIV>
+		<DIV class=gn_bg>
+		<DIV class=gn_con></DIV>
+		</DIV>
+	</DIV>
+</DIV>
+<!---头部文件结束-->

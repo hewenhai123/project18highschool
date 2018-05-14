@@ -1,0 +1,42 @@
+<div  id="itemcss" data-page=tpl_track_media_page>
+
+	{{section name=ListMovie loop=$ListMovie.entity }}
+		<DIV class="pictxt" >
+			<DIV  style="width:124px ">
+				<DIV class=pic style="border:0px ">
+
+					<A class=inner title="{{$ListMovie.entity[ListMovie].name}}" href="http://{{$ListMovie.aServer.addr}}:89/{{$ListMovie.entity[ListMovie].guid}}.mp4" target="vodplay"><IMG class=imgcss height=90 alt="{{$ListMovie.entity[ListMovie].name}}" src="admin/upload/{{$ListMovie.entity[ListMovie].imagepos}}" width=120></A>
+
+				</DIV>
+
+				<DIV class=txt>
+
+					<H1 class=caption style="color:#000;height: 30px;overflow: hidden; ">{{$ListMovie.entity[ListMovie].name}}</H1>
+
+				</DIV>
+			</DIV>
+		</DIV><!-- 单元格 -->
+	{{/section}}
+</div>
+{{if  $ListMovie.pageCount>1}}
+	<div style="clear:both;text-align: center;">
+
+			{{if $ListMovie.page <= 1}}
+				<span ><img src="root/images/prepage.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			{{else}}
+				<SPAN ><a onClick="trackShow('MovieListInfo','-1','{{$movie_id}}',{{$ListMovie.page-1}},{{$class_id}})" href = "javascript:"><img src="root/images/prepage.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></SPAN>
+			{{/if}}
+
+
+			{{if $ListMovie.page >= $ListMovie.pageCount}}
+				<span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="root/images/nexpage.png"></span>
+			{{else}}
+				<SPAN ><a onClick="trackShow('MovieListInfo','-1','{{$movie_id}}',{{$ListMovie.page+1}},{{$class_id}})" href = "javascript:">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="root/images/nexpage.png"></A></SPAN>
+			{{/if}}
+
+
+
+
+	</div>
+{{/if}}
+<script>getimgwh()</script>

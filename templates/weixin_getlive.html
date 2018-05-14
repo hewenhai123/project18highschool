@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<title>{{$mysetting.webtitle}}</title>
+
+<script language="javascript" src="./root/js/weixin/zepto.js"></script>
+<script language="javascript" src="./root/js/weixin/event.js"></script>
+<script language="javascript" src="./root/js/weixin/touch.js"></script>
+<script language="javascript" src="./root/js/weixin/ajax.js"></script>
+<script language="javascript" src="./root/js/weixin/ye_dialog_s.js"></script>
+<script language="javascript" src="./root/js/jquery.min.js"></script>
+<script>
+/*
+if(typeof window.wView !== "undefined"){	
+window.wView.allowsInlineMediaPlayback = "YES";	
+window.wView.mediaPlaybackRequiresUserAction = "NO";
+}
+*/
+</script>
+<style>
+* { border:0; margin:0; padding:0; outline:none; }
+
+body,div {font: 12px/20px "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+word-break: break-all;
+word-wrap: break-word;}
+
+
+
+
+
+</style>
+<style>
+	
+	ul, ol {list-style: none;padding: 0;}
+	a{text-decoration: none;}
+	html,body{-webkit-touch-callout: none;}
+	pre {
+			white-space: pre-wrap;      
+			white-space: -moz-pre-wrap; 
+			white-space: -pre-wrap;     
+			white-space: -o-pre-wrap;   
+			word-wrap: break-word;      
+	}
+	
+	.evt_box_attr_time, .evt_box_attr_addr, .evt_box_attr_tel, .evt_box_attr_user, .evt_box_attr_state {
+		display: inline-block;
+		zoom: 1;
+		background: url(./root/images/weixin/fabubtn.png) no-repeat;
+		width: 25px;
+		height: 20px;
+		
+	}
+	.evt_box_attr_user {background-position: 0px -100px;	}
+	.evt_box_attr_addr {background-position: 0px -24px;}
+
+
+		
+
+		
+	
+	
+/**/
+.btnPlay {
+/*width: 56px;
+height: 56px;*/
+width: 38px;
+height: 38px;
+display: block;
+position: absolute;
+left: 50%;
+top: 50%;
+margin: -24px 0 0 -24px;
+border-radius: 60px;
+box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.3);
+cursor: pointer;
+overflow: hidden;
+border: 2px solid hsl(0, 100%, 100%);
+}
+.btnPlay .canPlay {
+width: 0;
+height: 0;
+font-size: 0;
+line-height: 0;
+border-width: 15px 15px 15px 22px;
+border-style: dashed dashed dashed solid;
+border-color: hsla(0, 0%, 0%, 0) hsla(0, 0%, 0%, 0) hsla(0, 0%, 0%, 0) hsl(0, 100%, 100%);
+/*left: 21px;
+top: 13px;
+*/
+left: 15px;
+top: 4px;
+}
+.btnPlay em {
+display: block;
+position: absolute;
+}
+.mv_video {
+/*
+text-align: center;
+border:1px solid #c9c9c9;
+-moz-border-radius: 5px; 
+-webkit-border-radius: 5px; 
+border-radius: 5px; 
+margin:10px 10px 0px 10px;
+*/
+/* background: hsl(0, 0%, 94%); */
+/*
+background: #fff;
+overflow: hidden;
+*/
+
+}
+.mv_video .vWrap {
+text-align: center;
+}
+.mv_video .vWrap {
+position: relative;
+/*background: hsl(0, 100%, 100%);*/
+text-align: center;
+}
+.vWrap img {
+max-width: 100%;
+max-height: 100%;
+}
+.btnPlay .vloading {width: 10px;height: 10px;border-radius: 10px;background-color: hsl(0, 100%, 100%);left: 10px;top: 24px;-webkit-animation: loadinganm 1.2s linear infinite;-webkit-transform-style: preserve-3d;}
+@-webkit-keyframes loadinganm {
+	0% {
+		opacity: .1;
+		-webkit-transform: translate(-5px,0);
+	}
+
+	40% {
+		opacity: 1;
+		-webkit-transform: translate(30px,0);
+	}
+
+	100% {
+		opacity: 0;
+		-webkit-transform: translate(0px,0);
+	}
+}
+
+.vWrap video {
+position: absolute;
+top: 0;
+left: 0;
+}
+video {
+background: #f0f0f0;
+}
+video {
+max-width: 100%;
+vertical-align: top;
+}
+
+
+.yk-title a{color:#555555}
+.yk-title a.classcurr{color:#f59906}
+.yk-title {
+	/*margin-right: 20px;*/
+	font-size: 1rem;
+	width:24.4%;
+	color: #909090;
+	}
+	.yk-title, .yk-box .yk-head .yk-append {
+	display: inline-block;
+	vertical-align: bottom;
+	/*font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;*/
+}
+
+
+
+.yk-box {
+	width: 100%;
+	margin-bottom: 5px;
+	clear:both;
+}
+.videolist {
+width: 100%;
+}
+.videolist .video-row {
+margin-left: -20px;
+}
+.videolist .video-row:before, .videolist .video-row:after {
+display: table;
+content: "";
+line-height: 0;
+}
+.videolist .video-item {
+width: 50%;
+}
+.videolist .video-item, .videolist .video-item-large, .videolist .video-item-huge {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+float: left;
+padding-left: 20px;
+}
+.p {
+margin: 0;
+padding: 0;
+/*margin-bottom: 20px;*/
+margin-bottom: 10px;
+font: 12px/20px arial, helvetica, verdana, tahoma, sans-serif;
+}
+.p .p-thumb {
+z-index: 1;
+position: relative;
+background: #999;
+}
+.p .p-thumb .p-pic-default {
+position: relative;
+}
+.p .p-thumb img {
+width: 100%;
+height: auto;
+}
+.p img {
+display: block;
+border: 0 none;
+}
+img {
+max-width: 100%;
+width: auto\9;
+height: auto;
+vertical-align: middle;
+border: 0;
+-ms-interpolation-mode: bicubic;
+-webkit-tap-highlight-color: transparent;
+-moz-tap-highlight-color: transparent;
+-o-tap-highlight-color: transparent;
+-ms-tap-highlight-color: transparent;
+tap-highlight-color: transparent;
+-webkit-touch-callout: none;
+-moz-touch-callout: none;
+-o-touch-callout: none;
+-ms-touch-callout: none;
+touch-callout: none;
+}
+.p .p-thumb .p-pic-default::after {
+content: "";
+z-index: 0;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+/* background-image: url("/index/img/mobile/video_default_brands.png"); */
+background-position: center center;
+background-repeat: no-repeat;
+-webkit-background-size: 50%;
+-moz-background-size: 50%;
+-o-background-size: 50%;
+background-size: 50%;
+}
+.p .p-thumb .p-pic-real {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-position: center center;
+background-repeat: no-repeat;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+.p .p-link {
+z-index: 4;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.p a {
+text-decoration: none;
+color: #555555;
+}
+.p .p-isdrama {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+position: absolute;
+top: -2px;
+left: 0;
+width: 100%;
+height: 1px;
+background: #bbb;
+border-left: 1px solid #fff;
+border-right: 1px solid #fff;
+}
+.p .p-isdrama:before {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+content: "";
+position: absolute;
+top: -2px;
+left: 0;
+width: 100%;
+height: 1px;
+background: #d6d6d6;
+border-left: 1px solid #fff;
+border-right: 1px solid #fff;
+}
+.p .p-metadata {
+padding: 5px;
+background: #f5f5f5;
+}
+.v .v-title, .p .p-title, .v .v-desc, .p .p-desc {
+height: 20px;
+overflow: hidden;
+white-space: nowrap;
+-webkit-text-overflow: ellipsis;
+-moz-text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+}
+.p .p-title {
+font-size: 14px;
+font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+color: #555;
+}
+.v .v-title, .p .p-title, .v .v-desc, .p .p-desc {
+height: 20px;
+overflow: hidden;
+white-space: nowrap;
+-webkit-text-overflow: ellipsis;
+-moz-text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+}
+.p .p-desc {
+font-size: 12px;
+color: #909090;
+}
+
+}
+/**/
+</style>
+
+<script>
+
+	scrollnumber=0;
+	
+		$(window).scroll(function(){
+			// 当滚动到最底部以上100像素时， 加载新内容
+			//if($('#mengban').css('display')=='none'){
+				if (($(document).height() - $(this).scrollTop() - $(this).height()<80 ) ) {
+					if(scrollnumber==0){
+						scrollnumber=1;
+							if(parseInt($('#currpage').val())<=parseInt($('#totalpage').val())){
+								$('#addzhi').css('display','block')
+								getmore();
+							}
+						
+					}
+				}
+			//}
+		});
+	
+
+	function getmore(){
+		getorder=$('#order').val()//排序
+		
+		pages = $('#currpage').val()
+		if(pages){
+			//LoadPageShow();
+			$.get('index.php?controller=weixin&action=GetTrackFile&type=new&live_id={{$trackcurr.live_id}}&page='+$('#currpage').val(),function(datamsg){
+				
+				var stdata=$.parseJSON(datamsg);
+				if(stdata.ret=='error'){
+					$('#rCount').remove();
+				}else{
+					$('#rCount').remove();
+					addajax(stdata.entity)
+				}
+			});
+		}
+	}
+	
+	function addajax(_cont){
+		$('#addzhi').css('display','none')
+		$('#cont_lists').append(_cont);
+		scrollnumber=0;
+	}
+</script>
+<script>
+	eventTester = function(p,e,o){  
+    p.addEventListener(e,function(){  
+	//alert('d')
+        o.removeClass('vloading').addClass('canPlay')  
+    });  
+ }
+ 
+
+$(document).ready(function(){
+
+	//$.ajaxSetup({
+	 // async: false
+	 // });
+	u = navigator.userAgent
+	$('.btn-close').on('touchstart',function(e){
+		$('#spa-panel-video').css('z-index','2001')
+		$('#spa-page-wxtopics').css('z-index','2002')
+		$('video').remove();
+		stopnextoption();
+	})
+	
+})
+
+function stopnextoption(){
+	event.stopPropagation();
+	event.preventDefault()
+}
+
+function autoplayer(){
+/*
+	playobj = $('.btnPlay');
+	playobj.each(function(index){
+		//$(this).on('touchstart',function(){
+		$(this).on('click',function(){
+		
+			   stopnextoption();
+			   newobj = playobj.eq(index).find('em')
+					newobj.removeClass('canPlay').addClass('vloading')
+					playobj.eq(index).find('video').remove();
+					shareid =  newobj.data('media');
+					
+					geturl = newobj.data('url');
+					//if(geturl){
+						var stdata=[];
+						//stdata.url = geturl.replace('.mak', '.mp4');  
+						stdata.url = geturl;  
+					//}else{
+						////$.get(siteurl+"/Weixin/getmedia/media/"+shareid+"/filetype/kejian/",
+							////function (msg){
+							//// stdata = $.parseJSON(msg)
+							//// stdata.url = stdata.url.replace('.mak', '.mp4');  
+							if(u.indexOf('Android') > -1){//判断是否是安卓系统
+								var player = '<video width="100%" height="100%" id="play_'+shareid+'" controls="" loop="" src="'+stdata.url+'" ></video>'
+							}else{
+								if(u.indexOf('iPad') > -1){
+									width='100%';
+									height='100%';
+								}else{
+									width='1px';
+									height='1px';
+								}
+
+								var player='<video width="'+width+'" height="'+height+'" id="play_'+shareid+'"  class="ios" x-webkit-airplay=""   controls="" loop="loop" src="'+stdata.url+'"></video>'
+								//
+							}
+							
+							playobj.eq(index).parent().find("#play_"+shareid).remove();
+							playobj.eq(index).parent().append(player);
+						 	videoplay = document.getElementById('play_'+shareid);
+						 	videoplay.play();
+						 	eventTester(videoplay,"loadedmetadata",newobj);
+							
+							
+						////})
+					//}
+					
+					
+			  //}
+		})
+		
+		
+	})
+	*/
+	playobj = $('.btnPlay');
+	playobj.each(function(index){
+		//$(this).on('touchstart',function(){
+		$(this).on('click',function(){
+		
+			   stopnextoption();
+			   newobj = playobj.eq(index).find('em')
+					////newobj.removeClass('canPlay').addClass('vloading')
+					////playobj.eq(index).find('video').remove();
+					
+					shareid =  newobj.data('media');
+					
+					geturl = newobj.data('url');
+						var stdata=[];
+						stdata.url = geturl;  
+						//var player='<video id="play_'+shareid+'" width="100%" height="100%" controls="" preload="none" src="http://123.125.86.26/vhot2.qqvideo.tc.qq.com/h0156lhkpv1.m701.mp4?vkey=2C3A6A8A9C889E6BDACD7D279C244AFDB08DC8D90933A0F50CE317B57D4F84981571ED91424143447CC632835684A729A807015ED6BD85D66FD08631F4E02A3A5CBF254407B089A8A362B18AF1F7F8A21747EA16773A8FD7&amp;br=29&amp;platform=2&amp;fmt=auto&amp;level=0&amp;sdtfrom=v3010"></video>'
+						var player='<video id="play_'+shareid+'" width="100%" height="100%" controls="" preload="none" src="'+geturl+'"></video>'
+						$('#showplay').html(player);
+						videoplay = document.getElementById('play_'+shareid);
+						videoplay.play();
+						eventTester(videoplay,"loadedmetadata",newobj);
+					   
+					    playobj.css('display','block')
+						$(this).css('display','none')
+					    		
+							
+						
+		})
+		
+		
+	})
+}
+
+</script>
+
+
+<body >
+	
+	<div >{{include file = 'weixin_top.html'}}</div>
+
+
+	<div style="width:100%;margin-bottom:5px;overflow:hidden">
+		{{section name=trackname loop=$track}}
+		<div class="yk-title" style="width:33%;float:left;text-align: center;line-height:2em;"><span><a {{if $trackcurr.track_id==$track[trackname].track_id}} class="classcurr" {{/if}} href="index.php?controller=weixin&action=live&trackid={{$track[trackname].track_id}}">{{$track[trackname].name|truncate:8:'':true}}</a></span></div>
+		{{/section}}
+	</div>
+	
+	<div style="padding:10px ">
+		<div id="showplay">
+			<video id="tenvideo_video_player_0" width="100%" height="100%" autoplay="autoplay" x-webkit-airplay="true" webkit-playsinline="true" controls preload="none" src="{{$trackcurr.html5url}}"></video>
+		</div>
+
+		
+		<div>
+			
+			<div class="yk-title" style="text-align: center;line-height:2em;padding:10px  0 8px"><span>直播录像</span></div>
+		
+		</div>
+
+		<div id="cont_lists">
+			
+			{{$record}}
+		</div>
+			
+		
+		<!--正在加载 start-->
+		<div  style="text-align:center;">
+				<div style="margin:0px  10px 20px" >
+					<span id="addzhi" style="height:20px;color:#474747;display:none ">
+					<img src="./root/images/weixin/loadinga51.gif" style="width:20px;height:20px;vertical-align: bottom;">&nbsp;正在加载...
+					</span>
+				</div>
+		 </div>
+		 <!--正在加载 end-->
+		 
+		
+		
+		
+		
+		
+	</div>
+	<div style="clear:both">{{include file = 'weixin_footle.html'}}</div>
+</body>
+</html>

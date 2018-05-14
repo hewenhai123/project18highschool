@@ -1,0 +1,122 @@
+<div style="background-color:#000000;height:520px;MIN-WIDTH: 990px; " data-page=tpl_livecast_content>
+	<div class="ind_mainall" >
+	  <!---通栏广告上部分开始-->
+	  <div class="body_middle1" style="MARGIN: 0px auto;width:980px; ">
+		<div class="body_middle1_left">
+		  <div class="ind_middle1_left_top" style="width:200px;background-image:url(./root/images/class_bg.gif);">
+		  		<div style="height:35px;margin-top:15px;margin-left:40px;color:#ffffff; "><H2 style=" font-size:14px; font-weight:bold ">直播列表</H2></div>
+				<div class="ind_middle2_left" style="width:190px;padding-left:5px;scrollbar-face-color: #23272a; font-size: 14px; scrollbar-highlight-color: #4f4f4f; overflow: auto;  scrollbar-shadow-color: #23272a; color: #216dad; scrollbar-3dlight-color: #23272a; line-height: 25px; scrollbar-arrow-color: #216dad;  scrollbar-darkshadow-color: #4f4f4f; scrollbar-base-color: #23272a; height: 435px"  >
+						<div style="height:600px;width:170px;  "  >
+
+						{{foreach item = item name = track from = $track.entity}}
+							<div style="height:20px; margin-bottom:10px ">
+								{{* <div class="zhibo_title" style="width:40px;height:30px "><img src="admin/upload/{{$item.image}}" width="40" height="30" /></div> *}}
+								 <div class="zhibo_title" style="width:3px;height:3px;margin-top:13px;margin-right:5px;margin-left:5px; "><img src="./root/images/live_03.gif" width="3" height="3" /></div>
+								<div class="list" style=" width:150px; font-size:14px;">
+									<a href="javascript:" name="trackname" id="live{{$item.track_id}}" onclick="trackShow('weekId',0,'{{$item.track_id}}');return false" title="{{$item.name}}">{{$item.name|truncate:10:'':true}}</a>
+									<div style="float:right " id="fuliu{{$item.track_id}}"></div>
+								</div>
+
+							</div>
+						{{/foreach}}
+
+						 </div>
+				</div>
+		  </div>
+			<div class="ind_middle1_down" style="width:410px; background-image:url(./root/images/live.gif);height:510px;margin-top:0px ">
+				<div class="body_middle1_down_left" align="center" style="margin-top:10px ">
+
+					  <!--start:track-->
+					  <div class="ind_middle1_down_left_nr" id="showplay" style="height:350px;width:400px; border:0px; ">
+						<img src="root/images/4.jpg">
+					  </div>
+
+					   <!--播放器写在js里 livecast.js-->
+					    <input name="play_type" id="play_type" type="hidden" value="{{$mysetting.player_type}}">
+						<input name="isLogin" id="isLogin" type="hidden" value="{{$my_nav.isLogin}}">
+						{{*{{if !$mysetting.player_type}}*}}
+							<input name="defaultvolume" id="defaultvolume" type="hidden" value="{{$mysetting.volume}}">
+							<input name="defaultrbutton" id="defaultrbutton" type="hidden" value="{{$mysetting.rkeystatus}}">
+							<input name="defaultctrl" id="defaultctrl" type="hidden" value="{{$mysetting.showctrlbar}}">
+							<input name="defaultstatus" id="defaultstatus" type="hidden" value="{{$mysetting.showstatusbar}}">
+							<input name="defaultrecord" id="defaultrecord" type="hidden" value="{{$mysetting.recordenable}}">
+							<input name="defaultscale" id="defaultscale" type="hidden" value="{{$mysetting.scale}}">
+							<input name="defaultversion" id="defaultversion" type="hidden" value="{{$mysetting.vodversion}}">
+						{{*{{/if}}*}}
+					   <input name="fenbian" id="fenbian" type="hidden" value="{{$css}}">
+					   <input name="settime" id="settime" type="hidden" value="{{$windcont.position}}">
+					   <!--end:track-->
+					   <div style="width:390px;heigh:150px;color:#fbf4f4;margin-top:20px;text-indent: 2em ;line-height:20px " align="left" id="livedes">
+					   {{*{{$track.entity[0].describe}}*}}
+					   【友好提示】：如果您是首次接收直播，IE会自动下载播放器插件，请耐心等待；若不能下载，请检查IE安全设置，并点击&nbsp;&nbsp;<a href="GMPlayerX.exe"><font color="#FF0000">这里</font></a>&nbsp;&nbsp;手动下载播放器安装程序，再刷新网页即可。
+					   </div>
+				</div>
+			</div>
+		</div>
+		<!---右侧用户登录开始-->
+		<DIV id='jmyg' >
+			<div style="height:30px; color:#fcffb4; margin-top:13px;margin-left:5px">
+				<div style=" float:left;margin-top:5px; margin-right:10px;margin-left:10px">节目单</div>
+				<div ><a href="#" id="100" {{if $card.datew == 1}}class="on"{{/if}} onMouseOver="weekchange(100,1)">周一</a></div>
+				<div ><a href="#" id="101" {{if $card.datew == 2}}class="on"{{/if}} onMouseOver="weekchange(101,2)">周二</a></div>
+				<div ><a href="#" id="102" {{if $card.datew == 3}}class="on"{{/if}} onMouseOver="weekchange(102,3)">周三</a></div>
+				<div ><a href="#" id="103" {{if $card.datew == 4}}class="on"{{/if}} onMouseOver="weekchange(103,4)">周四</a></div>
+				<div ><a href="#" id="104" {{if $card.datew == 5}}class="on"{{/if}} onMouseOver="weekchange(104,5)">周五</a></div>
+				<div ><a href="#" id="105" {{if $card.datew == 6}}class="on"{{/if}} onMouseOver="weekchange(105,6)">周六</a></div>
+				<div ><a href="#" id="106" {{if $card.datew == 0}}class="on"{{/if}} onMouseOver="weekchange(106,0)">周日</a></div>
+			</div>
+			<div class="body_middle1_right_fqanr" style="margin-top:0px;width:340px;padding-left:5px;scrollbar-face-color: #23272a; font-size: 14px;  scrollbar-highlight-color: #4f4f4f; overflow: auto;  scrollbar-shadow-color: #23272a; color: #216dad; scrollbar-3dlight-color: #23272a; line-height: 25px; scrollbar-arrow-color: #216dad;  scrollbar-darkshadow-color: #4f4f4f; scrollbar-base-color: #23272a; height: 445px">
+				<div style="background-color:#23262b ">
+					<div style="color:#fbf4f4;margin-left:5px " id="livepre">
+
+					{{section name=cardlist loop=$card.entity}}
+					<div   id="{{$card.entity[cardlist].week_id}}" {{if $card.datew == $card.entity[cardlist].week_id}} style="display:block; font-size:13px " {{else}} style="display:none ;font-size:13px" {{/if}}>
+						{{section name=list loop=$card.entity[cardlist].describe}}
+
+						  <div>{{$card.entity[cardlist].describe[list]}}</div>
+
+						{{/section}}
+					</div>
+				  {{/section}}
+					</div>
+
+				</div>
+			</div>
+		 </DIV>
+
+		 <input name="myprecate" id="myprecate" type="hidden" value="{{$mysetting.precate}}">
+		 {{if $mysetting.erweima==0}}
+		 <DIV id='MovedDiv' style='margin-left:890px;width:86px;POSITION:absolute;TOP:180px; z-index:1000'>
+				<div id='valurl' style="height:320px;padding-top:10px"></div>
+				<div style="width:86px;float:left" id='erwei'></div>
+				<div style="height:20px;width:86px;float:left" id='erwei_gap'></div>
+				<div style="height:20px;width:86px;float:left" id='gap'></div>
+				<div style="width:86px;float:left" id='html5qr'></div>
+			</DIV>
+			<script language="javascript" type="text/javascript">
+				var w3c = (document.getElementById) ? true : false;
+				var agt = navigator.userAgent.toLowerCase();
+				var ie = ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1) && (agt.indexOf("omniweb") == -1));
+				var mymovey = 0;
+				function IeTrueBody(){
+				return (document.compatMode && document.compatMode!="BackCompat") ? document.documentElement : document.body;
+				}
+				function GetScrollTop(){
+				return ie ? IeTrueBody().scrollTop : window.pageYOffset;
+				}
+			</script>
+			 <script language="JavaScript1.1">
+				function heartBeat(){
+				 diffY=GetScrollTop();
+				 mymovey += Math.floor((diffY-document.getElementById('MovedDiv').style.top.replace("px","")+180)*0.1);
+				 document.getElementById('MovedDiv').style.top = mymovey+"px";
+				}
+				//window.setInterval("heartBeat()",1);
+			</script>
+		{{/if}}
+
+
+	  </div>
+	  <!---通栏广告上部分结束-->
+	</div>
+</div>

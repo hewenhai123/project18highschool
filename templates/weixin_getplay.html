@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<title>{{$mysetting.webtitle}} </title>
+<script language="javascript" src="./root/js/weixin/zepto.js"></script>
+<script language="javascript" src="./root/js/weixin/event.js"></script>
+<script language="javascript" src="./root/js/weixin/touch.js"></script>
+<script language="javascript" src="./root/js/weixin/ajax.js"></script>
+<script language="javascript" src="./root/js/weixin/ye_dialog_s.js"></script>
+<script language="javascript" src="./root/js/jquery.min.js"></script>
+<!--<script language="javascript" src="./root/js/jquery.cycle.all.min.js"></script>-->
+
+<style>
+	
+	ul, ol {list-style: none;padding: 0;}
+	a{text-decoration: none;}
+	
+
+	
+</style>
+	
+	
+	
+	
+	
+<style>	
+	.yk-container {
+		min-width: 300px;
+		max-width: 984px;
+		margin: 0 auto;
+		/*padding-top: 20px;
+		padding-bottom: 20px;*/
+		padding:0 10px;
+		overflow:hidden
+	}
+	.yk-box {
+		width: 100%;
+		margin-bottom: 15px;
+		clear:both;
+	}
+	
+	
+</style>
+<style>
+* { border:0; margin:0; padding:0; outline:none; }
+
+
+
+
+body,div {font: 12px/20px "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+word-break: break-all;
+word-wrap: break-word;}
+.yk-box .yk-head {
+position: relative;
+margin-bottom: 8px;
+/*height: 50px;*/
+line-height: 35px;
+}
+.yk-TitleBar .titlebar {
+/*height: 50px;*/
+/*line-height: 35px;
+
+border-bottom:1px solid #e6e6e6;*/
+line-height: 30px;
+
+}
+.yk-title {
+/*margin-right: 20px;*/
+font-size: 1rem;
+width:24.4%;
+color: #909090;
+}
+.yk-title, .yk-box .yk-head .yk-append {
+display: inline-block;
+vertical-align: bottom;
+/*font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;*/
+}
+
+.yk-box .yk-head .yk-extend {
+position: absolute;
+right: 0;
+bottom: 10px;
+font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+}
+.yk-box .yk-head .yk-extend {
+font-size: 18px;
+}
+.yk-box .yk-head .yk-extend a {
+margin-left: 20px;
+color: #555;
+}
+.yk-box .ico-right {
+margin-left: 4px;
+/*vertical-align: bottom;*/
+}
+.ico-right{
+	display: inline-block;
+vertical-align: middle;
+background: transparent url("./root/images/weixin/yk.png") no-repeat;
+}
+.ico-right {
+background-position: -30px -120px;
+}
+.ico-left, .ico-right {
+width: 12px;
+height: 20px;
+}
+
+
+.videolist {
+width: 100%;
+}
+.videolist .video-row {
+margin-left: -20px;
+}
+.videolist .video-row:before, .videolist .video-row:after {
+display: table;
+content: "";
+line-height: 0;
+}
+.videolist .video-item {
+width: 50%;
+}
+.videolist .video-item, .videolist .video-item-large, .videolist .video-item-huge {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+float: left;
+padding-left: 20px;
+}
+.p {
+margin: 0;
+padding: 0;
+margin-bottom: 20px;
+font: 12px/20px arial, helvetica, verdana, tahoma, sans-serif;
+}
+.p .p-thumb {
+z-index: 1;
+position: relative;
+background: #999;
+}
+.p .p-thumb .p-pic-default {
+position: relative;
+}
+.p .p-thumb img {
+width: 100%;
+height: auto;
+}
+.p img {
+display: block;
+border: 0 none;
+}
+img {
+max-width: 100%;
+width: auto\9;
+height: auto;
+vertical-align: middle;
+border: 0;
+-ms-interpolation-mode: bicubic;
+-webkit-tap-highlight-color: transparent;
+-moz-tap-highlight-color: transparent;
+-o-tap-highlight-color: transparent;
+-ms-tap-highlight-color: transparent;
+tap-highlight-color: transparent;
+-webkit-touch-callout: none;
+-moz-touch-callout: none;
+-o-touch-callout: none;
+-ms-touch-callout: none;
+touch-callout: none;
+}
+.p .p-thumb .p-pic-default::after {
+content: "";
+z-index: 0;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+/* background-image: url("/index/img/mobile/video_default_brands.png"); */
+background-position: center center;
+background-repeat: no-repeat;
+-webkit-background-size: 50%;
+-moz-background-size: 50%;
+-o-background-size: 50%;
+background-size: 50%;
+}
+.p .p-thumb .p-pic-real {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-position: center center;
+background-repeat: no-repeat;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+.p .p-link {
+z-index: 4;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.p a {
+text-decoration: none;
+color: #555555;
+}
+.p .p-isdrama {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+position: absolute;
+top: -2px;
+left: 0;
+width: 100%;
+height: 1px;
+background: #bbb;
+border-left: 1px solid #fff;
+border-right: 1px solid #fff;
+}
+.p .p-isdrama:before {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+content: "";
+position: absolute;
+top: -2px;
+left: 0;
+width: 100%;
+height: 1px;
+background: #d6d6d6;
+border-left: 1px solid #fff;
+border-right: 1px solid #fff;
+}
+.p .p-metadata {
+padding: 5px;
+background: #f5f5f5;
+}
+.v .v-title, .p .p-title, .v .v-desc, .p .p-desc {
+height: 20px;
+overflow: hidden;
+white-space: nowrap;
+-webkit-text-overflow: ellipsis;
+-moz-text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+}
+.p .p-title {
+font-size: 14px;
+font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+color: #555;
+}
+.v .v-title, .p .p-title, .v .v-desc, .p .p-desc {
+height: 20px;
+overflow: hidden;
+white-space: nowrap;
+-webkit-text-overflow: ellipsis;
+-moz-text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+}
+.p .p-desc {
+font-size: 12px;
+color: #909090;
+}
+
+</style>
+<style>
+.ch_type {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	height: 75px;
+	PADDING-BOTTOM: 15px;
+	MARGIN: 0px auto;
+	OVERFLOW: hidden;
+	WIDTH: 100%;
+	PADDING-TOP: 15px;
+	margin-top: 15px;
+	border: 1px solid #0d8126;
+	background-color: #f0f9fe;
+}
+.game_kuang {
+width: 100%;
+height: 26px;
+}
+.game_type {
+margin-top: 6px;
+margin-left: 5px;
+width: 47px;
+height: 16px;
+float: left;
+}
+.game_all {
+margin-top: 6px;
+margin-left: 12px;
+width: 36px;
+height: 18px;
+float: left;
+cursor: pointer;
+}
+a.nextPage {
+color: white;
+display: inline-block;
+background: #6CA620;
+border: 1px solid #41810A;
+padding: 2px 3px;
+line-height: 12px;
+vertical-align: middle;
+font-size: 12px;
+}
+.game_left_hui {
+margin-top: 6px;
+margin-left: 5px;
+width: 16px;
+height: 16px;
+float: left;
+background: url(./root/images/2leftarrow_m.png);
+}
+
+
+.yk-title a{color:#555555}
+.yk-title a.classcurr{color:#f59906}
+</style>
+
+<body >
+	
+	<div >{{include file = 'weixin_top.html'}}</div>
+
+	<div style="width:100%;margin-bottom:5px;overflow:hidden">
+		{{section name=pic_3 loop=$aType}}
+		<div class="yk-title" style="width:25%;float:left;text-align: center;line-height:2em;"><span><a {{if $typeid==$aType[pic_3].type_id}} class="classcurr" {{/if}} href="index.php?controller=weixin&action=play&p={{$classid}}&t={{$aType[pic_3].type_id}}">{{$aType[pic_3].name|truncate:4:'':true}}</a></span></div>
+		{{/section}}
+	</div>
+	
+	<div class="yk-container">
+		
+		
+		
+		
+		
+		
+		<div name="m_pos" id="m_86887"  >
+		
+		
+			{{$aMovie}}
+		
+			</div>
+	
+	  </div>
+		
+
+		
+		<!--正在加载 start-->
+		<div  style="text-align:center;">
+				<div style="margin:0px  10px 20px" >
+					<span id="addzhi" style="height:20px;color:#474747;display:none ">
+					<img src="./root/images/weixin/loadinga51.gif" style="width:20px;height:20px;vertical-align: bottom;">&nbsp;正在加载...
+					</span>
+				</div>
+		 </div>
+		 <!--正在加载 end-->
+		 
+		
+		<script>
+
+	scrollnumber=0;
+	
+		$(window).scroll(function(){
+			// 当滚动到最底部以上100像素时， 加载新内容
+			//if($('#mengban').css('display')=='none'){
+				if (($(document).height() - $(this).scrollTop() - $(this).height()<80 ) ) {
+					if(scrollnumber==0){
+						scrollnumber=1;
+							if(parseInt($('#currpage').val())<=parseInt($('#totalpage').val())){
+								$('#addzhi').css('display','block')
+								getmore();
+							}
+						
+					}
+				}
+			//}
+		});
+	
+
+	function getmore(){
+		getorder=$('#order').val()//排序
+		
+		pages = $('#currpage').val()
+		if(pages){
+			//LoadPageShow();
+			$.get('index.php?controller=weixin&action=getplayvod&p={{$classmes.class_id}}&t={{$typeid}}&page='+$('#currpage').val(),function(datamsg){
+				var stdata=$.parseJSON(datamsg);
+				if(stdata.ret=='error'){
+					$('#rCount').remove();
+				}else{
+					$('#rCount').remove();
+					addajax(stdata.entity)
+				}
+			});
+		}
+	}
+	
+	function addajax(_cont){
+		$('#addzhi').css('display','none')
+		$('#m_86887').append(_cont);
+		scrollnumber=0;
+	}
+</script>
+		
+		
+
+	<div style="clear:both">{{include file = 'weixin_footle.html'}}</div>
+</body>
+</html>

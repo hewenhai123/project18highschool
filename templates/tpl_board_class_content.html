@@ -1,0 +1,20 @@
+<div class="publicmain" data-page="tpl_board_class_content">
+  <table width="940" border="0" cellspacing="0" cellpadding="0" style=" border-bottom:1px dashed #666666;">
+    <tr>
+      <td width="81" height="25">&nbsp;</td>
+      <td width="74" align="left" valign="top" class="publictext">&nbsp;&nbsp;{{$tagtype.board}}</td>
+      <td width="695">&nbsp;</td>
+      <td width="90">&nbsp;</td>
+    </tr>
+  </table>
+  <div class="public_c">
+    <ul class="public_con">
+      {{section name="titlename" loop=$my_title}}
+      <li><a href="index.php?controller=board&action=Content&board_id={{$my_title[titlename].board_id}}">{{$my_title[titlename].name}}</a></li>
+      {{/section}}
+    </ul>
+    <!--- 翻页 -->
+    <div class="turn" style="clear:both;">{{include file="tpl_page.html"}}</div>
+    <!--- 翻页 -->
+  </div>
+</div>

@@ -1,0 +1,58 @@
+{{if $ListMovie.count>0}}
+	
+		<div class="yk-box">
+						
+				<div class="yk-body">
+					<div class="videolist">
+						<div class="video-row">
+						{{section name=moviename loop=$ListMovie.result}}
+							<a href="index.php?controller=weixin&action=lianxu&mid={{$ListMovie.result[moviename].media_id}}&lid={{$ListMovie.result[moviename].track_id}}&play_type=record">
+								<div class="video-item">
+									<div class="p">
+										<div class="p-thumb">
+											<div class="p-pic-default"><img src="./root/images/weixin/video_defaultpic2.png"></div>
+											<div class="p-pic-real" data-media="{{$ListMovie.result[moviename].media_id}}"   style="background-image:url('admin/upload/{{$ListMovie.result[moviename].imagepos}}');"></div>
+											
+											<!--<div class="p-isdrama"></div>-->
+									
+										</div>
+										<div class="p-metadata">
+											<div class="p-title">
+												{{$ListMovie.result[moviename].name}}
+											</div>						
+											<div class="p-desc">
+												<span>时长：{{$ListMovie.result[moviename].duration}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						{{/section}}					
+											
+						</div>
+					</div>
+
+				</div>
+		</div>
+
+	
+	
+	
+	
+	
+	
+		
+		
+	
+{{else}}
+	<div style="margin-top:200px;text-align:center;color:#000000  ">暂无录像</div>
+{{/if}}
+
+<p id="rCount" class="more" style="height:1px " >
+	<input name="currpage" id="currpage" type="hidden" value="{{$page}}">
+	<input name="totalpage" id="totalpage" type="hidden" value="{{$pageCount}}">
+	
+</p>
+<script>
+	//autoplayer()
+</script>

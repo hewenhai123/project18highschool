@@ -1,0 +1,30 @@
+﻿<DIV id=gBot data-page="tpl_footle">
+	<DIV class=gn>
+		<DIV class=gn_i>
+			<DIV class=gs>
+			<!--<div style="float:left;margin-top:7px;color:#fe7b00 ">当前在线人数:{{$votpeople.onlinpeople[0].peoplenum}}&nbsp;当天访问人数:{{$votpeople.visitpeople[0].num}}&nbsp;访问总人数:{{$votpeople.totalpeople[0].num}}&nbsp;&nbsp;</div>-->
+				<FORM class=gs_form action="index.php?controller=search" method=get searchtype="">
+					<div class="diyselect">
+						<div id="ssel_name" name="sel_name"  class="fsearch"  onclick=turnit(sbb)><div class="bottomcss" >名称</div></div>
+						<ul id="sbb"  style="display:none">
+						  <li id=t1 class="diyselect_current" onclick=sele('名称','s') ><a href="javascript://" >名称</a> </li>
+						  <li id=t2 onclick=sele('简介','s')><a href="javascript://">简介</a>  </li>
+						</ul>
+					</div>
+					<INPUT class="gs_text tui_searchint"  id="ssKey"	onblur="this['_gs_focus']=0" onfocus="this['_gs_focus']=1" accessKey=s name=kw 	autocomplete="off" onkeydown="if(event.keyCode==13) {return SearchTop('s')};"><INPUT class=gs_submit type=button onClick="return SearchTop('s');" value="搜 索">
+					<INPUT 	disabled type=hidden value=tudou8848_pg name=tn> 
+				</FORM>
+			</DIV>
+		</DIV>
+	</DIV>
+	<DIV class=gf>
+		 <!--start:link-->
+			<DIV class=gfn>
+				<UL>
+					<LI><a href='javascript://' onclick="SouChangeUrl('无限流媒体应用平台')">加入收藏</a></LI></UL>
+		   </DIV><!--end:link-->
+		<DIV class=gc>
+		<!--start:web-->无限流媒体应用平台 <br>Any Media System 版权所有<!--end:web-->
+		</DIV>
+	</DIV>
+</DIV>

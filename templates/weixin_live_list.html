@@ -1,0 +1,41 @@
+
+
+{{if $iCount>0}}
+	{{section name=livename loop=$aTrack}}
+	
+	
+	
+		<div style="width:50%;float:left ">
+			<div  style="{{if ($smarty.section.livename.rownum%2== 0)}} padding:5px 3px 0px 2px;{{else}}padding:5px 2px 0px 3px; {{/if}} " >
+				<div class="mv_video" style="clear:both;margin-top:5px ">    
+				  <div class="vWrap" thumbs="1">              
+					<div>
+						<img src="admin/upload/{{$aTrack[livename].image}}" style="width:100% "  onerror="this.src='./root/images/weixin/live_weixin.png'" style="display: inline;"> 
+					</div>           
+					<span class="btnPlay"><em class="canPlay" data-media="{{$aTrack[livename].track_id}}" data-url = "{{$aTrack[livename].hls}}"></em></span>
+				  </div> 
+				  <div style="text-align:left;font-size:1.2rem;line-height:20px;overflow:hidden">
+					  <div style="text-align:center;padding:6px 0px 0px;font-size:1.2rem;">{{$aTrack[livename].name}}</div>
+				  </div>   
+			  </div>
+			</div>
+			
+		</div>
+	
+	
+			
+		
+	{{/section}}
+{{else}}
+	<div style="margin-top:200px;text-align:center;color:#000000  ">没有直播</div>
+{{/if}}
+
+<p id="rCount" class="more" style="height:1px " >
+	<input name="currpage" id="currpage" type="hidden" value="{{$page}}">
+	<input name="totalpage" id="totalpage" type="hidden" value="{{$pageCount}}">
+	
+</p>
+
+<script>
+	autoplayer()
+</script>

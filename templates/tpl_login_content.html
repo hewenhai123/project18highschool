@@ -1,0 +1,48 @@
+<div class="loginmain" style="margin-top:3px " data-page=tpl_login_content>
+  <div class="login_one" align="center">
+    <div class="login_two">
+      <div class="Regis_top" id="loginname">登录</div>
+      <ul class="Regis_shuxing">
+        <div id="err_code"></div>
+        <li>帐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:
+          <input type="text" name="username" id="username" size="22" onkeydown="if(event.keyCode==13) doLoginSubmit();"/>
+        </li>
+        <li id="loginpass">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:
+          <input type="password" name="password" id="password" size="22" onkeydown="if(event.keyCode==13) doLoginSubmit();" />
+        </li>
+        <li>
+            <OBJECT ID="ZSAuth" CLASSID="CLSID:E56AD2B6-E0AC-4F0B-ABBB-C009364CC21D" codeBase="./ApiIF.cab#version=1,0,0,1"></OBJECT>
+        </li>
+      </ul>
+	  <ul class="Regis_shuxing" style="display:none " id="prepet">
+        <li>密码保护问题:
+		<span>
+          <select name="question" id="question" onkeydown="if(event.keyCode==13) check();" style="width:160px" >
+            <option value="wenti">选择一个问题</option>
+            <option value="school">您的第一所学校的名称</option>
+            <option value="city">您的出生城市</option>
+            <option value="code">身份证号码最后4位</option>
+            <option value="actor">您最喜欢的演员</option>
+            <option value="pet">您最喜欢的宠物</option>
+          </select>
+		</span>
+        </li>
+        <li>保护问题答案:
+          <input type="text" name="answer" id="answer" size="22" onkeydown="if(event.keyCode==13) check();" />
+        </li>
+      </ul>
+      <div class="login_button_main" style="width:300px;margin-top:20px">
+        <div class="Regis_button"><a href="#" onclick="doLoginSubmit()">确 定</a></div>
+		<div class="Regis_button"><a href="#" onclick="oncannel()">取 消</a></div>
+      </div>
+	   <div class="login_button_main" style="width:300px;margin-top:20px;" id="loginfind">
+		<div style="margin-left:-130px" >点击这里<a href="#" onclick="passwordFind()"><font color=red>找回密码</font></a></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('username').focus();
+</script>

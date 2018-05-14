@@ -1,0 +1,27 @@
+{{section name=comlist loop=$data.comment}}
+	<li class="comment-item">
+		<div><span class="item-time">{{$data.comment[comlist].times}}</span></div>
+		<div class="item-description">
+			<div><span class="item-name">{{$data.comment[comlist].author}}</span></div>
+			<p>{{$data.comment[comlist].describe}}</p>
+		</div>
+		<div class="clear"></div>
+	</li>
+{{/section}}
+{{if ($data.page < $pageCount)}}
+	<div class="more-btn" id="more_comment_btn">
+		<span loopnum="1" id="more_comment" onclick="getcommentmore({{$page}})">查看更多</span>
+		<div class="more-ico">
+			<div class="line1"></div>
+			<div class="line2"></div>
+		</div>
+	 </div>
+{{/if}}
+<!--
+<p id="chakanmore" class="more" style="height:1px " >
+	<input name="currpage" id="currpage" type="hidden" value="{{$page}}">
+	<input name="totalpage" id="totalpage" type="hidden" value="{{$pageCount}}">
+	
+	
+</p>
+-->

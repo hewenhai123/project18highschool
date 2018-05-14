@@ -1,0 +1,64 @@
+{{if $iCount>0}}
+	
+		<div class="yk-box">
+						
+				<div class="yk-body">
+					<div class="videolist">
+						<div class="video-row">
+						{{section name=moviename loop=$aMovie}}
+							{{if $play_type=='media'}}
+								<a href="index.php?controller=weixin&action=lianxu&mid={{$aMovie[moviename].movie_id}}&cid={{$class_id}}&lid={{$aMovie[moviename].media_id}}&play_type={{$play_type}}">
+							{{else}}
+
+								<a href="index.php?controller=weixin&action=lianxu&mid={{$aMovie[moviename].media_id}}&lid={{$aMovie[moviename].track_id}}&play_type={{$play_type}}">
+
+							{{/if}}
+								<div class="video-item">
+									<div class="p">
+										<div class="p-thumb">
+											<div class="p-pic-default"><img src="./root/images/weixin/video_defaultpic2.png"></div>
+											<div class="p-pic-real" data-media="{{$aMovie[moviename].media_id}}" data-url="{{$aMovie[moviename].url}}"  style="background-image:url('admin/upload/{{$aMovie[moviename].imagepos}}');"></div>
+											
+											<!--<div class="p-isdrama"></div>-->
+									
+										</div>
+										<div class="p-metadata">
+											<div class="p-title">
+												{{$aMovie[moviename].name}}
+											</div>						
+											<div class="p-desc">
+												<span>时长：{{$aMovie[moviename].duration}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						{{/section}}					
+											
+						</div>
+					</div>
+
+				</div>
+		</div>
+
+	
+	
+	
+	
+	
+	
+		
+		
+	
+{{else}}
+	<div style="margin-top:200px;text-align:center;color:#000000  ">{{$currtitle}}</div>
+{{/if}}
+
+<p id="rCount" class="more" style="height:1px " >
+	<input name="currpage" id="currpage" type="hidden" value="{{$page}}">
+	<input name="totalpage" id="totalpage" type="hidden" value="{{$pageCount}}">
+	
+</p>
+<script>
+	//autoplayer()
+</script>

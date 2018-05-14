@@ -1,0 +1,185 @@
+<!--图片变幻开始-->
+
+{{if $mysetting.index_type}}
+<DIV class="fr fc" id=adex_box data-page="tpl_demand_content" >
+	<div  style="width:680px; float:left;border:1px solid #c6c3c6;height:305px ">
+
+			<div id="focus_change" >
+				 <div id="focus_change_list" style="top:0; left:0;">
+					  <ul>
+					  {{section name=bigpic loop=$dayMovie.entity}}
+						  	<li><a href="index.php?controller=play&action=index&movie_id={{$dayMovie.entity[bigpic].movie_id}}" target="vodplay"><img src="admin/upload/{{$dayMovie.entity[bigpic].bigimg}}" alt="{{$dayMovie.entity[bigpic].movie_name}}" /></a></li>
+					  {{/section}}
+					  </ul>
+				 </div>
+			</div>
+			<div class="focus_change_con" >
+				{{section name=textpic loop=$dayMovie.entity}}
+					<div id="{{$smarty.section.textpic.rownum}}"  {{if $smarty.section.textpic.rownum==1}}style="display:;word-wrap:break-word "{{else}}style="display:none;word-wrap:break-word "{{/if}}>
+
+					  <div class=post_caption style='margin-left:20px; font-size:22px' title="{{$dayMovie.entity[textpic].movie_name}}">{{$dayMovie.entity[textpic].movie_name}}</div>
+					  <div style='margin-left:20px;margin-top:5px; font-size:12px'>{{$tagtype.type}}：{{section name=type loop=$dayMovie.entity[textpic].types.entity}}{{$dayMovie.entity[textpic].types.entity[type].name}}&nbsp;{{/section}}</div>
+					  <div style='margin-left:20px;margin-top:5px; font-size:12px'>{{$tagtype.areas}}：{{section name=areas loop=$dayMovie.entity[textpic].areas.entity}}{{$dayMovie.entity[textpic].areas.entity[areas].name}}&nbsp;{{/section}}</div>
+					  <div style='margin-left:20px;margin-top:5px; font-size:12px'>{{$tagtype.years}}：{{$dayMovie.entity[textpic].years.entity[0].name}}</div>
+					  <div style='margin-left:20px;margin-top:5px; font-size:12px'>简介：{{$dayMovie.entity[textpic].describe|truncate:197:'':true}}</div>
+
+					</div>
+				{{/section}}
+			</div>
+			<div id="focus_change_btn"  >
+			  <ul>
+			  {{section name=smallpic loop=$dayMovie.entity max=6}}
+			  {{if $smarty.section.smallpic.rownum == 1}}
+				<li class="current"   ><!--<div  style="margin-top:-10px;text-align:center; "><a href="index.php?controller=play&action=index&movie_id={{$dayMovie.entity[smallpic].movie_id}}" target="vodplay">{{$smarty.section.smallpic.rownum}}</a></div>--></li>
+			  {{else}}
+				<li   ><!--<div  style="margin-top:-10px; text-align:center;  "><a href="index.php?controller=play&action=index&movie_id={{$dayMovie.entity[smallpic].info_id}}" target="vodplay">{{$smarty.section.smallpic.rownum}}</a></div>--></li>
+			  {{/if}}
+			  {{/section}}
+			  </ul>
+		  </div>
+	  </div>
+
+
+
+<DIV class=s >
+
+	<!--公告开始-->
+			<DIV class="b news" style="margin-top:0px" >
+				<DIV class=h><H2 style="width:50px ">{{$tagtype.board|truncate:4:'':true}}</H2><div style="float:right "><a class="more" href="index.php?controller=board&action=Index">更多>></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></DIV>
+				<DIV class=c style="{{if $mysetting.player_type!=3}}height:150px;{{else}}height:255px;{{/if}} ">
+					<UL class=nw_li>
+						{{section name=board loop=$board.entity}}
+					  <LI><SPAN>{{$board.entity[board].updated|date_format:"%m-%d"}} </SPAN><A title="{{$board.entity[board].name}}"   href="index.php?controller=board&action=Content&board_id={{$board.entity[board].board_id}}" target="board">{{$board.entity[board].name|truncate:15:'':true}}</A>   </LI>
+					  {{/section}}
+					</UL>
+				</DIV>
+				<DIV class=f></DIV>
+			</DIV>
+		<!--公告结束-->
+
+	<!--登录-->
+		<div id="login"  >
+
+
+				<DIV class="b lg" id=iLog style="margin-top:10px ">
+					<!--<DIV class=h></DIV>-->
+
+					<!--登录开始-->
+					<!--<DIV class=c>-->
+							{{if $mysetting.player_type!=3}}
+								<div><!--<a href="GMPlayerX.exe" onClick="counter()" ><img src="./root/images/xiazai.gif"></a>--> <a href="GMPlayerX.exe" ><img src="./root/images/xiazai.gif"></a></div>
+							{{/if}}
+							<!--<div align='center' style='color:#985810;margin-top:4px' id="xianum">已下载<font color=red>{{$xiacounter}}</font>次 </div>-->
+
+
+					<!--</DIV>-->
+					<!--登录结束-->
+					<!--<DIV class=f></DIV>-->
+				</DIV>
+
+		</div>
+	<!--登录结束-->
+
+</DIV>
+{{/if}}
+
+</DIV>
+<!--图片变幻结束-->
+<!--图片中间开始-->
+
+
+{{section name=listclass loop=$classAll.entity }}
+<DIV class=fr>
+	<DIV class=m>
+		<DIV class="b sec3">
+			<DIV class=h>
+				<H2 ><A title="{{$classAll.entity[listclass].class_name}}" href="index.php?controller=vodtwo&action=index&list={{$classAll.entity[listclass].class_id}}" target="vodlist">{{$classAll.entity[listclass].class_name}}</A></H2>
+
+				{{if $classAll.entity[listclass].class_name}}<SPAN class=ap><A class=more title={{$classAll.entity[listclass].class_name}}频道 href="index.php?controller=vodtwo&action=index&list={{$classAll.entity[listclass].class_id}}" target=_blank>更多>></A></SPAN>{{/if}}
+			</DIV>
+		<DIV class=c style="height:222px">
+			<DIV class=sc4>
+				<DIV class=row>
+					{{section name=pic_3 loop=$classAll.entity[listclass].classMovie max=15}}
+						{{if $smarty.section.pic_3.rownum<6}}
+							<DIV class=item  style=" width:128px; height:176px ">
+								<DIV class="pack pack_video_card hd_video" style="width:125px ">
+									<DIV class=pic style="width:120px;height:90px;BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: #ccc 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #ccc 1px solid; POSITION: relative "><A class=inner title="{{$classAll.entity[listclass].classMovie[pic_3].movie_name}}" 	href="index.php?controller=play&action=index&movie_id={{$classAll.entity[listclass].classMovie[pic_3].movie_id}}" target="vodplay"><IMG class="pack_clipImg lazyImg"  alt="{{$classAll.entity[listclass].classMovie[pic_3].movie_name}}"	src="admin/upload/{{$classAll.entity[listclass].classMovie[pic_3].image}}" width=120></A></DIV>
+									<DIV class=txt>
+										<H6 class=caption ><A title="{{$classAll.entity[listclass].classMovie[pic_3].movie_name}}" 	href="index.php?controller=play&action=index&movie_id={{$classAll.entity[listclass].classMovie[pic_3].movie_id}}" 	target="vodplay">{{$classAll.entity[listclass].classMovie[pic_3].movie_name}}</A></H6>
+										<UL >
+
+										  {{if $tagtype.daoyin}}
+										  		<LI title="{{$classAll.entity[listclass].classMovie[pic_3].tag_directors}}" {{if !$tagtype.pingjia }} style="margin-top:1px " {{/if}}>{{$tagtype.directors}}: {{$classAll.entity[listclass].classMovie[pic_3].tag_directors|truncate:7:'':true}} </LI>
+										  {{/if}}
+										  {{if $tagtype.yanyuan}}
+										  		<LI title="{{$classAll.entity[listclass].classMovie[pic_3].tag_stars}}" {{if !$tagtype.pingjia }} style="margin-top:1px " {{/if}}>{{$tagtype.stars}}: {{$classAll.entity[listclass].classMovie[pic_3].tag_stars|truncate:7:'':true}} </LI>
+										  {{/if}}
+
+										  {{if $tagtype.bofang}}
+										  <LI {{if !$tagtype.pingjia }} {{/if}}>播放: {{$classAll.entity[listclass].classMovie[pic_3].click_num}}次 </LI>
+										  {{/if}}
+										  {{if $tagtype.pingjia}}
+										  <div ><div style="float:left; margin-top:7px ">评价: </div><div class="fRed" style="float:left "><strong>{{$classAll.entity[listclass].classMovie[pic_3].codenumsp[0]}}</strong>{{$classAll.entity[listclass].classMovie[pic_3].codenumsp[1]}}</div> <div style=" float:left;margin-top:6px ">({{$classAll.entity[listclass].classMovie[pic_3].assess_people}}评)</div></div>
+										  {{/if}}
+										</UL>
+									</DIV>
+								</DIV>
+							</DIV>
+						{{else}}
+							<DIV class=item  style="width:128px ">
+								<DIV class="pack pack_video_card hd_video" style="width:125px;height:25px ">
+									<DIV class=txt>
+										<H6 class=caption_1><div style="float:left;margin-top:5px; width:14px "><img src="./root/images/kuang.gif"></div><div><A title="{{$classAll.entity[listclass].classMovie[pic_3].movie_name}}" 	href="index.php?controller=play&action=index&movie_id={{$classAll.entity[listclass].classMovie[pic_3].movie_id}}" 	target="vodplay">{{$classAll.entity[listclass].classMovie[pic_3].movie_name}}</A></div></H6>
+									</DIV>
+								</DIV>
+							</DIV>
+						{{/if}}
+					{{/section}}
+				</DIV>
+			</DIV>
+		</DIV>
+		<DIV class=f></DIV>
+		</DIV>
+	</DIV>
+	<DIV class=s>
+		<DIV class="b top2">
+			<DIV class=h>	<H2 style="width:270px ">{{$classAll.entity[listclass].class_name|truncate:12:'':true}}排行榜</H2></DIV>
+			<DIV class=c>
+				<OL class=billboard>
+				{{if $classAll.entity[listclass].clickMovie[0]}}
+				  <LI class=n1>
+					  <DIV class="pack pack_video_brief hd_video" style="width:245px ">
+						<DIV class=pic><A class=inner title="{{$classAll.entity[listclass].clickMovie[0].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$classAll.entity[listclass].clickMovie[0].movie_id}}" target="vodplay"><IMG class="pack_clipImg lazyImg" height=90 alt="{{$classAll.entity[listclass].clickMovie[0].movie_name}}" 	  src="admin/upload/{{$classAll.entity[listclass].clickMovie[0].image}}" width=120> 	  </A></DIV>
+						<DIV class=txt >
+						  <H6 class=caption><A title="{{$classAll.entity[listclass].clickMovie[0].movie_name}}" 	  href="index.php?controller=play&action=index&movie_id={{$classAll.entity[listclass].clickMovie[0].movie_id}}" target="vodplay">{{$classAll.entity[listclass].clickMovie[0].movie_name}}	  </A></H6>
+						  <UL class=info>
+							<LI>播放: {{$classAll.entity[listclass].clickMovie[0].click_num}}次 </LI>
+							<LI><div style="float:left; margin-top:8px ">评价: </div><div class="fRed" style="float:left "><strong>{{$classAll.entity[listclass].clickMovie[0].codenumsp[0]}}</strong>{{$classAll.entity[listclass].clickMovie[0].codenumsp[1]}}</div> </LI>
+						  </UL>
+						</DIV>
+					  </DIV>
+				  </LI>
+				  {{/if}}
+				  {{section name=nopic_3 loop=$classAll.entity[listclass].clickMovie start=1}}
+				  <LI class=n{{$smarty.section.nopic_3.rownum+1}} style="height:18px;">
+				  	<div class=top_caption><A title="{{$classAll.entity[listclass].clickMovie[nopic_3].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$classAll.entity[listclass].clickMovie[nopic_3].movie_id}}" target="vodplay">{{$classAll.entity[listclass].clickMovie[nopic_3].movie_name}}</A></div>
+					<div>播放:{{$classAll.entity[listclass].clickMovie[nopic_3].click_num}}次</div>
+				  </LI>
+				  {{/section}}
+				 </OL>
+			</DIV>
+		<DIV class=f></DIV>
+		</DIV>
+	</DIV>
+</DIV>
+	{{if $smarty.section.listclass.rownum==2 and $mysetting.showbanner==1}}
+		<!--banner-->
+		<DIV class=fr>
+			<DIV class="b "  id=adex_left_banner1> <a href="{{$mysetting.banner_url}}" ><img src="admin/images/{{$mysetting.banner_image}}" width="980" height="87"></a></DIV>
+		</DIV>
+		<!--banner-->
+
+	{{/if}}
+{{/section}}
+<!--图片中间结束-->

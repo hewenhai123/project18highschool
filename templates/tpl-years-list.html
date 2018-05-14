@@ -1,0 +1,12 @@
+<div data-page=tpl-years-list class="game_years"><div style="margin-top:3px;margin-left:5px; color:#09698f ">按{{$tagtype.years}}:</div></div>
+<!--<div class="game_all" onClick="AllList('years')"></div>-->
+<div class="game_all" id="years0" ><a href='javascript://' class="nextPage" onClick="SearchCont('years','nosearch',0)">全部</a></div>
+<div id="yearsleft"  {{if $ayears.page >1}} class="game_left" onClick="showlist('GetClassTag','years','{{$ayears.page-1}}')" {{else}} class="game_left_hui" {{/if}}></div>
+<div style="width:830px;float:left; " id="years_list">
+	{{section name=type loop=$ayears.entity }}
+		<div class="game_list"    id="years{{$smarty.section.type.rownum}}" >
+		<div ><a href="javascript://" class="typePage" onClick="SearchCont('years',{{$ayears.entity[type].year_id}},{{$smarty.section.type.rownum}})">{{$ayears.entity[type].name|truncate:4:'':true}}</a></div>
+		</div>
+	{{/section}}
+</div>
+<div id="yearsright"   {{if $ayears.count >$ayears.page}}class="game_right" onClick="showlist('GetClassTag','years','{{$ayears.page+1}}')" {{else}} class="game_right_hui" {{/if}}></div>

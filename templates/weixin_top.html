@@ -1,0 +1,735 @@
+<style>
+	.yk-header * {
+		font-family: "Microsoft YaHei",SimHei,helvetica,arial,verdana,tahoma,sans-serif;
+	}
+	.yk-header {
+		position: relative;
+		width: 100%;
+		/*height: 40px;*/
+		height: 90px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-o-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+		outline: none;
+	}
+	
+	.yk-header .yk-header-container {
+		/*z-index: 1290;
+		position: fixed;*/
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 40px;
+		background: #f6f6f6;
+	}
+	.yk-header .yk-header-box {
+		z-index: 2;
+		position: relative;
+		min-width: 300px;
+		max-width: 984px;
+		margin: 0 auto;
+		padding: 0 20px;
+		height: 100%;
+		background: #f6f6f6;
+	}
+	.yk-header .yk-header-box:before, .yk-header .yk-header-box:after {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	.yk-header .yk-logo {
+		overflow: hidden;
+		float: left;
+		padding-top: 10px;
+		margin-right: 10px;
+	}
+	.yk-header .yk-logo a, .yk-header .yk-logo .youkulogo {
+		display: block;
+		width: 34px;
+		height: 26px;
+	}
+	.yk-header .yk-logo .youkulogo {
+		background-image: url("./root/images/weixin/fanhui.png");
+		-webkit-background-size: 34px 26px;
+		-moz-background-size: 34px 26px;
+		-o-background-size: 34px 26px;
+		background-size: 34px 26px;
+	}
+	
+	
+	.yk-header .yk-logo a, .yk-header .yk-logo .khlogo {
+		display: block;
+		width: 210px;
+		height: 26px;
+	}
+	.yk-header .yk-logo .kuihualogo {
+		background-image: url("./root/images/weixin/logo.png");
+		-webkit-background-size: 120px 26px;
+		-moz-background-size: 120px 26px;
+		-o-background-size: 120px 26px;
+		background-size: 120px 26px;
+	}
+	
+	
+	
+	.yk-header a {
+		text-decoration: none;
+		color: #555;
+	}
+	.yk-nav a:visited {
+		color: #555;
+	}
+	.yk-header .yk-ucenter {
+		z-index: 1050;
+		position: relative;
+		float: right;
+		height: 100%;
+	}
+	.yk-header .yk-ucenter .yk-playrecords, .yk-header .yk-ucenter .yk-userlog {
+		float: right;
+	}
+	.yk-header .yk-ucenter .yk-userlog .yk-userlog-before {
+		cursor: pointer;
+		min-width: 24px;
+		padding: 0 10px;
+		text-align: center;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-o-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+	.yk-header .yk-ucenter .yk-userlog .yk-userlog-before .ico-user {
+		width: 16px;
+		height: 16px;
+		margin-top: 3px;
+	}
+	.yk-header .ico-user,.yk-header .ico-search, .yk-header .ico-channel , .yk-header .ico-so {
+		display: inline-block;
+		font-size: 0;
+		line-height: 0;
+		vertical-align: middle;
+		width: 24px;
+		height: 24px;
+		background: transparent url("./root/images/weixin/mheader.png") no-repeat;
+	}
+	.yk-header .ico-user {
+		background-position: 0 -24px;
+	}
+	
+	.yk-header .ico-channel {
+		background-position: 0 0;
+	}
+	
+	.yk-header .yk-ucenter .yk-userlog .yk-userlog-before .caption {
+		display: block;
+		line-height: 16px;
+		color: #555;
+	}
+	.yk-header .yk-so {
+		float: right;
+		height: 100%;
+	}
+	.yk-header .yk-so .yk-so-phone {
+		display: block;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	.yk-header .yk-channel {
+		z-index: 1051;
+		/*position: absolute;*/
+		top: 0px;
+		
+		float: right;
+		/*left: 150px;*/
+	}
+	.yk-header .yk-handle {
+		overflow: hidden;
+		position: relative;
+		cursor: pointer;
+		min-width: 24px;
+		height: 40px;
+		padding: 0 10px;
+		text-align: center;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-o-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+	
+	
+	
+	.yk-header .yk-handle.yk-handle-expand {
+		background: rgba(187,187,187,0.1);
+	}
+	.yk-header .yk-handle.yk-handle-expand::before {
+		content: '';
+		position: absolute;
+		top: -50%;
+		left: 0;
+		width: 100%;
+		height: 150%;
+		-webkit-box-shadow: inset 0 5px 3px rgba(105,105,105,0.75);
+		-moz-box-shadow: inset 0 5px 3px rgba(105,105,105,0.75);
+		box-shadow: inset 0 5px 3px rgba(105,105,105,0.75);
+	}
+	.yk-header .yk-handle.yk-handle-expand .ico-search {
+		background-position: -72px 0;
+	}
+	.yk-header .yk-handle.yk-handle-expand .caption {
+		color: #06a7e1;
+	}
+	
+	.yk-header .yk-handle.yk-handle-expand .ico-channel {
+		background-position: -48px 0;
+	}
+	
+	.yk-header .yk-handle i[class^='ico-'] {
+		margin-top: 3px;
+	}
+	.yk-header .ico-search {
+		background-position: -24px 0;
+	}
+	.yk-header .ico-search, .yk-header .ico-channel , .yk-header .ico-so {
+		width: 16px;
+		height: 16px;
+	}
+	.yk-header .yk-handle .caption {
+		display: block;
+		line-height: 16px;
+		font-size: 12px;
+		color: #555;
+	}
+	.yk-header .yk-searchbox-phone {
+		/*display: none;*/
+		display:'block';
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		z-index: 1;
+		/*position: absolute;*/
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 50px;
+		padding: 10px;
+	}
+	.yk-header .yk-search-box {
+		position: relative;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		min-width: 232px;
+		max-width: 480px;
+		width: 100%;
+		height: 30px;
+		margin: 0 auto;
+		padding-right: 68px;
+	}
+	.yk-header .yk-search-box input {
+		float: left;
+		width: 100%;
+		border-right: 0 none;
+	}
+	.yk-header input {
+		-webkit-appearance: none;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		width: 100%;
+		height: 30px;
+		padding: 4px 5px;
+		border: 1px solid #a0a0a0;
+		outline: none;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		background: #fff none;
+		font-family: "Microsoft YaHei",SimHei,helvetica,arial,verdana,tahoma,sans-serif;
+		font-size: 14px;
+		line-height: 20px;
+	}
+	.yk-header .yk-search-box button {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	.yk-header .btn-search {
+		cursor: pointer;
+		width: 68px;
+		height: 30px;
+		font-size: 17px;
+		border-radius: 0;
+		border: 1px solid #1a67cb;
+		background-color: #2e8ee2;
+		background-image: -webkit-gradient(linear,0 0,0 100%,from(#47a4f4),color-stop(7%,#2e8ee2),to(#2e8ee2));
+		background-image: -webkit-linear-gradient(#47a4f4,#2e8ee2 7%,#2e8ee2);
+		background-image: -moz-linear-gradient(top,#47a4f4,#2e8ee2 7%,#2e8ee2);
+		background-image: -o-linear-gradient(#47a4f4,#2e8ee2 7%,#2e8ee2);
+		background-image: linear-gradient(#47a4f4,#2e8ee2 7%,#2e8ee2);
+		background-repeat: no-repeat;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff47a4f4',endColorstr='#ff2e8ee2',GradientType=0);
+		color: #fff;
+	}
+	.yk-header .ico-so {
+		background-position: 0 -120px;
+	}
+	.yk-header .btn-search .ico-so {
+		margin: -3px 5px 0 0;
+	}
+
+
+	
+	.yk-nav {
+		padding: 0 10px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-o-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+		outline: none;
+	}
+	.yk-nav .yk-nav-box {
+		overflow: hidden;
+		position: relative;
+		min-width: 300px;
+		max-width: 984px;
+		margin: 0 auto;
+	}
+	.yk-nav .yk-nav-list {
+		width: 100%;
+		height: 46px;
+		border-bottom: 3px solid #e6e6e6;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+	.yk-nav .yk-nav-pills {
+		position: absolute;
+		top: 0;
+		left: 0;
+		list-style: none;
+		height: 42px;
+		margin: 0;
+		padding: 0;
+		padding-top: 7px;
+	}
+	.yk-nav .yk-nav-pills:before, .yk-nav .yk-nav-pills:after {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	.yk-nav .yk-nav-pills li {
+		float: left;
+		position: relative;
+		top: 3px;
+		height: 39px;
+		line-height: 20px;
+		margin-right: 32px;
+		white-space: nowrap;
+	}
+	.yk-nav .yk-nav-pills li.current a, .yk-nav .yk-nav-pills a.current {
+		border-bottom: 3px solid #06a7e1;
+		color: #3399e0;
+	}
+	.yk-nav .yk-nav-pills li a {
+		display: inline-block;
+		padding: 8px 0;
+		font-size: 18px;
+		font-family: "Microsoft YaHei",SimHei,helvetica,arial,verdana,tahoma,sans-serif;
+	}
+	
+	
+	
+	
+</style>
+<style>
+
+.yk-header .yk-header-container {
+	z-index: 1290;
+	/*position: fixed;*/
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 40px;
+	background: #f6f6f6
+}
+@media screen and (max-width:767px) {
+
+	.yk-header .yk-header-box {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	
+	
+
+	
+
+	
+	
+}
+
+
+
+
+
+
+
+</style>
+<style>
+
+.site_nav {
+    position: relative;
+    z-index: 2;
+    background-color: #2D2E2F;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
+    padding-top: .2em;
+    padding-bottom: .2em;
+    margin-bottom: 6px;
+}
+.site_nav .nav_row {
+    display: -webkit-box;
+    display: box;
+    margin: 0;
+    text-align: justify;
+    /*padding: 0 5px .2em;*/
+	padding: 0 0px .2em;
+    font-size: 0rem;
+}
+.site_nav .nav_row a {
+    position: relative;
+    display: block;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    min-width: 3.2em;
+    line-height: 2em;
+    font-size: 1rem;
+    color: #FFF;
+    text-align: center;
+}
+.site_nav .nav_row a.classcurr{color:#f59906}
+</style>
+
+
+<script language="javascript" src="./root/js/weixin/main.js"></script>
+<script>
+function doLoginSubmit(){
+	
+		if (document.getElementById("username").value=="")
+		{
+			alert("用户名不能为空")
+			return false
+		}
+		if (document.getElementById("password").value=="")
+		{
+			alert("密码不能为空")
+			return false
+		}
+		$.post(
+			   'index.php?controller=login&action=Login',
+			   {'username':$('#username').val(),'password':$('#password').val()},
+			   function(data){
+				  if (data=='ok'){
+				   location.href="index.php?controller=weixin";
+				  }else{
+					alert(data)  
+				  }
+			   }
+		)
+	
+}
+
+
+</script>
+<script>
+function check(_type)
+	{
+	var strReg=""; 
+	if ($('#signup-username').attr('value').length >18 || $('#signup-username').attr('value').length < 3){
+		alert ("用户名称字数在3-18个字符之间！");
+		$('#signup-username').focus();
+		return false;
+	}
+		
+	if ($('#signup-password').attr('value').length >20 || $('#signup-password').attr('value').length  < 3 ){
+		alert ("密码字数在3-20个字符之间！");
+		$('#signup-password').focus();
+		return false;
+	}
+	if ($('#signup-twopass').attr('value')==""){
+		alert ("确认密码不能为空！");
+		repassword.focus();
+		return false;
+	}
+	if ($('#signup-password').val()!=$('#signup-twopass').val()){
+		alert("两次密码输入不一致");
+		password.focus();
+		return false;
+	}
+	
+	mail=$('#signup-email').val()
+	if ( mail != '') {//判断
+		var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		if (!reg.test(mail)) {
+			alert('邮箱格式不正确，请重新填写!');
+		   return false;
+		}
+	}
+	if($('#fabu').attr('checked')){
+		trackfabu=1
+	}else{
+		trackfabu=0
+	}
+	
+	
+	$.post(
+		   'index.php?controller=register&action=RegSubmit',
+		   {'uname':$('#signup-username').val(),'pword':$('#signup-password').val(),'fabu':trackfabu,'email':mail},
+		   function(data){
+			   location.href="index.php?controller=weixin";
+		   }
+	)
+	
+}
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="./root/css/tanchu.css" />
+
+<header class="yk-header" id="mheader">
+    <div class="yk-header-container" id="mheader_box">
+        <div class="yk-header-box">
+		
+			<div class="yk-logo">
+			
+				<a class="" href="#" id="logo" title="logo" ><img src="admin/images/{{$mysetting.logo_image}}" ></a>
+			</div>
+			
+			<div class="yk-ucenter">
+				
+				<div class="yk-userlog">
+				
+					<div class="yk-userlog-before" id="mheader_logbefore" style="cursor:pointer;" data-stat-role="ck">
+						<i class="ico-user"></i>
+						{{if !$my_nav.isLogin}}
+							<span class="caption" id="logon">登录</span>
+						{{else}}
+							<span class="caption" >欢迎{{$my_nav.username}}</span>
+						{{/if}}
+					</div>
+				
+				</div>
+			</div>
+			<script>
+				boxwidth=$('.yk-header-box').css('width')
+				usewidth=$('.yk-ucenter').css('width')
+				logowidth=parseInt(boxwidth)-parseInt(usewidth)-20;
+				$('#logo').css('width',logowidth)
+			</script>
+			
+			<!--
+			<div class="yk-so">
+				
+				<div class="yk-so-phone">
+					<div class="yk-handle" id="mheader_search_handle" data-stat-role="ck">
+						<i class="ico-search"></i>
+						<span class="caption">搜索</span>
+					</div>
+				</div>
+			</div>
+			-->
+			
+			
+	
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+
+		
+    </div>
+    <div class="yk-searchbox-phone">
+        <div class="yk-search-box">
+			<form id="mheader_search3" action="index.php?controller=weixinSearch&action=index" method="post"  >
+				<input type="search" name="key" value="{{$searchkey}}" autocomplete="off" >
+				
+				<button type="submit" class="btn-search"><i class="ico-so"></i>搜库</button>
+			</form>
+		</div>
+    </div>
+ </header>
+	
+	
+	
+	
+	
+	
+	
+	<!--login start-->
+	<div class="cd-user-modal"> 
+		<div class="cd-user-modal-container">
+			<ul class="cd-switcher">
+				<li><a href="#0">用户登录</a></li>
+				<li><a href="#0">注册新用户</a></li>
+			</ul>
+
+			<div id="cd-login"> <!-- 登录表单 -->
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signin-username">用户名</label>
+						<input class="full-width has-padding has-border" id="username" type="text" placeholder="输入用户名">
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">密码</label>
+						<input class="full-width has-padding has-border" id="password" type="password"  placeholder="输入密码">
+					</p>
+
+					
+
+					<p class="fieldset">
+						<input class="full-width2" type="button" onclick="doLoginSubmit()" value="登 录">
+					</p>
+				</form>
+			</div>
+
+			<div id="cd-signup"> <!-- 注册表单 -->
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signup-username">用户名</label>
+						<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="输入用户名">
+					</p>
+					
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">密码</label>
+						<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="输入密码">
+					</p>
+					
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">确认密码</label>
+						<input class="full-width has-padding has-border" id="signup-twopass" type="password"  placeholder="确认密码">
+					</p>
+					
+					
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signup-email">邮箱</label>
+						<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="输入mail">
+					</p>
+					<!--
+					
+					<p class="fieldset">
+						<div>
+							<input name="fabu" id="fabu" type="checkbox" value="" style="vertical-align:middle" />
+							<span style="color:#a9a9a9;font-size:14px;padding-left:5px">我要发布直播</span>
+						</div>
+						<div style="color:red">
+							友情提示：若申请发布直播，请确保邮件地址真实有效，我们会在24小时内审核回复,请注意查收邮件。
+						</div>
+					</p>
+					-->
+					
+
+					<p class="fieldset">
+						<input class="full-width2" type="button" onclick="check()" value="注册新用户">
+					</p>
+				</form>
+			</div>
+
+			<a href="#0" class="cd-close-form">关闭</a>
+		</div>
+	</div>
+	<!--login start-->
+	
+	<script>
+		{{if !$my_nav.isLogin}}
+			$('.cd-user-modal').addClass('is-visible');
+			//login_selected();
+			$form_modal = $('.cd-user-modal'),
+			$form_login = $form_modal.find('#cd-login'),
+			$form_signup = $form_modal.find('#cd-signup'),
+			$form_modal_tab = $('.cd-switcher'),
+			$tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+			$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
+			$main_nav = $('#mheader_logbefore');
+			
+			
+			$form_login.addClass('is-selected');
+			$form_signup.removeClass('is-selected');
+			
+			$tab_login.addClass('selected');
+			$tab_signup.removeClass('selected');
+			
+		{{/if}}
+	</script>
+	
+	
+	
+	
+	
+	
+	   <nav class="site_nav">
+   		<div class="nav_row" >
+		   <div style="width:25%"><a {{if $orgin=='index'}}class="classcurr" {{/if}} href="index.php?controller=weixin&action=index" target="_parent">首页</a></div>
+		   <div style="width:25%"><a {{if $orgin=='live'}}class="classcurr" {{/if}} href="index.php?controller=weixin&action=live" target="_parent">直播频道</a></div>
+		   {{if $classdaohang.entity[0]}}
+		  <div style="width:25%"><a href="index.php?controller=weixin&action=play&p={{$classdaohang.entity[0].class_id}}" {{if $currclassid==$classdaohang.entity[0].class_id}}class="classcurr"{{/if}} title="{{$classdaohang.entity[0].class_name}}" >{{$classdaohang.entity[0].class_name|truncate:4:'':true}}</a>
+</div>
+{{/if}}
+
+{{if $classdaohang.entity[1]}}
+<div style="width:25%">
+		  <a href="index.php?controller=weixin&action=play&p={{$classdaohang.entity[1].class_id}}" {{if $currclassid==$classdaohang.entity[1].class_id}}class="classcurr"{{/if}} title="{{$classdaohang.entity[1].class_name}}" >{{$classdaohang.entity[1].class_name|truncate:4:'':true}}</a>
+</div>
+{{/if}}
+		</div>
+		
+		{{section name=classdaohang loop=$classdaohang.entity start=2 }}
+		
+			{{if $smarty.section.classdaohang.rownum%4==1}}
+				<div class="nav_row" >
+			{{/if}}	
+					<div style="width:25%"><a href="index.php?controller=weixin&action=play&p={{$classdaohang.entity[classdaohang].class_id}}" {{if $currclassid==$classdaohang.entity[classdaohang].class_id}}class="classcurr"{{/if}} title="{{$classdaohang.entity[classdaohang].class_name}}" >{{$classdaohang.entity[classdaohang].class_name|truncate:4:'':true}}</a>
+					</div>
+							
+				
+					<!--<span class="justify_fix"></span>-->
+			{{if $smarty.section.classdaohang.rownum%4==0 || $smarty.section.classdaohang.last}}
+				</div>
+			{{/if}}
+		{{/section}}
+	
+	
+   </nav>
+
+
+

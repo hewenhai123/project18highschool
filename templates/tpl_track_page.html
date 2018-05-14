@@ -1,0 +1,19 @@
+
+
+			<div style="width:239px;margin-top:20px;"  data-page=tpl_track_page>
+				<div class="tracklist" id="vod_1" >
+					<div  {{if $class_id == -1}}class="current"{{else}}class="nocurr"{{/if}}>
+						<A href="index.php?controller=track&action=Recordlist&class_id=-1"    style="font-size:24px " title="直播录像" rel=22>直播录像</A>
+					</div>
+					<div style="margin-top:2px "><img src="root/images/line.png"></div>
+				</div>
+				{{section name=oneClass loop=$classList.entity }}
+					<div class="tracklist" {{if $smarty.section.oneClass.rownum >9}}style="display:none"{{/if}} id="vod_{{$smarty.section.oneClass.rownum+1}}" >
+						<div  {{if $class_id == $classList.entity[oneClass].class_id}}class="current"{{else}}class="nocurr"{{/if}} >
+							<A href="index.php?controller=track&action=Recordlist&class_id={{$classList.entity[oneClass].class_id}}"   style="font-size:24px " title="{{$classList.entity[oneClass].class_name}}" >{{$classList.entity[oneClass].class_name|truncate:6:'':true}}</A>
+						</div>
+						<div style="margin-top:2px "><img src="root/images/line.png"></div>
+					</div>
+				{{/section}}
+
+			</div>

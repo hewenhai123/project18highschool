@@ -1,0 +1,10 @@
+{{section name=cardlist loop=$card}}
+	<UL data-page=tpl_livecast_predict  id="{{$card[cardlist].week_id}}" {{if $datew == $card[cardlist].week_id}} style="display:block;font-size:13px " {{else}} style="display:none;font-size:13px " {{/if}}>
+		{{section name=list loop=$card[cardlist].describe}}
+		<LI>
+		  <SPAN >{{$card[cardlist].describe[list]}}</SPAN>
+		</LI>
+		{{/section}}
+	</UL>
+
+{{/section}}

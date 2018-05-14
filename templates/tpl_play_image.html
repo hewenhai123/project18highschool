@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+var mySrcWidth = 0;
+var mySrcHeight = 0;
+var myDstWidth = 0;
+var myDstHeight = 0;
+var myRawFlag = false;
+function DrawImage(ImgD,iwidth,iheight){
+    //参数(图片,允许的宽度,允许的高度)
+    var image=new Image();
+    image.src=ImgD.src;
+    mySrcWidth = image.width;
+    mySrcHeight = image.height;
+    if(image.width>0 && image.height>0){
+      if(image.width/image.height>= iwidth/iheight){
+          if(image.width>iwidth){
+              ImgD.width=iwidth;
+              ImgD.height=(image.height*iwidth)/image.width;
+          }else{
+              ImgD.width=image.width;
+              ImgD.height=image.height;
+          }
+      }else{
+          if(image.height>iheight){
+              ImgD.height=iheight;
+              ImgD.width=(image.width*iheight)/image.height;
+          }else{
+              ImgD.width=image.width;
+              ImgD.height=image.height;
+          }
+      }
+    }
+    myDstWidth = ImgD.width;
+    myDstHeight = ImgD.height;
+}
+function DoClick(ImgD) {
+    if( myRawFlag ) {
+        myRawFlag = false;
+        ImgD.width = myDstWidth;
+        ImgD.height = myDstHeight;
+    } else {
+        myRawFlag = true;
+        ImgD.width = mySrcWidth;
+        ImgD.height = mySrcHeight;
+    }
+}
+</script>
+<title>{{$mysetting.webtitle}}</title>
+</head>
+
+<body data-page=tpl_play_image >
+<div>{{$mysetting.myName}}</div>
+<div><img alt="点击查看原始图片" style="cursor:hand" src="admin/upload/{{$mysetting.myImage}}" onclick="DoClick(this)" onload="DrawImage(this, 800, 600)"></div>
+</body>
+</html>

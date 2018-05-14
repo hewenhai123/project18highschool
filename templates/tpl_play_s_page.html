@@ -1,0 +1,75 @@
+<DIV class=rh data-page=tpl_play_s_page>
+	<H2>相关视频</H2>
+	<DIV class="rp">
+		<a href="#1"  hidefocus="true" class="rp_i current">1</a>
+		<a href="#2"  hidefocus="true" class="rp_i">2</a>
+
+		{{if $SomeMovie.page <= 1}}
+			<a href="javascript://" title="上一页"  hidefocus="true" coords="KJu|1" class="rp_pr_off">上一页</a>
+		{{else}}
+			<a href="javascript://" title="上一页"  class="rp_pr"   onClick="movepage('MoviePage',{{$SomeMovie.class}},{{$SomeMovie.page-1}},{{$autoid}})">上一页</a>
+		{{/if}}
+		{{if $SomeMovie.page >= $SomeMovie.pageCount}}
+			<a href="javascript://" title="下一页" hidefocus="true" coorde="KJv|1" class="rp_nx_off">下一页</a>
+		{{else}}
+			<a href="javascript://" title="下一页" class="rp_nx"  onClick="movepage('MoviePage',{{$SomeMovie.class}},{{$SomeMovie.page+1}},{{$autoid}})" >下一页</A>
+		{{/if}}
+		<!--
+		<a href="javascript://" title="上一页"  hidefocus="true" coords="KJu|1" class="rp_pr_off">上一页</a>
+		<a href="javascript://" title="下一页" hidefocus="true" coorde="KJv|1" class="rp_nx">下一页</a>
+		-->
+		<input name="track_id" type="hidden" id="track_id" value="{{$SomeMovie.track_id}}">
+	</DIV>
+	<div style="float:left;color:#FFFFFF ">
+		{{$SomeMovie.page}}/{{$SomeMovie.pageCount}}&nbsp;&nbsp;
+		<input name="jumpage" id="jumpage" style="width:30px;margin-top:2px"  value="" type="text">&nbsp;
+		<a href="javascript:void(0)" onClick="movepage('MoviePage',{{$SomeMovie.class}},'jmp',{{$autoid}})" style="color:#fff">跳转</a>
+	</div>
+
+	<div style="float:left;color:#FFFFFF;margin-top:3px;margin-left:5px ">
+		<a href="javascript:void(0)" onClick="orderdesc('MoviePage',{{$SomeMovie.class}},'jmp',{{$autoid}},'a')" style="color:#fff">正序</a>
+		<a href="javascript:void(0)" onClick="orderdesc('MoviePage',{{$SomeMovie.class}},'jmp',{{$autoid}},'d')" style="color:#fff">倒序</a>
+	</div>
+
+
+
+	<DIV class=mcr id=mcr style="DISPLAY:">
+		<DIV class=mcr-ct>
+				<div style="float:right;margin-top:0px;width:160px">
+				{{if $mysetting.player_type!=3}}
+				<div style="float:left;margin-top:0px ">
+				<input name="seriesplay" id="seriesplay" type="checkbox" {{if $mysetting.auto_play}} checked{{/if}} value="" >
+				</div>
+				{{/if}}
+				<div style="margin-top:2px ">
+				{{if $mysetting.player_type!=3}}
+				<span class="link_vod" >&nbsp;连续播放</span>&nbsp;&nbsp;
+				{{/if}}
+				<A class="daohang" href="javascript:" onclick="bgcolor(1)">开灯</A>&nbsp;&nbsp;
+				<A class="daohang" href="javascript:" onclick="bgcolor(2)">关灯</A>&nbsp;&nbsp;
+				</div>
+				</div>
+			</DIV>
+
+	</DIV>
+
+
+
+
+
+</DIV>
+<UL class=rc style="height: 130px; DISPLAY: block" id="vodPlayList" >
+{{section name=someMovie loop=$SomeMovie.entity}}
+<LI>
+  <DIV class=p>
+	 <DIV class=pic style="cursor:pointer"   onclick="getUrl('GetUrl',{{$SomeMovie.entity[someMovie].movie_id}},{{$SomeMovie.entity[someMovie].media_id}},{{$SomeMovie.mysetting.image_type}},{{$smarty.section.someMovie.rownum}})" >
+	 <A title="{{$SomeMovie.entity[someMovie].name}}" target="vodplay"   ><IMG class=pack_clipImg    alt="{{$SomeMovie.entity[someMovie].name}}"   src="admin/upload/{{$SomeMovie.entity[someMovie].imagepos}}"   coords="KJCA"> </A>
+	 <span class="vpbg"><span style=" float:right ">{{$SomeMovie.entity[someMovie].duration}}</span></span>
+	 </DIV>
+	<H6 style="width: 120px;" id="{{$smarty.section.someMovie.rownum}}"><A title="{{$SomeMovie.entity[someMovie].name}}" href="javascript://" target="vodplay"  onclick="getUrl('GetUrl',{{$SomeMovie.entity[someMovie].movie_id}},{{$SomeMovie.entity[someMovie].media_id}},{{$SomeMovie.mysetting.image_type}},{{$smarty.section.someMovie.rownum}})"   coords=KJCB >{{$SomeMovie.entity[someMovie].name}}</A></H6>
+	<!--<P>{{if $SomeMovie.series ==1}}创建：{{$SomeMovie.ordertime|date_format:"%Y-%m-%d"}}{{else}}创建：{{$SomeMovie.entity[someMovie].ordertime|date_format:"%Y-%m-%d"}}{{/if}}</P>-->
+  </DIV>
+</LI>
+{{/section}}
+</UL>
+<DIV class=rf></DIV>

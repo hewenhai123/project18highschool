@@ -1,0 +1,52 @@
+<div class="Regismain" data-page=tpl_register_content>
+  <div class="Regis_one" align="center">
+    <div class="Regis_two">
+      <div class="Regis_top">新用户注册</div>
+      <div id='errorname'></div>
+      <ul class="Regis_shuxing">
+        <li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名:<span class="red">&nbsp;&nbsp;*</span>
+          <input type="text" name="username" id="username" onkeydown="if(event.keyCode==13) check();" size="22"  />
+        </li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置密码:<span class="red">&nbsp;&nbsp;*</span>
+          <input type="password" name="password" onkeydown="if(event.keyCode==13) check();" size="22" />
+        </li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认密码:<span class="red">&nbsp;&nbsp;*</span>
+          <input type="password" name="repassword" onkeydown="if(event.keyCode==13) check();" size="22" />
+        </li>
+
+      </ul>
+
+      <ul class="Regis_shuxing">
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码保护问题:<span class="red">&nbsp;&nbsp;*</span>
+		<span>
+          <select name="question" id="question" onkeydown="if(event.keyCode==13) check();" style="width:160px" >
+            <option value="wenti">选择一个问题</option>
+            <option value="school">您的第一所学校的名称</option>
+            <option value="city">您的出生城市</option>
+            <option value="code">身份证号码最后4位</option>
+            <option value="actor">您最喜欢的演员</option>
+            <option value="pet">您最喜欢的宠物</option>
+          </select>
+		</span>
+        </li>
+          <!--<font color="Red">(用来找回密码)</font>-->
+        <li>密码保护问题答案:<span class="red">&nbsp;&nbsp;*</span>
+          <input type="text" name="answer" id="answer" size="22" onkeydown="if(event.keyCode==13) check();" />
+        </li>
+          <!--<font color="Red">(用来找回密码)</font>-->
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性&nbsp;&nbsp;别:<span class="red">&nbsp;&nbsp;*</span>
+          <input type="radio" name="sex" value="1" checked onkeydown="if(event.keyCode==13) check();" />
+          男
+          <input type="radio" name="sex" value="0" onkeydown="if(event.keyCode==13) check();" />
+          女</li>
+      </ul>
+      <div class="Regis_button_main">
+        <div ><a href="#" onclick="check()"><img src="./root/images/regist.gif"></a></div>
+        <div >如果您已经注册,请点击<a href="index.php?controller=login&action=index"><font color=red>这里登录</font></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+document.getElementById('username').focus();
+</script>

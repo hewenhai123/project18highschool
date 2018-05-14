@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{{$mysetting.webtitle}}</title>
+<LINK media=all href="root/css/__g_75.css" type=text/css rel=stylesheet>
+
+<script src="root/js/jquery-1.5.2.js" type="text/javascript"></script>
+<script src="root/js/common.js" type="text/javascript"></script>
+<!--<script src="root/js/jQuery-jcMarquee.js" type="text/javascript"></script>-->
+<style type="text/css">
+
+<!--
+/*a{text-decoration:none;outline:none; color:#666666;}
+a:hover{text-decoration:none}
+img{border:0}*/
+/*
+ul,li{list-style:none}
+#Marquee_x { overflow:hidden; width: 100px; }
+#Marquee_x ul li ,#Marquee_x ul li div{ float:left;} 横向滚动必须让所有li左浮动
+#Marquee_y { overflow:hidden; height:500px; width:200px; } */
+
+
+-->
+</style>
+<style type="text/css">
+
+body{
+    padding:0px; margin:0px;
+    background-image:url(root/images/bg.jpg);        /* 背景图片 */
+    background-repeat:no-repeat;        /* 不重复 */
+    background-attachment:fixed;        /* 固定背景图片 */
+}
+.imgcss{border:3px solid #fff}
+.imgcss:hover{border:3px solid #3608fe}
+</style>
+</head>
+<script>
+//parseInt
+
+function getViewSizeWithScreen(){//
+	return {
+	width : window.screen.width,
+	height: window.screen.availHeight
+	}
+}
+function getViewSizeWithoutScrollbar(){//不包含滚动条
+	return {
+	width : document.documentElement.clientWidth,
+	height: document.documentElement.clientHeight
+	}
+}
+function getViewSizeWithScrollbar(){//包含滚动条
+	if(window.innerWidth){
+		return {
+		width : window.innerWidth,
+		height: window.innerHeight
+		}
+	}else if(document.documentElement.offsetWidth == document.documentElement.clientWidth){
+		return {
+		width : document.documentElement.offsetWidth,
+		height: document.documentElement.offsetHeight
+		}
+	}else{
+		return {
+		width : document.documentElement.clientWidth + getScrollWith(),
+		height: document.documentElement.clientHeight + getScrollWith()
+		}
+	}
+}
+
+screewidth = getViewSizeWithoutScrollbar()
+function getimgwh(){
+	tkvals = $('#tkrow').val();
+	if(tkvals==1 || tkvals==2){
+		$('.listleft').css('text-align','center');
+		width = (screewidth.width/2)-26;
+		height = (screewidth.height-67)-60;
+	}else{
+		if(tkvals==3 || tkvals==6){
+			width = (screewidth.width/3)-26;
+			height = (screewidth.height-67)/2-60;
+			$('.listleft').css('text-align','center');
+		}else{
+			if(tkvals==4){
+				width = (screewidth.width/2)-26;
+				height = (screewidth.height-67)/2-60;
+				$('.listleft').css('text-align','center');
+				//$('.listleft').css('margin-left','12px');
+			}else{
+				//if(tkvals==6){
+					//width = (screewidth.width/3)-26;
+					//height = (screewidth.height-67)/2-60;
+					//$('.listleft').css('margin-left','12px');
+				//}else{
+					width = (screewidth.width/4)-26
+					height = (screewidth.height-67)/$('#tracknum').val()-60;
+					$('.listleft').css('margin-left','12px');
+				//}
+			}
+		}
+		//$('.imgcss').css('width',width).css('height',height).css('margin-bottom',10)
+	}
+	$('.imgcss').css('width',width).css('height',height).css('margin-bottom',10)
+/*
+	if(window.screen.width<=1280 && window.screen.width>800){
+		if($('#tracknum').val()==1){
+			width = (screewidth.width/4)-26
+			//alert(width)
+			height = (screewidth.height-67)/$('#tracknum').val()-80;
+			$('.listleft').css('margin-left','12px');
+		}else{
+			width = (screewidth.width/4)-26
+			height = (screewidth.height-67)/$('#tracknum').val()-60;
+			$('.listleft').css('margin-left','12px');
+		}
+	}else{
+		//if(window.screen.width==1024){
+			if($('#tracknum').val()==1){
+				width = (screewidth.width/4)-20
+				//alert(width)
+				height = (screewidth.height-67)/$('#tracknum').val()-110;
+			}else{
+				width = (screewidth.width/4)-20
+				height = (screewidth.height-67)/$('#tracknum').val()-70;
+			}
+
+			$('.logo').find('img').css('width','160px')
+		//}
+	}
+	$('.imgcss').css('width',width).css('height',height).css('margin-bottom',10)
+	*/
+}
+
+</script>
+<body data-page=tpl_track>
+
+
+
+	<input name="tracknum" id="tracknum" type="hidden" value="{{$trackcount}}">
+	<input name="tkrow" id="tkrow" type="hidden" value="{{$tknum}}">
+
+	<table id="tblList" width="100%" border="0" cellpadding="8" cellspacing="0" class="table_link">
+	  <tr id="trHeader" valign="bottom" height="65">
+
+		<td  style="text-align:left " width="500" ><DIV class=logo style="margin-top:15px;"><img src="admin/images/{{$mysetting.logo_image}}"  > </DIV></td>
+
+		<td  style="text-align:left " >
+			<div style="font-size:28px;color:#ffffff;margin-top:25px" >
+				<div id="years"></div>
+
+			</div>
+		</td>
+		<td  style="text-align:center " ><div style="font-size:28px;color:#ffffff;margin-top:25px" id='times'></div></td>
+		<td  style="text-align:right " >
+			<div style="font-size:28px;color:#ffffff;margin-top:25px" >
+
+				<div id="week"></div>
+			</div>
+		</td>
+
+
+		<td  style="text-align:center " >
+			<div style="font-size:30px;color:#ffffff;margin-top:18px" >
+
+				<a href="index.php?controller=track&action=Recordlist"><img src="root/images/vodtitle.png"></a>
+			</div>
+		</td>
+
+
+		</tr>
+	</table>
+
+
+	<div style="border-bottom:2px solid #fff" ></div>
+
+
+
+	<div style="clear:both;margin:10px auto;" id="listvod">
+
+
+	{{include file = 'tpl_track_list.html'}}
+
+	</div>
+
+	<div id='hiddendiv' style="display:none"></div>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+<script language="Javascript">
+var datelocalweek=new Array("星期日", "星期一", "星期二","星期三","星期四", "星期五","星期六");
+var datelocalnow=new Date();
+var datelocalyear=datelocalnow.getFullYear();
+var datelocalmonth=(datelocalmonth="0"+(datelocalnow.getMonth()+1)).substr(datelocalmonth.length-2,2);
+var datelocalday=(datelocalday="0"+datelocalnow.getDate()).substr(datelocalday.length-2,2);
+var datelocalweekday=datelocalweek[datelocalnow.getDay()];
+$('#week').html(datelocalweekday);
+$('#years').html(datelocalyear+"-"+datelocalmonth+"-"+datelocalday);
+
+
+
+function showtime () {
+var now = new Date();
+var hours = now.getHours();
+var minutes = now.getMinutes();
+var seconds = now.getSeconds()
+var timeValue = hours
+timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+$('#times').html(timeValue);
+timerID = setTimeout("showtime()",1000);//设置超时,使时间动态显示
+timerRunning = true;
+}
+showtime();
+
+</script>

@@ -1,0 +1,716 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<title>{{$mysetting.webtitle}}</title>
+
+<script language="javascript" src="./root/js/weixin/zepto.js"></script>
+<script language="javascript" src="./root/js/weixin/event.js"></script>
+<script language="javascript" src="./root/js/weixin/touch.js"></script>
+<script language="javascript" src="./root/js/weixin/ajax.js"></script>
+<script language="javascript" src="./root/js/weixin/ye_dialog_s.js"></script>
+<script language="javascript" src="./root/js/jquery.min.js"></script>
+
+
+
+<style>
+	
+	ul, ol {list-style: none;padding: 0;}
+	a{text-decoration: none;}
+	
+
+	
+</style>
+	
+	
+	
+	
+	
+<style>	
+	.yk-container {
+		min-width: 300px;
+		max-width: 984px;
+		margin: 0 auto;
+		/*padding-top: 20px;
+		padding-bottom: 20px;*/
+		padding:15px 0px;
+		position:relative;
+	}
+	.yk-box {
+		width: 100%;
+		margin-bottom: 5px;
+		clear:both;
+	}
+	
+</style>
+<style>
+* { /*border:0;*/ margin:0; padding:0; outline:none; }
+
+
+
+
+body,div {font: 12px/20px "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+word-break: break-all;
+word-wrap: break-word;}
+.yk-box .yk-head {
+position: relative;
+margin-bottom: 8px;
+height: 50px;
+line-height: 35px;
+}
+.yk-TitleBar .titlebar {
+height: 50px;
+line-height: 35px;
+
+border-bottom:1px solid #e6e6e6;
+
+}
+.yk-box .yk-head .yk-title {
+margin-right: 18px;
+font-size: 20px;
+color: #909090;
+}
+.yk-box .yk-head .yk-title, .yk-box .yk-head .yk-append {
+display: inline-block;
+vertical-align: bottom;
+font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+}
+
+.yk-box .yk-head .yk-extend {
+position: absolute;
+right: 0;
+bottom: 10px;
+font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+}
+.yk-box .yk-head .yk-extend {
+font-size: 18px;
+}
+.yk-box .yk-head .yk-extend a {
+margin-left: 20px;
+color: #555;
+}
+.yk-box .ico-right {
+margin-left: 4px;
+/*vertical-align: bottom;*/
+}
+.ico-right{
+	display: inline-block;
+vertical-align: middle;
+background: transparent url("./root/images/weixin/yk.png") no-repeat;
+}
+.ico-right {
+background-position: -30px -120px;
+}
+.ico-left, .ico-right {
+width: 12px;
+height: 20px;
+}
+
+
+.videolist {
+width: 100%;
+}
+.videolist .video-row {
+margin-left: -20px;
+}
+.videolist .video-row:before, .videolist .video-row:after {
+display: table;
+content: "";
+line-height: 0;
+}
+.videolist .video-item {
+width: 50%;
+}
+.videolist .video-item, .videolist .video-item-large, .videolist .video-item-huge {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+float: left;
+padding-left: 20px;
+}
+.p {
+margin: 0;
+padding: 0;
+/*margin-bottom: 20px;*/
+margin-bottom: 10px;
+font: 12px/20px arial, helvetica, verdana, tahoma, sans-serif;
+}
+.p .p-thumb {
+z-index: 1;
+position: relative;
+background: #999;
+}
+.p .p-thumb .p-pic-default {
+position: relative;
+}
+.p .p-thumb img {
+width: 100%;
+height: auto;
+}
+.p img {
+display: block;
+border: 0 none;
+}
+img {
+max-width: 100%;
+width: auto\9;
+height: auto;
+vertical-align: middle;
+border: 0;
+-ms-interpolation-mode: bicubic;
+-webkit-tap-highlight-color: transparent;
+-moz-tap-highlight-color: transparent;
+-o-tap-highlight-color: transparent;
+-ms-tap-highlight-color: transparent;
+tap-highlight-color: transparent;
+-webkit-touch-callout: none;
+-moz-touch-callout: none;
+-o-touch-callout: none;
+-ms-touch-callout: none;
+touch-callout: none;
+}
+.p .p-thumb .p-pic-default::after {
+content: "";
+z-index: 0;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+/* background-image: url("/index/img/mobile/video_default_brands.png"); */
+background-position: center center;
+background-repeat: no-repeat;
+-webkit-background-size: 50%;
+-moz-background-size: 50%;
+-o-background-size: 50%;
+background-size: 50%;
+}
+.p .p-thumb .p-pic-real {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-position: center center;
+background-repeat: no-repeat;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+.p .p-link {
+z-index: 4;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.p a {
+text-decoration: none;
+color: #555555;
+}
+.p .p-isdrama {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+position: absolute;
+top: -2px;
+left: 0;
+width: 100%;
+height: 1px;
+background: #bbb;
+border-left: 1px solid #fff;
+border-right: 1px solid #fff;
+}
+.p .p-isdrama:before {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+content: "";
+position: absolute;
+top: -2px;
+left: 0;
+width: 100%;
+height: 1px;
+background: #d6d6d6;
+border-left: 1px solid #fff;
+border-right: 1px solid #fff;
+}
+.p .p-metadata {
+padding: 5px;
+background: #f5f5f5;
+}
+.v .v-title, .p .p-title, .v .v-desc, .p .p-desc {
+height: 20px;
+overflow: hidden;
+white-space: nowrap;
+-webkit-text-overflow: ellipsis;
+-moz-text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+}
+.p .p-title {
+font-size: 14px;
+font-family: "Microsoft YaHei", SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+color: #555;
+}
+.v .v-title, .p .p-title, .v .v-desc, .p .p-desc {
+height: 20px;
+overflow: hidden;
+white-space: nowrap;
+-webkit-text-overflow: ellipsis;
+-moz-text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+}
+.p .p-desc {
+font-size: 12px;
+color: #909090;
+}
+
+
+
+.pic{width:40%;
+	padding:5px;
+	float:left
+}
+.mstxt{float:left;width:55%}
+@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone4/4s */
+	.pic{width:32%;
+		padding:5px;
+		float:left
+	}
+	.mstxt{float:left;width:63%}
+}
+
+.biaocurr{color:#f59906}
+.biaonocur{color:#555}
+
+/*comment*/
+ul.comment-list {
+  /*margin: 0 1.25rem;*/
+}
+.comment-item {
+  margin-bottom: 1.25rem;
+}
+.comment-item .item-time {
+  position: absolute;
+  right: 1.25rem;
+  font-size: .75rem;
+  color: #bbbbbb;
+}
+.comment-item .item-description {
+  position: relative;
+  display: table;
+}
+.comment-item .item-description .item-name {
+  font-size: 1rem;
+  color: #797979;
+}
+.comment-item .item-description p {
+  margin-top: .4rem;
+  font-size: 1.1rem;
+  color: #555555;
+  line-height: 1.5rem;
+}
+.clear {
+  clear: both;
+}
+.comments-f {
+  z-index: 10;
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem 1.25rem;
+  -webkit-box-sizing: -webkit-border-box;
+  box-sizing: border-box;
+}
+.comments-f textarea {
+  width: 100%;
+  height: 7.08rem;
+  margin: 0;
+  border-radius: 0;
+  resize: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+ 
+  font-size: 100%;
+
+
+}
+.comments-f .comments-figure {
+  margin-bottom: .5rem;
+}
+.comments-f .comments-figure span:first-child {
+  float: left;
+  color: #ef3f22;
+}
+.comments-f .comments-figure span {
+  display: inline-block;
+  font-size: .83rem;
+}
+.comments-f .comments-figure span.count {
+  float: right;
+  color: #909090;
+}
+.comments-f .cancel {
+  float: left;
+  display: inline-block;
+  width: 46.5%;
+  height: 2.917rem;
+  line-height: 2.917rem;
+  font-size: 1rem;
+  color: #909090;
+  background: #f4f7fa;
+  border: 1px solid #d1d1d1;
+  text-align: center;
+  -webkit-box-sizing: -webkit-border-box;
+  box-sizing: border-box;
+  
+}
+.comments-f .submit.active {
+  color: #fff;
+  background: #3eb4ff;
+  border: 1px solid #007dcc;
+}
+.comments-f .submit {
+  float: right;
+  width: 46.5%;
+  height: 2.917rem;
+  line-height: 2.917rem;
+  font-size: 1rem;
+  color: #909090;
+  background: #f4f7fa;
+  border: 1px solid #d1d1d1;
+  text-align: center;
+  -webkit-box-sizing: -webkit-border-box;
+  box-sizing: border-box;
+}
+.more-btn {
+    position: relative;
+    border-top: 1px solid #efefef;
+    text-align: center;
+    height: 3.4rem;
+    line-height: 3.4rem;
+    color: #8b8b8b;
+    background: #fff;
+    font-size: 1rem;
+}
+.more-ico {
+    position: absolute;
+    width: 14px;
+    height: 7px;
+    overflow: hidden;
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: transform .4s;
+}
+.more-btn .more-ico {
+    top: 50%;
+    left: 50%;
+    margin-top: -3px;
+    margin-left: 2.5rem;
+}
+.more-ico .line1 {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.more-ico .line2 {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.more-ico .line1, .more-ico .line2 {
+    position: absolute;
+    left: -3px;
+    top: 6px;
+    width: 20px;
+    height: 1px;
+    background: #babcbd;
+}
+</style>
+
+
+<script>
+eventTester = function(p,e,o){  
+    p.addEventListener(e,function(){  
+	//alert('d')
+        o.removeClass('vloading').addClass('canPlay')  
+    });  
+ }
+ function stopnextoption(){
+	event.stopPropagation();
+	event.preventDefault()
+}
+function autoplayer(){
+	playobj = $('.video-item');
+	playobj.each(function(index){
+		//$(this).on('touchstart',function(){
+		$(this).on('click',function(){
+		
+			   stopnextoption();
+			   newobj = playobj.eq(index).find('.p-pic-real')
+					
+					shareid =  newobj.data('media');
+					
+					geturl = newobj.data('url');
+						var stdata=[];
+						stdata.url = geturl;  
+						//var player='<video id="play_'+shareid+'" width="100%" height="100%" controls="" preload="none" src="http://123.125.86.26/vhot2.qqvideo.tc.qq.com/h0156lhkpv1.m701.mp4?vkey=2C3A6A8A9C889E6BDACD7D279C244AFDB08DC8D90933A0F50CE317B57D4F84981571ED91424143447CC632835684A729A807015ED6BD85D66FD08631F4E02A3A5CBF254407B089A8A362B18AF1F7F8A21747EA16773A8FD7&amp;br=29&amp;platform=2&amp;fmt=auto&amp;level=0&amp;sdtfrom=v3010"></video>'
+						var player='<video id="play_'+shareid+'" width="100%" height="100%" controls="" preload="none" src="'+geturl+'"></video>'
+						$('#showplay').html(player);
+						videoplay = document.getElementById('play_'+shareid);
+						videoplay.play();
+						eventTester(videoplay,"loadedmetadata",newobj);
+					   
+					   
+						//$(this).css('display','none')
+					    		
+							
+						
+		})
+		
+		
+	})
+}
+</script>
+<body >
+	
+	<div >{{include file = 'weixin_top.html'}}</div>
+	
+	
+	
+	
+	
+	
+	
+	<div style="padding:10px 10px 0px 10px ">
+		
+		<div style="font-size:1rem;color:#f59906;margin-bottom:10px">正的播放：{{if $classmes.class_name}}{{$classmes.class_name}}{{else}}直播录像{{/if}}&nbsp;>&nbsp;{{$currmedia.name}}</div>
+		<div id="showplay">
+			<video id="tenvideo_video_player_0" width="100%" height="100%" autoplay="autoplay" x-webkit-airplay="true" webkit-playsinline="true" controls preload="none" src="{{$currmedia.url}}"></video>
+		</div>
+		
+		
+		
+		<div style="font-size:1.4em;margin-top:15px"><span id="xiangvideo" onClick="qiehuan('xiangvideo')"><a href="javascript:void(0)" class="biaocurr">相关视频</a></span><span id="pinglunvideo" onClick="qiehuan('pinglunvideo')" style="padding-left:20px"><a href="javascript:void(0)" class="biaonocur">精华评论</a></span><span id="writecomm" style="cursor:point;padding-left:20px" onClick="fabiaocom()"><a href="javascript:void(0)" style="color:#1c98e7;">写评论</a></span></div>
+		
+		<div class="yk-container">
+			
+			<div id="cont_lists" >
+				{{include file = 'weixin_lianxu_list.html'}}
+			</div>
+			<div id="cont_comment" style="display:none">
+				
+
+				<ul class="comment-list" id="comment-list">
+					
+						{{$comment}}
+					
+						
+				</ul>
+				
+				<!-- 写评论区域 start -->
+				<form class="comments-f" style="display: none;">
+					<textarea placeholder="这里是评论内容" id='pmcontentbox' onKeyDown="javascript:return spnums(event);"></textarea>
+					<div class="comments-figure">
+						<span class="error" id="error"></span>
+						<span class="count">0/300</span>
+						<div class="clear"></div>
+					</div>
+					<div class="comments-option">
+						<a class="cancel" href="javascript:void(0);">取 消</a>
+						<a class="submit active" href="javascript:void(0);" onClick="addComm({{$currmedia.media_id}})">提 交</a>
+						<div class="clear"></div>
+					</div>
+				</form>
+				<!-- 写评论区域 end -->
+
+
+
+
+
+			</div>
+		</div>
+		
+		<!--正在加载 start-->
+		<div  style="text-align:center;">
+				<div style="margin:0px  10px 20px" >
+					<span id="addzhi" style="height:20px;color:#474747;display:none ">
+					<img src="./root/images/weixin/loadinga51.gif" style="width:20px;height:20px;vertical-align: bottom;">&nbsp;正在加载...
+					</span>
+				</div>
+		 </div>
+		 <!--正在加载 end-->
+		 
+		
+		
+		
+		
+		
+	</div>
+	<script>
+		function qiehuan(obj){
+			if(obj=='xiangvideo'){
+				$('#xiangvideo').find('a').addClass('biaocurr').removeClass('biaonocur')
+				$('#pinglunvideo').find('a').addClass('biaonocur').removeClass('biaocurr')
+				$('#cont_lists').css('display','')
+				$('#cont_comment').css('display','none')
+			}else{
+				$('#pinglunvideo').find('a').addClass('biaocurr').removeClass('biaonocur')
+				$('#xiangvideo').find('a').addClass('biaonocur').removeClass('biaocurr')
+				$('#cont_lists').css('display','none')
+				$('#cont_comment').css('display','')
+				$('.comments-f').css('display','none')
+			}
+		}
+		function fabiaocom(){
+			qiehuan('pinglunvideo')
+			$('.comments-f').css('display','block')
+			
+		}
+		$('.cancel').click(function(){
+			$('.comments-f').css('display','none')
+		})
+		function addComm(_id){
+			
+			
+			var comment = $('#pmcontentbox').val();
+			if(comment.length < 3 || comment.length > 400){
+				alert('\u8bc4\u8bba\u4fe1\u606f\u57283 - 400\u4e2a\u5b57\u7b26');//评论信息在3 - 400个字符
+				return;
+			}
+			if(!_id){
+				alert('\u8bf7\u9009\u62e9\u4f60\u8981\u8bc4\u8bba\u7684\u5f71\u7247');//请选择你要评论的影片
+				return;
+			}
+
+			describe = comment;
+			recomid=0;
+
+
+			$.post(
+			   'index.php?controller=weixin&action=AddComment&media_id=' + _id +'&type={{$play_type}}'  ,
+			   {'describe':comment},
+			   function(data){
+			  
+			   		var stdata=$.parseJSON(data);
+					$('#pmcontentbox').val('');
+					if (stdata.err_code=='-1'){
+						alert(stdata.err_text)
+					}else{
+						if (stdata.comment_type == 1){
+							$('#comment-list').html(stdata.entity);
+						}else{
+							alert('\u53d1\u8868\u6210\u529f\uff0c\u7b49\u5f85\u5ba1\u6838')//发表成功，等待审核
+						}
+					}
+					$('.comments-f').css('display','none')
+			   })
+		}
+
+		
+		function spnums(e){
+			var len=typenums('#pmcontentbox');
+			if (len>300) {
+				shen=len-300;
+				$("#error").html('您输入的内容已超出'+shen+'个字');
+			} else {
+				$("#error").html('');
+				$(".count").html(len+'/300');
+			}
+		}
+		function typenums(id){
+			var matchURL = new RegExp("((?:http|https|ftp|mms|rtsp)://(&(?=amp;)|[A-Za-z0-9\./=\?%_~@&#:;\+\-])+)","ig");
+			var cval=$(id).val();
+			var webnum=cval.match(matchURL);
+			if (webnum) {
+				webnum=webnum.length;
+			} else {
+				webnum=0;
+			}
+		   
+			var len=$.trim(cval).length+(webnum*8);
+			//len=140-len;
+			return len;
+		}
+		
+		function getcommentmore(_page){
+			url='index.php?controller=weixin&action=GetComment&media_id={{$currmedia.media_id}}&play_type={{$play_type}}&page='+_page;
+			showdiv='comment-list';
+			$.get(url,function(datamsg){
+					
+				var stdata=$.parseJSON(datamsg);
+				if(stdata.ret=='error'){
+					$('#more_comment_btn').remove();
+				}else{
+					$('#more_comment_btn').remove();
+					addajax(stdata.entity,showdiv)
+				}
+			});
+		}
+		
+
+	</script>
+	<script>
+
+	scrollnumber=0;
+	
+		$(window).scroll(function(){
+			// 当滚动到最底部以上100像素时， 加载新内容
+			//if($('#mengban').css('display')=='none'){
+				if (($(document).height() - $(this).scrollTop() - $(this).height()<80 ) ) {
+					if(scrollnumber==0){
+						scrollnumber=1;
+							if(parseInt($('#currpage').val())<=parseInt($('#totalpage').val())){
+								$('#addzhi').css('display','block')
+								getmore();
+							}
+						
+					}
+				}
+			//}
+		});
+	
+
+	function getmore(){
+		getorder=$('#order').val()//排序
+		
+		pages = $('#currpage').val()
+		if(pages){
+			//LoadPageShow();
+	
+			$.get('index.php?controller=weixin&action=lianxu&mid={{$movie_id}}&cid={{$class_id}}&lid={{$lid}}&play_type={{$play_type}}&page='+$('#currpage').val(),function(datamsg){
+				
+				var stdata=$.parseJSON(datamsg);
+				if(stdata.ret=='error'){
+					$('#rCount').remove();
+				}else{
+					$('#rCount').remove();
+					addajax(stdata.entity,'cont_lists')
+				}
+			});
+		}
+	}
+	
+	function addajax(_cont,showdiv){
+		$('#addzhi').css('display','none')
+		$('#'+showdiv).append(_cont);
+		scrollnumber=0;
+	}
+
+
+	
+</script>
+
+
+<div style="clear:both">{{include file = 'weixin_footle.html'}}</div>
+</body>
+</html>

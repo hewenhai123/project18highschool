@@ -1,0 +1,111 @@
+{{if $mysetting.showtype || $mysetting.showyears || $mysetting.showareas}}
+	<DIV class=ch_type style="height:{{$height}} " >
+		{{if $mysetting.showtype }}
+			<div  class="game_kuang" id="typelist">
+				{{$atype.entity}}
+			</div>
+		{{/if}}
+
+		{{if $mysetting.showyears }}
+			<div class="game_kuang" id="yearslist">
+				{{$ayears.entity}}
+			</div>
+		{{/if}}
+
+
+		{{if $mysetting.showareas }}
+			<div class="game_kuang" id="areaslist">
+				{{$aareas.entity}}
+			</div>
+		{{/if}}
+
+	</div>
+{{/if}}
+<input name="currclassid" id="currclassid" type="hidden" value="{{$dayMovie.class}}">
+<input name="currtype" id="currtype" type="hidden" value="{{$dayMovie.type}}">
+<DIV class=ch_content data-page=tpl_vodthree_content>
+	<DIV class=main_col2 id="movie_info" >
+		<DIV class=tab_sort>
+			<div style="width:100px; border:1px solid #cccccc;height:28px;float:left "><div style="margin-top:5px;margin-left:15px"><b>排序方式:</b></div></div>
+			<div style="width:50px; border-right:1px solid #cccccc;border-top:1px solid #cccccc;height:28px;float:left "><div style="margin-top:5px;margin-left:12px"><b><a href="javascript://">最新</a></b></div></div>
+			<div style="width:50px; border-right:1px solid #cccccc;height:28px;border-top:1px solid #cccccc;height:28px;border-bottom:1px solid #cccccc;height:28px;float:left "><div style="margin-top:5px;margin-left:12px"><a href='javascript://' onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'click',0,'col')">热播</a></div></div>
+			<div style="width:50px; border-right:1px solid #cccccc;height:28px;border-top:1px solid #cccccc;height:28px;border-bottom:1px solid #cccccc;float:left "><div style="margin-top:5px;margin-left:12px"><a href='javascript://' onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'assess',0,'col')">好评</a></div></div>
+			<div style="width:721px; border:1px solid #cccccc;height:28px;float:left ">
+				<div style='float:right;margin-top:5px;margin-left:5px; cursor: pointer' onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',0,'row')">列表&nbsp;&nbsp;</div>
+				<div style='float:right;margin-top:3px;margin-left:15px; cursor:pointer' onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',0,'row')" ><img src='./root/images/leibiao.gif'></div>
+				<div style='float:right;margin-top:5px;margin-left:5px; cursor:pointer' onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',0,'col')">海报</div>
+				<div style="float:right;margin-top:3px;margin-left:12px; cursor:pointer" onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',0,'col')"><img src="./root/images/haibao.gif"></div>
+				<div style="margin-top:5px;float:right"><b>显示方式:</b></div>
+			</div>
+
+		</DIV>
+		<DIV class=showcase >
+			{{section name=newvod loop=$dayMovie.entity}}
+
+				<DIV class="pack pack_video_card" style="width:115px;height:180px;  ">
+					<DIV class=pic style="margin-left:15px ">
+						<A class=inner title="{{$dayMovie.entity[newvod].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$dayMovie.entity[newvod].movie_id}}" target="vodplay"><IMG class=pack_clipImg height=90 alt="{{$dayMovie.entity[newvod].movie_name}}" src="admin/upload/{{$dayMovie.entity[newvod].image}}" width=120> </A>
+					</DIV>
+					<DIV class=txt style="margin-left:15px " >
+						<H6 class=caption style="width:130px "><A title="{{$dayMovie.entity[newvod].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$dayMovie.entity[newvod].movie_id}}" target="vodplay">{{$dayMovie.entity[newvod].movie_name}}</A></H6>
+						<UL class=info>
+						 <!-- <LI>主演: {{$dayMovie.entity[newvod].tag_stars|truncate:10:''}} </LI>-->
+						  {{if $tagtype.daoyin}}
+						  	<LI title="{{$dayMovie.entity[newvod].tag_directors}}" style="width:125px;">{{$tagtype.directors}}: {{$dayMovie.entity[newvod].tag_directors|truncate:8:'':true}} </LI>
+						  {{/if}}
+						  {{if $tagtype.yanyuan}}
+						  	<LI title="{{$dayMovie.entity[newvod].tag_stars}}" style="width:125px;">{{$tagtype.stars}}: {{$dayMovie.entity[newvod].tag_stars|truncate:8:'':true}} </LI>
+						  {{/if}}
+						  {{if $tagtype.bofang}}
+						  <LI>播放: {{$dayMovie.entity[newvod].click_num}} </LI>
+						  {{/if}}
+						  {{if $tagtype.pingjia}}
+						  <LI style="height:25px; width:140px "><div style="float:left;margin-top:7px ">评价: </div><div class="fRed" style="float:left "><strong>{{$dayMovie.entity[newvod].codenumsp[0]}}</strong>{{$dayMovie.entity[newvod].codenumsp[1]}}</div><div style=" float:left; margin-top:6px ">({{$dayMovie.entity[newvod].assess_people}}评)</div> </LI>
+						  {{/if}}
+						</UL>
+					</DIV>
+				</DIV>
+
+			{{/section}}
+		</DIV>
+		{{if $dayMovie.pageCount > 1}}
+			<DIV class=page_nav id=pagingBars>
+				{{if $dayMovie.page <= 1}}
+					<SPAN class=page_nav_prev><SPAN>上一页</SPAN></SPAN>
+				{{else}}
+					<SPAN class=page_nav_prev><a onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',{{$dayMovie.page-1}},'col')" href = "javascript:">上一页</a></SPAN>
+				{{/if}}
+
+
+				<UL>
+				  <LI class=page_nav_current>1 </LI>
+				  {{section name=loop loop=$dayMovie.pageCount start=1 max=9}}
+					<LI><a onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',{{$smarty.section.loop.index+1}},'col')" href = "javascript:">{{$smarty.section.loop.index+1}}</A> </LI>
+				  {{/section}}
+				  {{if $dayMovie.pageCount >10}}
+				  	{{if $dayMovie.pageCount-1 > 11}}
+						<LI class=pagebarDot>... </LI>
+					{{/if}}
+					{{if $dayMovie.pageCount-1 > 10}}
+						<LI><a onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',{{$dayMovie.pageCount-1}},'col')" href = "javascript:">{{$dayMovie.pageCount-1}}</A> </LI>
+					{{/if}}
+					<LI><a onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',{{$dayMovie.pageCount}},'col')" href = "javascript:">{{$dayMovie.pageCount}}</A> </LI>
+				  {{/if}}
+				  <input name="maxpage" type="hidden" id="maxpage" value="{{$dayMovie.pageCount}}">
+
+				</UL>
+
+
+				{{if $dayMovie.page >= $dayMovie.pageCount}}
+					<SPAN class=page_nav_next><SPAN>下一页</SPAN></SPAN>
+				{{else}}
+					<SPAN class=page_nav_next><a onClick="onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}',{{$dayMovie.page+1}},'col')" href = "javascript:">下一页</A></SPAN>
+				{{/if}}
+
+				<div class=page_nav_jump id=pageForm  >第 <INPUT class=text id=inputPage size=3 name=page onkeydown="if(event.keyCode==13) {return  onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}','tz','col')};"> 页 <INPUT class=submit type=button onclick="return onClicks('GetDayMovie',{{$dayMovie.class}},'{{$dayMovie.type}}','tz','col')" value=跳转> </div>
+			</DIV>
+	    {{/if}}
+		 <input name="pcondition" id="pcondition" type="hidden" value="{{$dayMovie.searchcont}}">
+	</DIV><!-- end main_col -->
+
+</DIV>

@@ -1,0 +1,77 @@
+<div style="background-color:#000000;height:520px;MIN-WIDTH: 995px; " data-page=tpl_livecast_content_nopre>
+	<div class="ind_mainall" >
+	  <!---通栏广告上部分开始-->
+	  <div class="body_middle1" style="MARGIN: 0px auto;width:995px; ">
+		<div class="body_middle1_left">
+		  <div class="ind_middle1_left_top" style="width:200px;background-image:url(./root/images/class_bg.gif);">
+		  		<div style="height:35px;margin-top:15px;margin-left:40px;color:#ffffff; "><H2 style=" font-size:14px; font-weight:bold ">直播列表</H2></div>
+				<div class="ind_middle2_left" style="width:190px;padding-left:5px;scrollbar-face-color: #23272a; font-size: 14px; scrollbar-highlight-color: #4f4f4f; overflow: auto;  scrollbar-shadow-color: #23272a; color: #216dad; scrollbar-3dlight-color: #23272a; line-height: 25px; scrollbar-arrow-color: #216dad;  scrollbar-darkshadow-color: #4f4f4f; scrollbar-base-color: #23272a; height: 435px"  >
+						<div style="height:600px;width:170px;  "  >
+
+						{{foreach item = item name = track from = $track.entity}}
+							<div style="height:20px; margin-bottom:10px ">
+								{{* <div class="zhibo_title" style="width:40px;height:30px "><img src="admin/upload/{{$item.image}}" width="40" height="30" /></div> *}}
+								 <div class="zhibo_title" style="width:3px;height:3px;margin-top:13px;margin-right:5px;margin-left:5px; "><img src="./root/images/live_03.gif" width="3" height="3" /></div>
+								<div class="list" style=" width:160px; font-size:14px;">
+									<a href="javascript:" name="trackname" id="live{{$item.track_id}}" onclick="trackShow('weekId',0,'{{$item.track_id}}');return false" title="{{$item.name}}">{{$item.name|truncate:10:'':true}}</a>
+									<!--<div style="float:right ">{{$item.fuurl}}</div>-->
+								</div>
+
+
+							</div>
+						{{/foreach}}
+
+						 </div>
+				</div>
+		  </div>
+			<div class="ind_middle1_down" style="width:700px; background-image:url(./root/images/live_nopic.gif);height:510px;margin-top:0px ">
+				<div class="body_middle1_down_left" align="center" style="margin-top:10px ">
+
+					  <!--start:track-->
+
+
+
+
+						  <div class="ind_middle1_down_left_nr" id="showplay" style="height:490px;width:690px; border:0px; ">
+							<img src="root/images/4_nopre.jpg">
+						  </div>
+
+
+					   <!--播放器写在js里 livecast.js-->
+					    <input name="play_type" id="play_type" type="hidden" value="{{$mysetting.player_type}}">
+						<input name="isLogin" id="isLogin" type="hidden" value="{{$my_nav.isLogin}}">
+						{{*{{if !$mysetting.player_type}}*}}
+							<input name="defaultvolume" id="defaultvolume" type="hidden" value="{{$mysetting.volume}}">
+							<input name="defaultrbutton" id="defaultrbutton" type="hidden" value="{{$mysetting.rkeystatus}}">
+							<input name="defaultctrl" id="defaultctrl" type="hidden" value="{{$mysetting.showctrlbar}}">
+							<input name="defaultstatus" id="defaultstatus" type="hidden" value="{{$mysetting.showstatusbar}}">
+							<input name="defaultrecord" id="defaultrecord" type="hidden" value="{{$mysetting.recordenable}}">
+							<input name="defaultscale" id="defaultscale" type="hidden" value="{{$mysetting.scale}}">
+							<input name="defaultversion" id="defaultversion" type="hidden" value="{{$mysetting.vodversion}}">
+						{{*{{/if}}*}}
+					   <input name="fenbian" id="fenbian" type="hidden" value="_nopre">
+					   <input name="settime" id="settime" type="hidden" value="{{$windcont.position}}">
+					   <!--end:track-->
+					   <div style="width:390px;heigh:150px;color:#fbf4f4;margin-top:20px;text-indent: 2em ;line-height:20px; display:none " align="left" id="livedes" >
+					   {{*{{$track.entity[0].describe}}*}}
+					   【友好提示】：如果您是首次接收直播，IE会自动下载播放器插件，请耐心等待；若不能下载，请检查IE安全设置，并点击&nbsp;&nbsp;<a href="GMPlayerX.exe"><font color="#FF0000">这里</font></a>&nbsp;&nbsp;手动下载播放器安装程序，再刷新网页即可。
+					   </div>
+				</div>
+			</div>
+		</div>
+		<!---右侧用户登录开始-->
+		<input name="myprecate" id="myprecate" type="hidden" value="{{$mysetting.precate}}">
+		{{if $mysetting.erweima==0}}
+			<DIV id='MovedDiv' >
+				<div id='valurl' style="height:320px;padding-top:10px"></div>
+				<div style="width:86px;float:left" id='erwei'></div>
+				<div style="height:20px;width:86px;float:left" id='erwei_gap'></div>
+				<div style="height:20px;width:86px;float:left" id='gap'></div>
+				<div style="width:86px;float:left" id='html5qr'></div>
+			</DIV>
+		 {{/if}}
+	  </div>
+
+	  <!---通栏广告上部分结束-->
+	</div>
+</div>

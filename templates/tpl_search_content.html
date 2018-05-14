@@ -1,0 +1,60 @@
+<!---搜索内容开始-->
+<DIV class=page_content data-page=tpl_search_content>
+	<DIV class="frame frame_2cols">
+		<DIV class=main_col>
+
+			<DIV class=search_info>
+				<H1>找到 <EM><A   >{{$data.key}}</A></EM>&nbsp;&nbsp;相关视频 <EM>{{$data.counts}}</EM>&nbsp; 个 </H1>
+				<DIV class=btn_adlogo id=adex_logo_banner></DIV>
+			</DIV>
+		<DIV class=inner_col>
+			<DIV class=tab>
+				<UL>
+				  <LI class=current><A   href="#"   coords=FJE>视频</A></LI>
+
+				</UL>
+
+				<DIV class=chg_layout>
+					<SPAN>显示方式：</SPAN>
+					<A  id="row" class="layout_list"  title=列表方式 href="javascript://" onClick="doSearch('Search','{{$data.type}}','row')">列表</A>
+					<A id='col'  class="layout_showcase current"  title=相册方式 href="javascript://" onClick="doSearch('Search','{{$data.type}}','col')">相册</A>
+				</DIV>
+			</DIV>
+			<DIV class=search_filter>
+				<DIV class=filter_tab>
+					<UL>
+					  <LI {{if $sType=="name"}} class=current {{/if}}><A  id="pp"  href="index.php?controller=search&action=index&key={{$data.urlkey}}&sType=name&way={{$way}}&sContent={{$sContent}}">结果匹配</A></LI>
+					  <LI {{if $sType=="create"}} class=current {{/if}} ><A  id="ss"  href="index.php?controller=search&action=index&key={{$data.urlkey}}&sType=create&way={{$way}}&sContent={{$sContent}}">上传时间</A></LI>
+					  <LI {{if $sType=="click"}} class=current {{/if}}><A  id="cs"  href="index.php?controller=search&action=index&key={{$data.urlkey}}&sType=click&way={{$way}}&sContent={{$sContent}}">播放次数</A></LI>
+					</UL>
+				</DIV>
+				<!--鼠标放上时的样式是combo_bos on-->
+			</DIV>
+			<DIV class="box search_result" id="html">
+				{{include file=$file_name}}
+			</DIV><!-- 最近搜索的关键字 -->
+
+
+		</DIV>
+	</DIV><!-- 侧栏 -->
+	<DIV class=side_col><!-- 视频广告位 -->
+		<div style="margin-top:35px ">
+		</div>
+		<DIV class="box ad_box" id=adex_list>
+			<ul>
+				<LI><a href="index.php?controller=help&action=index#4" title="怎么全屏观看">怎么全屏观看？</a></LI>
+				<LI><a href="index.php?controller=help&action=index#6" title="播放器版本低">播放器版本低</a></LI>
+				<LI><a href="index.php?controller=help&action=index#7" title="解码出错提示">解码出错提示</a></LI>
+				<LI><a href="index.php?controller=help&action=index#9" title="播放器如何安装？">播放器如何安装？</a></LI>
+				<LI><a href="index.php?controller=help&action=index#8" title="观看直播节目或者点播节目时遇到播放器弹出提示信息“解码器错误”无法正常观看时，如何解决？">观看直播节目或者点播节目...</a></LI>
+				<LI><a href="index.php?controller=help&action=index#1" title="为什么打开网页时播放区域的显示是这样的" >为什么打开网页时播放区域...</a></LI>
+				<LI><a href="index.php?controller=help&action=index#2" title="接收直播和点播时候，播放器一直是缓冲状态，如何解决">接收直播和点播时候，播放...</a></LI>
+				<LI><a href="index.php?controller=help&action=index#3" title="观看节目时，画面有抖动情况，而且CPU一直在90％以上是什么原因">观看节目时，画面有抖动情...</a></LI>
+				<LI><a href="index.php?controller=help&action=index#5" title="Windows XP和Windows 2003系统在全屏接收直播时播放器无响应了，如何解决">Windows XP和Windows 200...</a></LI>
+			</ul>
+		</DIV>
+	</DIV><!-- 侧栏 -->
+</DIV>
+<DIV class="box ad_banner" id=adex_bottom_banner></DIV>
+</DIV>
+<!---搜索内容结束-->

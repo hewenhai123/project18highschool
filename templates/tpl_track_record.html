@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{{$mysetting.webtitle}}</title>
+<LINK media=all href="root/css/__g_75.css" type=text/css rel=stylesheet>
+
+<script src="root/js/jquery-1.5.2.js" type="text/javascript"></script>
+
+<style type="text/css">
+
+body{
+    padding:0px; margin:0px;
+    background-image:url(root/images/bg.jpg);        /* 背景图片 */
+    background-repeat:no-repeat;        /* 不重复 */
+    background-attachment:fixed;        /* 固定背景图片 */
+}
+.imgcss{border:3px solid #fff}
+.imgcss:hover{border:3px solid #3608fe}
+.tracklist{width:233px;height:40px;}
+/*.current{ background:url(root/images/bg.png);}*/
+.current,.nocurr{width:233px}
+.current a{color:#fc9c2e;background:url(root/images/bg.png);display:block}
+.nocurr a{color:#fff;display:block}
+.nocurr a:hover{background-color:#90cef4}
+.pic{border:2px solid #fff}
+.txt{margin-top:5px;}
+.pictxt{float:left;height:125px;margin-right:15px}
+/*.recordtwo{BACKGROUND: url(root/images/recordbg.png) no-repeat;FLOAT: left;  WIDTH: 239px;height:547px;margin-left:10px;text-align:center;overflow:auto;}*/
+/*.recordtwo{BACKGROUND: url(root/images/recordbg.png) no-repeat;FLOAT: left;  WIDTH: 250px;height:422px;margin-left:10px;text-align:center;OVERFLOW-Y: auto; OVERFLOW-X:hidden;}*/
+.recordtwo{BACKGROUND: url(root/images/recordbg.png) no-repeat;FLOAT: left;  WIDTH: 250px;height:422px;margin-left:10px;text-align:center;}
+
+</style>
+
+<script>
+
+
+
+	function classShow(page){
+			var theUrl = "index.php?controller=track&action=class&classpage="+page;
+
+			$.get(
+				theUrl,
+				function(data){
+				//alert(data)
+					$('.recordtwo').html(data);
+				}
+			)
+		}
+
+	function getViewSizeWithoutScrollbar(){//不包含滚动条
+		return {
+		width : document.documentElement.clientWidth,
+		height: document.documentElement.clientHeight
+		}
+	}
+
+
+
+	function getimgwh(){
+
+		screewidth = getViewSizeWithoutScrollbar()
+		$('#recordlist').css('width',(screewidth.width-265)+'px');
+
+
+
+		if(window.screen.width<=1280 && window.screen.width>800){
+			$('#itemcss').css('margin-left','10px')
+			//$('.pictxt').css('height','135px')
+			$('.pictxt').css('height','135px')
+			recordwidth = $('#recordlist').css('width');
+			recordwidth =parseInt(recordwidth)
+			if(recordwidth>1015)
+				$('#recordlist').css('width',(recordwidth-16)+'px');
+		}else{
+
+			$('.logo').find('img').css('width','160px')
+			$('#itemcss').css('margin-left','50px')
+			$('.recordtwo').css('height','390px')
+			$('.tracklist').css('height','30px')
+			$('.nocurr').css('padding','8px')
+			$('.current').css('padding','5px')
+
+			//$('.pictxt').css('height','155px')
+		}
+
+	}
+//getimgwh()
+</script>
+</head>
+
+<body data-page=tpl_track_record>
+
+
+
+	<input name="tracknum" id="tracknum" type="hidden" value="{{$trackcount}}">
+	<input name="screen_type" id="screen_type" type="hidden" value="{{$screen_type}}">
+
+
+
+
+
+
+
+
+
+	<table id="tblList" width="100%" border="0" cellpadding="8" cellspacing="0" class="table_link">
+	  <tr id="trHeader" valign="bottom" height="65">
+
+		<td  style="text-align:left " width="500" ><DIV class=logo style="margin-top:15px;"><img src="admin/images/{{$mysetting.logo_image}}"  > </DIV></td>
+
+		<td  style="text-align:left " >
+			<div style="font-size:28px;color:#ffffff;margin-top:25px" >
+				<div id="years"></div>
+
+			</div>
+		</td>
+		<td  style="text-align:center " ><div style="font-size:28px;color:#ffffff;margin-top:25px" id='times'></div></td>
+		<td  style="text-align:right " >
+			<div style="font-size:28px;color:#ffffff;margin-top:25px" >
+
+				<div id="week"></div>
+			</div>
+		</td>
+
+
+		<td  style="text-align:center " >
+			<div style="font-size:30px;color:#ffffff;margin-top:18px" >
+
+				<a href="index.php?controller=track&action=Tracklist"><img src="root/images/livetitle.png"></a>
+			</div>
+		</td>
+
+
+		</tr>
+	</table>
+
+
+
+
+
+
+	<div style="border-bottom:2px solid #fff" ></div>
+
+
+
+	<div style="clear:both;margin:10px auto;" id="listvod">
+		<div class="recordtwo">
+
+			{{include file = 'tpl_track_page.html'}}
+
+
+
+		</div>
+		<div style="float:left" id="recordlist">
+
+
+
+
+			{{include file = 'tpl_track_record_page.html'}}
+
+
+
+
+		</div>
+
+
+	</div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language="Javascript">
+
+
+
+function trackShow(_type, _id, _page, _this , _spell){
+	//在做post传值时如果要接收json类型的返回值时,最好是先不要加上接收类型'json'
+	//这样可以弹出结果,看一下对错,否则,将不显示结果,机器不会返回任何信息.
+	if (_type=='MovieListInfo'){
+		if (_this =='tz'){
+			_pagePage = document.getElementById('inputPage').value;
+			 var re = /^[\d]+$/  ;
+			 if (!re.test(_pagePage)){
+				return false;
+			}
+			if ( parseInt(_pagePage) > parseInt(document.getElementById('maxpage').value)){
+				_pagePage = document.getElementById('maxpage').value
+			}
+		}else{
+			_pagePage=_this;
+		}
+		if (_id==0){
+			var theUrl = "index.php?controller=track&action=GetTrackFile&class_id=" + _id + "&type=" + _page + "&page=" + _pagePage + "&condition=" + $('#condition').attr('value') ;
+		}else{
+			var theUrl = "index.php?controller=track&action=GetTrackFile&class_id=" + _id + "&type=" + _page + "&page=" + _pagePage+"&scrtype={{$screen_type}}";
+		}
+
+		$.get(
+			theUrl,
+			function(data){
+				//alert(data)
+				$('#recordlist').html(data);
+			}
+		)
+
+
+
+
+	}
+}
+
+
+rownum = $('.recordtwo').find('.current').parent().attr('id').split('_');
+//alert(rownum[1])
+///if(rownum[1]>9){
+nexpage = parseInt(rownum[1])+1;
+prepage = parseInt(rownum[1])-1;
+if($('#vod_'+nexpage).css('display')=='none'){
+	hiddnum = parseInt(rownum[1])-9;
+	for(i=0;i<hiddnum;i++){
+		hidd = hiddnum-i;
+		$('#vod_'+hidd).css('display','none');
+	}
+	for(i=0;i<10;i++){
+		shows = nexpage-i;
+		//alert(shows)
+		$('#vod_'+shows).css('display','block');
+	}
+
+}else{
+/*
+		if( $('#vod_'+nexpage).css('display')=='block'){
+			hiddnum = prepage;
+			alert(hiddnum)
+			for(i=0;i<hiddnum;i++){
+				hidd = hiddnum-i;
+				$('#vod_'+hidd).css('display','none');
+			}
+			for(i=0;i<10;i++){
+				shows = prepage+i;
+				//alert(shows)
+				$('#vod_'+shows).css('display','block');
+			}
+		}
+		*/
+
+}
+
+
+
+
+
+
+
+
+
+var datelocalweek=new Array("星期日", "星期一", "星期二","星期三","星期四", "星期五","星期六");
+var datelocalnow=new Date();
+var datelocalyear=datelocalnow.getFullYear();
+var datelocalmonth=(datelocalmonth="0"+(datelocalnow.getMonth()+1)).substr(datelocalmonth.length-2,2);
+var datelocalday=(datelocalday="0"+datelocalnow.getDate()).substr(datelocalday.length-2,2);
+var datelocalweekday=datelocalweek[datelocalnow.getDay()];
+//document.write(datelocalyear+"年"+datelocalmonth+"月"+datelocalday+"日"+" "+datelocalweekday);
+$('#week').html(datelocalweekday);
+$('#years').html(datelocalyear+"-"+datelocalmonth+"-"+datelocalday);
+
+
+
+function showtime () {
+var now = new Date();
+var hours = now.getHours();
+var minutes = now.getMinutes();
+var seconds = now.getSeconds()
+var timeValue = hours
+timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+//var timeValue = " " + ((hours >12) ? hours -12 :hours)
+//timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+//timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+//timeValue += (hours >= 12) ? " 下午 " : " 上午 "
+//document.clock.face.value = timeValue;
+$('#times').html(timeValue);
+timerID = setTimeout("showtime()",1000);//设置超时,使时间动态显示
+timerRunning = true;
+}
+showtime();
+
+</script>

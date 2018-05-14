@@ -1,0 +1,104 @@
+<DIV class=container data-page=tpl_record_movie_page_2>
+	<DIV class=showcase><!-- 一行 -->
+		{{section name=ListMovie loop=$ListMovie.entity }}
+		{{if $smarty.section.ListMovie.rownum%5==1 }}
+		<DIV class=row>
+		{{/if}}
+			<DIV class=item>
+				<DIV class="pack pack_video_card " style="width:130px ">
+					<DIV class=pic>
+						<A class=inner title="{{$ListMovie.entity[ListMovie].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$ListMovie.entity[ListMovie].media_id}}" target="vodplay"><IMG class=pack_clipImg height=90 alt="{{$ListMovie.entity[ListMovie].name}}" src="admin/upload/{{$ListMovie.entity[ListMovie].imagepos}}" width=120></A>
+					</DIV>
+					<DIV class=txt>
+						<H1 class=caption><A title="{{$ListMovie.entity[ListMovie].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$ListMovie.entity[ListMovie].media_id}}" target="vodplay">{{$ListMovie.entity[ListMovie].name|truncate:14:'':true}}</A></H1>
+						<UL class=info>
+
+						  	<LI>时长: {{$ListMovie.entity[ListMovie].duration}} </LI>
+
+						  <LI>时间: {{$ListMovie.entity[ListMovie].created|date_format:"%Y-%m-%d"}} </LI>
+						</UL>
+					</DIV>
+				</DIV>
+			</DIV><!-- 单元格 -->
+		{{if $smarty.section.ListMovie.rownum%5==0 ||$smarty.section.ListMovie.last }}
+		</DIV>
+		{{/if}}
+		{{/section}}
+	<!-- 一行 -->
+	</DIV>
+	<DIV class=page_nav style="width:730px " id=pagingBars>
+		{{if $ListMovie.page <= 1}}
+			<SPAN class=page_nav_prev><SPAN>上一页</SPAN></SPAN>
+		{{else}}
+			<SPAN class=page_nav_prev><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page-1}})" href = "javascript:">上一页</a></SPAN>
+		{{/if}}
+
+
+
+
+		<UL>
+		  {{if $ListMovie.page < 10}}
+
+			  {{section name=loop loop=$ListMovie.pageCount start=0 max=10 }}
+			    {{if $smarty.section.loop.index+1 == $ListMovie.page }}
+					<LI class=page_nav_current>{{$smarty.section.loop.index+1}} </LI>
+				{{else}}
+					<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$smarty.section.loop.index+1}})" href = "javascript:">{{$smarty.section.loop.index+1}}</A> </LI>
+				{{/if}}
+			  {{/section}}
+			  {{if $ListMovie.pageCount >10}}
+			  		{{if $ListMovie.pageCount-1 > 11 }}
+						<LI class=pagebarDot>... </LI>
+					{{/if}}
+					{{if $ListMovie.pageCount-1 >10}}
+						<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.pageCount-1}})" href = "javascript:">{{$ListMovie.pageCount-1}}</A> </LI>
+					{{/if}}
+					<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.pageCount}})" href = "javascript:">{{$ListMovie.pageCount}}</A> </LI>
+			  {{/if}}
+		  {{else}}
+
+		  		<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',1)" href = "javascript:">1</A> </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',2)" href = "javascript:">2</A> </LI>
+				{{ if $ListMovie.pageCount > 10}}
+				<LI class=pagebarDot>... </LI>
+				{{/if}}
+				{{if $ListMovie.pageCount-$ListMovie.page >= 7}}
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page-3}})" href = "javascript:">{{$ListMovie.page-3}}</A> </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page-2}})" href = "javascript:">{{$ListMovie.page-2}}</A> </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page-1}})" href = "javascript:">{{$ListMovie.page-1}}</A> </LI>
+				<LI class=page_nav_current>{{$ListMovie.page}} </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page+1}})" href = "javascript:">{{$ListMovie.page+1}}</A> </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page+2}})" href = "javascript:">{{$ListMovie.page+2}}</A> </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page+3}})" href = "javascript:">{{$ListMovie.page+3}}</A> </LI>
+				<LI class=pagebarDot>... </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.pageCount-1}})" href = "javascript:">{{$ListMovie.pageCount-1}}</A> </LI>
+				<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.pageCount}})" href = "javascript:">{{$ListMovie.pageCount}}</A> </LI>
+				{{else}}
+				{{section name=page loop=$ListMovie.pageCount start=-8}}
+					{{if $ListMovie.page== $smarty.section.page.index+1}}
+					<LI class=page_nav_current>{{$ListMovie.page}} </LI>
+					{{else}}
+					<LI><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$smarty.section.page.index+1}})" href = "javascript:">{{$smarty.section.page.index+1}}</A> </LI>
+					{{/if}}
+				{{/section}}
+				{{/if}}
+		  {{/if}}
+
+		  <input name="maxpage" type="hidden" id="maxpage" value="{{$ListMovie.pageCount}}">
+		</UL>
+
+
+
+
+		{{if $ListMovie.page >= $ListMovie.pageCount}}
+			<SPAN class=page_nav_next><SPAN>下一页</SPAN></SPAN>
+		{{else}}
+			<SPAN class=page_nav_next><a onClick="trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}',{{$ListMovie.page+1}})" href = "javascript:">下一页</A></SPAN>
+		{{/if}}
+
+		<div class=page_nav_jump id=pageForm  >第 <INPUT class=text id=inputPage size=3 name=page onkeydown="if(event.keyCode==13) {return trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}','tz')};"> 页 <INPUT class=submit type=button onclick="return trackShow('MovieListInfo',{{$ListMovie.track_id}},'{{$ListMovie.type}}','tz')" value=跳转> </div>
+	</DIV>
+</DIV>
+<script>
+getcunurls()
+</script>

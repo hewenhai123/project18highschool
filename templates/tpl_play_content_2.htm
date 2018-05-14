@@ -1,0 +1,192 @@
+
+	<DIV class=m id=mCnt data-page=tpl_play_content_2>
+	{{if $entity.syktype!='record'}}
+		<DIV class="b ds ds_v">
+			<DIV class=h>
+				<H2>视频信息</H2>
+			</DIV>
+			<DIV class=c>
+				<DIV class=pic>
+					<DIV class=avatar><A title="{{$entity.movie.movie_name}}" href="index.php?controller=play&action=index&movie_id={{$entity.movie.movie_id}}" target="vodplay"><IMG alt="{{$entity.movie.movie_name}}" src="admin/upload/{{$entity.movie.image}}" coords="KBB"> </A></DIV>
+					<DIV style="width:120px;margin-top:2px ">{{$entity.movie.type|truncate:9:'':true}}</DIV>
+				</DIV>
+				<DIV class=txt>
+					<UL>
+					  <LI style="width:200px;">名称: <EM>{{$entity.movie.movie_name}} </EM></LI>
+					  <!--<LI style="width:200px;">分类: <EM id=playNum>{{$entity.movie.tag_stars}}</EM> </LI>-->
+					  <LI style="width:200px;">类型: <EM id=commentNum>{{section name=looptype loop=$entity.mType}} {{$entity.mType[looptype].name}}&nbsp;  {{/section}}</EM> </LI>
+					  <LI style="width:200px;">年份: <EM >{{$entity.mYears[0].name}}</EM> </LI>
+					  <LI style="width:200px;">地区: <EM >{{section name=loopareas loop=$entity.mAreas}} {{$entity.mAreas[loopareas].name}}&nbsp;  {{/section}}</EM> </LI>
+					  <input name="assesspeople" id="assesspeople" type="hidden" value="{{$entity.movie.assess_people}}">
+					  <LI style="width:200px;">
+						  <div style="float:left ">评价:</div>
+						  <EM >
+							  <div id='start1' style="float:left; cursor:pointer " onClick="assess(2,{{$entity.movie.movie_id}})" title="2分" >{{if $entity.mCode >=2}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'> {{/if}}</div>
+							  <div id='start2' style="float:left; cursor:pointer " onClick="assess(4,{{$entity.movie.movie_id}})" title="4分">{{if $entity.mCode >=4}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id='start3' style="float:left; cursor:pointer " onClick="assess(6,{{$entity.movie.movie_id}})" title="6分">{{if $entity.mCode >=6}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id='start4' style="float:left; cursor:pointer " onClick="assess(8,{{$entity.movie.movie_id}})" title="8分">{{if $entity.mCode >=8}}<img src='./root/images/starthuang.gif'>{{else}} <img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id='start5' style="float:left; cursor:pointer " onClick="assess(10,{{$entity.movie.movie_id}})" title="10分">{{if $entity.mCode >=10}}<img src='./root/images/starthuang.gif'>{{else}}<img src='./root/images/starthui.gif'>{{/if}}</div>
+							  <div id="mycode">
+
+
+							    <div class="fRed" style="float:left; ">
+							  		<strong>{{$entity.movie.codenumsp[0]}}</strong>
+							  		{{$entity.movie.codenumsp[1]}}
+								 </div>
+							  	<div style=" float:left;margin-top:6px ">({{$entity.movie.assess_people}}评)</div>
+
+
+
+							  </div>
+						  </EM>
+					  </LI>
+					</UL>
+					<P class=ds_t>
+					<!--
+						<SPAN>标签:</SPAN>
+						{{section name=tag loop=$entity.tag}}
+						<A href="javascript://" onClick="return Search('tag','{{$entity.tag[tag].name}}')" >{{$entity.tag[tag].name}}</A>
+						 {{/section}}
+					-->
+					</P>
+				</DIV>
+
+
+				<DIV class=ds_d   style="word-wrap:break-word;margin-top:110px;  " id=videoDes>影片简介:{{$entity.movie.describe|truncate:100:'':true}}</DIV>
+				<DIV class=ds_d   style="word-wrap:break-word;margin-top:110px;display:none " id=videoDesOp>影片简介:{{$entity.movie.describe}}</DIV>
+				<DIV style='float:right;width:70px'><div style="float:left; cursor: pointer " onClick="opendiv()" id="openclose"><a href="javascript://"  >全部展开</a></div><div id="picopen"><img src="./root/images/open.gif"></div></DIV>
+
+
+
+			</DIV>
+			<DIV class=f></DIV>
+		</DIV>
+		{{/if}}
+
+
+
+		<DIV class="b cmt" id=comment>
+			<DIV class="h">
+				<h2>评论</h2>
+				<span class="ap"><a href="#cmPost" class="cm_more">我要发表评论</a></span>
+				<input name="playtpye" id="playtpye" type="hidden" value="{{$entity.comment.playtpye}}">
+			</DIV>
+			<DIV class="c" id="movie_comment_list">
+				<DIV class="cm_pg">
+					<DIV class="cm_info"> 共{{$entity.comment.count}}条</DIV>
+					<DIV class="pg">
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">首页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},1)" href ="javascript:" class="pg_n">首页</a> {{/if}}
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">上一页  </span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page-1}})" href = "javascript:" class="pg_n">上一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">下一页  </span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page+1}})" href="javascript:" class="pg_n">下一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">末页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.pageCount}})" href ="javascript:" class="pg_n">末页</a> {{/if}}
+
+					</DIV>
+				</DIV>
+				<DIV class="cm_l" id="cmList">
+					{{section name=comment loop=$entity.comment.entity}}
+					<DIV class="cm_i" commentid="35438201" userid="123">
+						<DIV class="avatar_s">
+							<span><img src="root/images/p2.jpg"></span>
+						</DIV>
+						<DIV class="cm_t">
+							<DIV class="cm_u">{{$entity.comment.entity[comment].author}}<span class="cm_d">&nbsp;&nbsp;{{$entity.comment.entity[comment].created}}</span></DIV>
+							<DIV class="cm_b">{{$entity.comment.entity[comment].describe}}</DIV>
+							{{if $entity.comment.entity[comment].recom }}<blockquote>{{$entity.comment.entity[comment].recom.author}}&nbsp;&nbsp;的评论:<br>{{$entity.comment.entity[comment].recom.describe}}</blockquote>{{/if}}<!--引入评论-->
+							<DIV class="cm_a">
+								<!--<a href="#" commentid="3543021" userid="123" class="deleteMyBtn">删除</a>-->
+								<a href="javascript://" onclick="reComment({{$entity.comment.entity[comment].comment_id}},'open')" class="reBtn">回应这条评论</a>
+							</DIV>
+							<DIV id="reBox{{$entity.comment.entity[comment].comment_id}}" class="cm_re" style="display:none">
+								<p>
+									<textarea name="{{$entity.comment.entity[comment].comment_id}}" id="{{$entity.comment.entity[comment].comment_id}}" style="width:420px;" rows="5" cols="60"></textarea>
+									{{*<input type="hidden" value="{{$entity.comment.entity[comment].comment_id}}" id="comment_id">*}}
+								</p>
+								<p>
+									<input type="button" value="写上去" id="postRe" class="submit" onclick="doAddComment('AddComment','recomment'{{if $entity.comment.movie_id}},{{$entity.comment.movie_id}}{{/if}},{{$entity.comment.entity[comment].comment_id}})">
+									<input type="button" value="不想说了" class="button" onclick="reComment({{$entity.comment.entity[comment].comment_id}},'close')">
+								</p>
+							</DIV>
+						</DIV>
+					</DIV>
+					{{/section}}
+				</DIV>
+				<DIV class="cm_pg">
+					<DIV class="pg">
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">首页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},1)" href ="javascript:" class="pg_n">首页</a> {{/if}}
+						{{if $entity.comment.page <= 1}}
+						<span class="pg_p">上一页  </span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page-1}})" href = "javascript:" class="pg_n">上一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">下一页  </span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.page+1}})" href="javascript:" class="pg_n">下一页</a> {{/if}}
+						{{if $entity.comment.page >= $entity.comment.pageCount}}
+						<span class="pg_p">末页</span>
+						{{else}} <a onClick="doGetComment('GetComment',{{$entity.comment.movie_id}},{{$entity.comment.pageCount}})" href ="javascript:" class="pg_n">末页</a> {{/if}}
+					</DIV>
+				</DIV>
+				<DIV id="cmPost" class="cm_po">
+					<h3>发表评论</h3>
+
+					<p>
+						<textarea id="commentcom" name="commentcom" rows="5" cols="100" class="cm_ta"></textarea>
+					</p>
+					<p>
+						<input type="button" value="写上去" id="comment_post" class="cm_su" name="submit" onclick="doAddComment('AddComment','comment'{{if $entity.comment.movie_id}},{{$entity.comment.movie_id}}{{/if}})">
+					</p>
+				</DIV>
+			</DIV>
+			<DIV class="f">
+				<a href="#comment" class="cm_top">返回顶部</a>
+			</DIV>
+		</DIV>
+	</DIV><!-- main_col -->
+	<DIV class=s id=side>
+
+
+		<DIV class="b recv">
+			<DIV class=h>
+				<H2>相关推荐</H2>
+			</DIV>
+			<DIV class=c>
+				{{section name=comvod loop=$entity.commentvod.entity}}
+				{{if $smarty.section.comvod.rownum%3==1}}
+				<DIV class=r>
+				{{/if}}
+					<DIV class=p>
+						{{if $entity.syktype!='record'}}
+							<DIV class=pic><A title="{{$entity.commentvod.entity[comvod].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$entity.commentvod.entity[comvod].movie_id}}" target="vodplay"><IMG class="pack_clipImg lazyImg" alt="{{$entity.commentvod.entity[comvod].movie_name}}" src="admin/upload/{{$entity.commentvod.entity[comvod].image}}" coords="KFA"></A> </DIV>
+							<H6><A class="link_xiang" title="{{$entity.commentvod.entity[comvod].movie_name}}" href="index.php?controller=play&action=index&movie_id={{$entity.commentvod.entity[comvod].movie_id}}" coords=KFA target="vodplay">{{$entity.commentvod.entity[comvod].movie_name|truncate:11:'...':true}}</A></H6>
+							<!--<P>&nbsp;&nbsp;评论:{{$entity.commentvod.entity[comvod].comment_num}}</P>-->
+							<UL></UL>
+						{{else}}
+							<DIV class=pic><A title="{{$entity.commentvod.entity[comvod].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$entity.commentvod.entity[comvod].media_id}}" target="vodplay"><IMG class="pack_clipImg lazyImg" alt="{{$entity.commentvod.entity[comvod].name}}" src="admin/upload/{{$entity.commentvod.entity[comvod].imagepos}}" coords="KFA"></A> </DIV>
+							<H6><A class="link_xiang" title="{{$entity.commentvod.entity[comvod].name}}" href="index.php?controller=play&action=index&type=record&movie_id={{$entity.commentvod.entity[comvod].media_id}}" coords=KFA target="vodplay">{{$entity.commentvod.entity[comvod].name|truncate:11:'...':true}}</A></H6>
+							<!--<P>&nbsp;&nbsp;评论:{{$entity.commentvod.entity[comvod].comment_num}}</P>-->
+							<UL></UL>
+						{{/if}}
+					</DIV>
+				{{if $smarty.section.comvod.rownum%3==0 || $smarty.section.comvod.last}}
+				</DIV>
+				{{/if}}
+				{{/section}}
+			</DIV>
+			<DIV class=f></DIV>
+		</DIV>
+
+		<DIV class="b bj" id=adExtension_buttons style="DISPLAY: none">
+			<DIV class=h></DIV>
+			<DIV class="c ad_banner" id=adExtension_right_minis></DIV>
+			<DIV class=f></DIV>
+		</DIV>
+		<DIV class=b id=adExtension_baidu style="PADDING-LEFT: 10px"></DIV>
+	</DIV><!-- side_col -->

@@ -1,0 +1,71 @@
+<DIV class="cm_pg" data-page=tpl_play_comment>
+	<DIV class="cm_info"> 共{{$data.count}}条</DIV>
+	<DIV class="pg">
+		{{if $data.page <= 1}}
+		<span class="pg_p">首页</span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},1)" href ="javascript:" class="pg_n">首页</a> {{/if}}
+		{{if $data.page <= 1}}
+		<span class="pg_p">上一页&nbsp;&nbsp;&nbsp;</span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},{{$data.page-1}})" href = "javascript:" class="pg_n">上一页</a> {{/if}}
+		{{if $data.page >= $data.pageCount}}
+		<span class="pg_p">下一页  </span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},{{$data.page+1}})" href="javascript:" class="pg_n">下一页</a> {{/if}}
+		{{if $data.page >= $data.pageCount}}
+		<span class="pg_p">末页</span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},{{$data.pageCount}})" href ="javascript:" class="pg_n">末页</a> {{/if}}
+
+	</DIV>
+</DIV>
+<DIV class="cm_l" id="cmList">
+	{{section name=comment loop=$data.entity}}
+	<DIV class="cm_i" commentid="35438201" userid="123">
+		<DIV class="avatar_s">
+			<span><img src="root/images/p2.jpg"></span>
+		</DIV>
+		<DIV class="cm_t">
+			<DIV class="cm_u">{{$data.entity[comment].author}}<span class="cm_d">&nbsp;&nbsp;{{$data.entity[comment].created}}</span></DIV>
+			<DIV class="cm_b">{{$data.entity[comment].describe}}</DIV>
+			{{if $data.entity[comment].recom }}<blockquote>{{$data.entity[comment].recom.author}}&nbsp;&nbsp;的评论:<br>{{$data.entity[comment].recom.describe}}</blockquote>{{/if}}<!--引入评论-->
+			<DIV class="cm_a">
+				<a href="javascript://" onclick="reComment({{$data.entity[comment].comment_id}},'open')" class="reBtn">回应这条评论</a>
+			</DIV>
+			<DIV id="reBox{{$data.entity[comment].comment_id}}" class="cm_re" style="display:none">
+				<p>
+					<textarea name="{{$data.entity[comment].comment_id}}" id="{{$data.entity[comment].comment_id}}" style="width:420px;" rows="5" cols="60"></textarea>
+					{{*<input type="hidden" value="{{$data.entity[comment].comment_id}}" id="comment_id">*}}
+				</p>
+				<p>
+					<input type="button" value="写上去" id="postRe" class="submit" onclick="doAddComment('AddComment','recomment'{{if $data.movie_id}},{{$data.movie_id}}{{/if}},{{$data.entity[comment].comment_id}})">
+					<input type="button" value="不想说了" class="button" onclick="reComment({{$data.entity[comment].comment_id}},'close')">
+				</p>
+			</DIV>
+		</DIV>
+	</DIV>
+	{{/section}}
+</DIV>
+<DIV class="cm_pg">
+	<DIV class="pg">
+		{{if $data.page <= 1}}
+		<span class="pg_p">首页</span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},1)" href ="javascript:" class="pg_n">首页</a> {{/if}}
+		{{if $data.page <= 1}}
+		<span class="pg_p">上一页&nbsp;&nbsp;&nbsp;</span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},{{$data.page-1}})" href = "javascript:" class="pg_n">上一页</a> {{/if}}
+		{{if $data.page >= $data.pageCount}}
+		<span class="pg_p">下一页  </span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},{{$data.page+1}})" href="javascript:" class="pg_n">下一页</a> {{/if}}
+		{{if $data.page >= $data.pageCount}}
+		<span class="pg_p">末页</span>
+		{{else}} <a onClick="doGetComment('GetComment',{{$data.movie_id}},{{$data.pageCount}})" href ="javascript:" class="pg_n">末页</a> {{/if}}
+	</DIV>
+</DIV>
+<DIV id="cmPost" class="cm_po">
+	<h3>发表评论</h3>
+
+	<p>
+		<textarea id="commentcom" name="commentcom" rows="5" cols="100" class="cm_ta"></textarea>
+	</p>
+	<p>
+		<input type="button" value="写上去" id="comment_post" class="cm_su" name="submit" onclick="doAddComment('AddComment','comment'{{if $data.movie_id}},{{$data.movie_id}}{{/if}})">
+	</p>
+</DIV>

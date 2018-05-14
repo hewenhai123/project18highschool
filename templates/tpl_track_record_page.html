@@ -1,0 +1,54 @@
+<div  id="itemcss">
+
+	{{section name=ListMovie loop=$ListMovie.entity }}
+		<DIV class="pictxt" data-page=tpl_track_record_page >
+			<DIV  style="width:124px ">
+				<DIV class=pic style="border:0px ">
+					{{if $class_id>0 || $ListMovie.class_id >0 }}
+
+						{{if $ListMovie.entity[ListMovie].type=='duo'}}
+							<div style="position:absolute;margin-top: 3px;margin-left: 85px; "><img src="root/images/lxj.png"></div>
+							<A class=inner title="{{$ListMovie.entity[ListMovie].movie_name}}" href="index.php?controller=track&action=getmedia&id={{$ListMovie.entity[ListMovie].movie_id}}&class_id={{$ListMovie.entity[ListMovie].class_id}}"  target="vodmedia"><IMG class=imgcss height=90 alt="{{$ListMovie.entity[ListMovie].movie_name}}" src="admin/upload/{{$ListMovie.entity[ListMovie].image}}" width=120> </A>
+						{{else}}
+							<A class=inner title="{{$ListMovie.entity[ListMovie].movie_name}}" href="http://{{$ListMovie.aServer.addr}}:89/{{$ListMovie.entity[ListMovie].media.guid}}.mp4" target="vodplay"><IMG class=imgcss height=90 alt="{{$ListMovie.entity[ListMovie].movie_name}}" src="admin/upload/{{$ListMovie.entity[ListMovie].image}}" width=120> </A>
+						{{/if}}
+
+
+					{{else}}
+					<A class=inner title="{{$ListMovie.entity[ListMovie].name}}" href="http://{{$ListMovie.aServer.addr}}:89/{{$ListMovie.entity[ListMovie].guid}}.mp4" target="vodplay"><IMG class=imgcss height=90 alt="{{$ListMovie.entity[ListMovie].name}}" src="admin/upload/{{$ListMovie.entity[ListMovie].imagepos}}" width=120></A>
+					{{/if}}
+				</DIV>
+
+				<DIV class=txt>
+					{{if $class_id>0 || $ListMovie.class_id >0 }}
+					<H1 class=caption style="color:#000;height: 30px;overflow: hidden; ">{{$ListMovie.entity[ListMovie].movie_name}}</Hl>
+					{{else}}
+					<H1 class=caption style="color:#000;height: 30px;overflow: hidden; ">{{$ListMovie.entity[ListMovie].name}}</H1>
+					{{/if}}
+				</DIV>
+			</DIV>
+		</DIV><!-- 单元格 -->
+	{{/section}}
+</div>
+{{if  $ListMovie.pageCount>1}}
+	<div style="clear:both;text-align: center;">
+
+			{{if $ListMovie.page <= 1}}
+				<span ><img src="root/images/prepage.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			{{else}}
+				<SPAN ><a onClick="trackShow('MovieListInfo',{{$ListMovie.class_id}},'{{$ListMovie.type}}',{{$ListMovie.page-1}})" href = "javascript:"><img src="root/images/prepage.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></SPAN>
+			{{/if}}
+
+
+			{{if $ListMovie.page >= $ListMovie.pageCount}}
+				<span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="root/images/nexpage.png"></span>
+			{{else}}
+				<SPAN ><a onClick="trackShow('MovieListInfo',{{$ListMovie.class_id}},'{{$ListMovie.type}}',{{$ListMovie.page+1}})" href = "javascript:">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="root/images/nexpage.png"></A></SPAN>
+			{{/if}}
+
+
+
+
+	</div>
+{{/if}}
+<script>getimgwh()</script>

@@ -1,0 +1,11 @@
+<div data-page=tpl-type-list class="game_type"><div style="margin-top:3px;margin-left:5px; color:#09698f ">按{{$tagtype.type}}:</div></div>
+<div class="game_all" id="type0"><a href='javascript://' class="nextPage" onClick="SearchCont('type','nosearch',0)">全部</a></div>
+<div id="typeleft"  {{if $atype.page >1}} class="game_left"  onClick="showlist('GetClassTag','type','{{$atype.page-1}}','{{$atype.classID}}')" {{else}} class="game_left_hui"  {{/if}} ></div>
+<div style="width:830px;float:left " id="type_list">
+	{{section name=type loop=$atype.entity }}
+		<div class="game_list"    id="type{{$smarty.section.type.rownum}}"  >
+			<div><a href="javascript://" class="typePage" onClick="SearchCont('type',{{$atype.entity[type].type_id}},{{$smarty.section.type.rownum}})" title="{{$atype.entity[type].name}}">{{$atype.entity[type].name|truncate:10:'':true}}</a></div>
+		</div>
+	{{/section}}
+</div>
+<div id = "typeright"  {{if $atype.count >$atype.page}} class="game_right" onClick="showlist('GetClassTag','type','{{$atype.page+1}}','{{$atype.classID}}')" {{else}} class="game_right_hui" {{/if}}></div>

@@ -1,0 +1,13 @@
+<div data-page=tpl-areas-list class="game_areas"><div style="margin-top:3px;margin-left:5px; color:#09698f ">按{{$tagtype.areas}}:</div></div>
+<!--<div class="game_all" onClick="AllList('areas')"></div>-->
+<div class="game_all" id='areas0' ><a href='javascript://' class="nextPage" onClick="SearchCont('areas','nosearch',0)">全部</a></div>
+<div id="areasleft"  {{if $aareas.page >1}} class="game_left" onClick="showlist('GetClassTag','areas','{{$aareas.page-1}}')" {{else}} class="game_left_hui" {{/if}}></div>
+<div style="width:830px;float:left;  " id="areas_list">
+	{{section name=type loop=$aareas.entity}}
+		<div class="game_list"   id="areas{{$smarty.section.type.rownum}}" >
+		<div ><a href="javascript://" class="typePage" onClick="SearchCont('areas',{{$aareas.entity[type].area_id}},{{$smarty.section.type.rownum}})">{{$aareas.entity[type].name|truncate:4:'':true}}</a></div>
+		</div>
+	{{/section}}
+</div>
+
+<div id="areasright"   {{if $aareas.count >$aareas.page}}class="game_right" onClick="showlist('GetClassTag','areas','{{$aareas.page+1}}')" {{else}} class="game_right_hui" {{/if}}></div>
